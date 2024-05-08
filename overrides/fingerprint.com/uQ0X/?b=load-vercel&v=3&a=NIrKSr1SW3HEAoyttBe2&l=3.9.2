@@ -41,7 +41,11 @@ function getProxy(path, obj) {
 				if (key === original) return obj;
 				if (typeof key === "symbol") return Reflect.get(target, key);
 				try {
-					var composed = `${path}.${key?.toString?.()}`;
+					if (path === "") {
+						var composed = `${key?.toString?.()}`;
+					} else {
+						var composed = `${path}.${key?.toString?.()}`;
+					}
 				} catch (error) {
 					var composed = `${path}`;
 					console.error(error);
@@ -51,7 +55,7 @@ function getProxy(path, obj) {
 				usedApis.add(composed);
 
 				if (
-					composed.includes(".window.parent") ||
+					composed.includes("window.parent") ||
 					key === "prototype" ||
 					// composed === ".window.performance.now" ||
 					key === "bodyData"
@@ -71,7 +75,9 @@ function getProxy(path, obj) {
 				return getProxy(`${path}()`, obj.apply(getOriginal(thisArg), argsArray));
 			},
 			set(target, p, newValue, receiver) {
-				log(`set ${path}.${p.toString()}`, newValue);
+				var composed = `${path}.${p.toString()}`;
+				log(`set ${composed}`, newValue);
+				usedApis.add(composed);
 				return Reflect.set(obj, p, newValue);
 			},
 			ownKeys(target) {
