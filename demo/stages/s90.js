@@ -1,3 +1,14 @@
+/**
+ * Calculates a fingerprint based on audio data.
+ *
+ * s90: {
+ *		s: 0,
+ *		v: 0.00006128742097644135,
+ *	},
+ * This is the audio fingerprint of the open source version https://github.com/fingerprintjs/fingerprintjs/blob/master/src/sources/audio.ts
+ *
+ */
+
 function kn() {
 	return r(this, void 0, void 0, function () {
 		var n, t, e;

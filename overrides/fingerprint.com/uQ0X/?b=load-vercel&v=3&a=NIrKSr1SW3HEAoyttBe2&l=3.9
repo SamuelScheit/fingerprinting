@@ -5134,8 +5134,7 @@ var __fpjs_p_l_b = (function (exports) {
 		}
 		function lu(n) {
 			var t = n.some(function (n) {
-				const result = 1655763047 === C(n.name.slice(0, 6));
-				return result;
+				return 1655763047 === C(n.name.slice(0, 6));
 			});
 			return { s: n.length ? 0 : 1, v: t };
 		}
@@ -6941,10 +6940,10 @@ var __fpjs_p_l_b = (function (exports) {
 				},
 				o = "test";
 			if (
-				(!(function (n) {
+				!(function (n) {
 					return n();
 				})(dn) ||
-				n(Pe)) && false
+				n(Pe)
 			)
 				return { s: -1, v: null };
 			var u = window[t(va, 0)],
@@ -6952,7 +6951,7 @@ var __fpjs_p_l_b = (function (exports) {
 			try {
 				r(u, null, null, null, null);
 			} catch (c) {
-				// return { s: 0, v: !0 };
+				return { s: 0, v: !0 };
 			}
 			try {
 				return i(Ar, a, 2330630162)(o, "1"), i(Ar, a, 588657539)(o), { s: 0, v: !1 };

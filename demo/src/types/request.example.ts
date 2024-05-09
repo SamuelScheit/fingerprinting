@@ -42,9 +42,25 @@ export const body = {
 		s: 0, // 0 = saved both in cookies and local storage, 1 = saved in cookies, 2 = saved in local storage, -1 = not saved
 		v: "4inmTefodwISxYsH23iwOu8lWgU4ak5WK7mB+wEUU3KfLfSPmfxYvHo4XuMmK5LX6gYlPWA9Lrfdj5IJH8dOZHmv0dvOf+SU53pspYo=",
 	},
+	/** gets the ice candidates from the peer connection */
 	s34: {
 		s: -2,
-		v: null,
+		v: [
+			"candidate:2079771436 1 udp 2122260223 169.254.25.252 50012 typ host generation 0 ufrag qRGm network-id 3",
+			"candidate:1850891489 1 udp 2122194687 169.254.41.16 60447 typ host generation 0 ufrag qRGm network-id 4",
+			"candidate:3267833839 1 udp 2122063615 192.168.178.74 61904 typ host generation 0 ufrag qRGm network-id 1 network-cost 10",
+			"candidate:2750988316 1 udp 2121932543 10.1.86.185 55620 typ host generation 0 ufrag qRGm network-id 5 network-cost 50",
+			"candidate:693893195 1 udp 2122131711 2a02:2455:16df:fd00:f90a:683d:8bd5:d4c6 62981 typ host generation 0 ufrag qRGm network-id 2 network-cost 10",
+			"candidate:4242097647 1 udp 2122003199 fd54:20a4:d33b:b10c:bd3:0:1:55b4 62721 typ host generation 0 ufrag qRGm network-id 6 network-cost 50",
+			"candidate:1372769609 1 udp 1685793023 2a02:6ea0:da08:3027::14 57677 typ srflx raddr fd54:20a4:d33b:b10c:bd3:0:1:55b4 rport 62721 generation 0 ufrag qRGm network-id 6 network-cost 50",
+			"candidate:2256605174 1 udp 1685724927 149.102.239.229 56388 typ srflx raddr 10.1.86.185 rport 55620 generation 0 ufrag qRGm network-id 5 network-cost 50",
+			"candidate:87632308 1 tcp 1518280447 169.254.25.252 9 typ host tcptype active generation 0 ufrag qRGm network-id 3",
+			"candidate:278773369 1 tcp 1518214911 169.254.41.16 9 typ host tcptype active generation 0 ufrag qRGm network-id 4",
+			"candidate:3154693495 1 tcp 1518083839 192.168.178.74 9 typ host tcptype active generation 0 ufrag qRGm network-id 1 network-cost 10",
+			"candidate:3711378052 1 tcp 1517952767 10.1.86.185 9 typ host tcptype active generation 0 ufrag qRGm network-id 5 network-cost 50",
+			"candidate:1469323987 1 tcp 1518151935 2a02:2455:16df:fd00:f90a:683d:8bd5:d4c6 9 typ host tcptype active generation 0 ufrag qRGm network-id 2 network-cost 10",
+			"candidate:2182522743 1 tcp 1518023423 fd54:20a4:d33b:b10c:bd3:0:1:55b4 9 typ host tcptype active generation 0 ufrag qRGm network-id 6 network-cost 50",
+		],
 	},
 	/** ICE + RTCStatsReport peer.getStats() */
 	s78: {
@@ -196,6 +212,7 @@ export const body = {
 		s: -1,
 		v: null,
 	},
+	/** calculates the width of text with certain fonts */
 	s51: {
 		s: 0,
 		v: {
@@ -218,6 +235,7 @@ export const body = {
 		s: 0,
 		v: 124.04344968475198,
 	},
+	/** save data in FileStorage of Browser */
 	s79: {
 		s: -3,
 		v: [
@@ -227,27 +245,27 @@ export const body = {
 			},
 		],
 	},
+	/** gets href and referrer of page and parent pages */
 	s69: {
-		s: 0,
+		s: 0, // 1 if href/referrer is empty, 0 if not
 		v: [
 			{
-				l: "https://fingerprint.com/demo/",
-				f: "",
-			},
-			{
-				l: "https://fingerprint.com/demo/",
-				f: "",
+				l: "https://fingerprint.com/demo/", // location.href
+				f: "https://fingerprint.com/demo/", // document.referrer
 			},
 		],
 	},
+	/** window.webkitRequestFileSystem */
 	s23: {
-		s: -3,
+		s: -3, // chrome is -3
 		v: null,
 	},
+	/** navigator.storage.estimate */
 	s29: {
 		s: 0,
 		v: 1197130899456,
 	},
+	/** window.screen */
 	s84: {
 		s: 0,
 		v: {
@@ -255,10 +273,12 @@ export const body = {
 			h: 1080,
 		},
 	},
+	/** TODO: indexedDB */
 	s85: {
 		s: -1,
 		v: null,
 	},
+	/** navigator.storage.getDirectory() */
 	s89: {
 		s: 0,
 		v: "",
@@ -313,15 +333,32 @@ export const body = {
 			sit: "rgb(0, 0, 0)",
 		},
 	},
+	/** gets values for rendering math formulates */
 	s92: {
 		s: 0,
 		v: {
-			font: "Times",
+			x: 7.998046875,
+			y: 7.998046875,
+			left: 7.998046875,
+			right: 294.70703125,
+			bottom: 26.123046875,
+			height: 18.125,
+			top: 7.998046875,
+			width: 286.708984375,
 		},
 	},
+	/** gets values for rendering emojis */
 	s93: {
 		s: 0,
 		v: {
+			x: 7.998046875,
+			y: 9.873046875,
+			left: 7.998046875,
+			right: 1307.998046875,
+			bottom: 27.998046875,
+			height: 18.125,
+			top: 9.873046875,
+			width: 1300,
 			font: "Times",
 		},
 	},
@@ -360,118 +397,146 @@ export const body = {
 		s: 0,
 		v: [0.09999999403953552, 0.10000002384185791],
 	},
+	/** performance.memory() */
 	s50: {
-		s: 0,
+		s: 0, // -1 = not available, 0 = available
 		v: 4294705152,
 	},
+	/** window.devicePixelRatio */
 	s57: {
 		s: 0,
 		v: 1.600000023841858,
 	},
+	/** checks if the browser is internet explorer */
 	s59: {
 		s: 0,
 		v: false,
 	},
+	/** checks if the browser is edge */
 	s60: {
 		s: 0,
 		v: false,
 	},
+	/** checks if the browser is chrome */
 	s61: {
 		s: 0,
 		v: true,
 	},
+	/** checks if the browser is safari */
 	s62: {
 		s: 0,
 		v: false,
 	},
+	/** checks if the browser is webkit */
 	s63: {
 		s: 0,
 		v: false,
 	},
+	/** checks if the browser is firefox */
 	s64: {
 		s: 0,
 		v: false,
 	},
+	/** checks if apis are available SharedWorker,  Audio().sinkId, navigator.connection, window.onorientation */
 	s65: {
 		s: 0,
-		v: false,
+		v: false, // true if at least two apis are unavailable
 	},
+	/** a tag attributionSourceId */
 	s66: {
 		s: -1,
 		v: null,
 	},
+	/** checks if at least 3 are unavailable: window.PushManager, window.AudioBuffer, window.RTCPeerConnection, navigator.geolocation, window.ServiceWorker */
 	s68: {
 		s: 0,
-		v: false,
+		v: false, // false = less than 3 are available, true = at least 3 are unavailable
 	},
+	/** window referer */
 	s71: {
 		s: 0,
 		v: {
-			w: "https://fingerprint.com",
-			l: "https://fingerprint.com",
-			a: [],
+			w: "https://fingerprint.com", // window.origin
+			l: "https://fingerprint.com", // location.origin
+			a: [], // location.ancestorOrigins  // https://developer.mozilla.org/en-US/docs/Web/API/Location/ancestorOrigins
 		},
 	},
+	/** v: eval.toString().length */
 	s24: {
 		s: 0,
 		v: 29,
 	},
+	/** navigator.webdriver */
 	s72: {
-		s: 0,
+		s: 0, // -1 = navigator.webdriver = null, -2 = navigator.webdriver = undefined, 0 = navigator.webdriver = false | true
 		v: false,
 	},
+	/** navigator.oscpu https://developer.mozilla.org/en-US/docs/Web/API/Navigator/oscpu */
 	s1: {
-		s: -1,
+		s: -1, // -1 = not available, 0 = available
 		v: null,
 	},
+	/** navigator.languages */
 	s2: {
 		s: 0,
 		v: [["en-US"]],
 	},
+	/** window.screen.colorDepth */
 	s3: {
 		s: 0,
 		v: 24,
 	},
+	/** navigator.deviceMemory */
 	s4: {
 		s: 0,
 		v: 8,
 	},
+	/** [window.screen.width, window.screen.height].sort().reverse() */
 	s5: {
 		s: 0,
 		v: [1920, 1080],
 	},
+	/** navigator.hardwareConcurrency */
 	s7: {
 		s: 0,
 		v: 20,
 	},
+	/** timezone */
 	s9: {
 		s: 0,
 		v: "Europe/Berlin",
 	},
+	/** window.sessionStorage */
 	s10: {
 		s: 0,
 		v: true,
 	},
+	/** window.localStorage */
 	s11: {
 		s: 0,
 		v: true,
 	},
+	/** window.indexedDB */
 	s12: {
 		s: 0,
 		v: true,
 	},
+	/** window.openDatabase */
 	s13: {
 		s: 0,
 		v: false,
 	},
+	/** navigator.cpuClass */
 	s14: {
 		s: -1,
 		v: null,
 	},
+	/** navigator.platform */
 	s15: {
 		s: 0,
 		v: "MacIntel",
 	},
+	/** navigator.plugins */
 	s16: {
 		s: 0,
 		v: [
@@ -547,6 +612,7 @@ export const body = {
 			},
 		],
 	},
+	/** checks for touch events */
 	s19: {
 		s: 0,
 		v: {
@@ -555,42 +621,52 @@ export const body = {
 			touchStart: false,
 		},
 	},
+	/** navigator.vendor */
 	s27: {
 		s: 0,
 		v: "Google Inc.",
 	},
+	/** check for global variables that indiciate the browser type */
 	s28: {
 		s: 0,
 		v: ["chrome"],
 	},
+	/** checks if cookies are allowed */
 	s32: {
 		s: 0,
 		v: true,
 	},
+	/** checks for display color depth */
 	s37: {
 		s: 0,
 		v: "p3",
 	},
+	/** checks for inverted-colors */
 	s41: {
-		s: -1,
-		v: null,
+		s: 0,
+		v: false,
 	},
+	/** check forced color mode */
 	s39: {
 		s: 0,
 		v: false,
 	},
+	/** min-monochrome, max-monochrome */
 	s42: {
 		s: 0,
 		v: 0,
 	},
+	/** prefers-contrast */
 	s38: {
 		s: 0,
 		v: 0,
 	},
+	/** prefers-reduced-motion */
 	s43: {
 		s: 0,
 		v: false,
 	},
+	/** dynamic range */
 	s40: {
 		s: 0,
 		v: false,
@@ -600,30 +676,37 @@ export const body = {
 		s: 0,
 		v: "5963cfe25fe61d0bbd7b4920bc602dc8",
 	},
+	/** navigator.pdfViewerEnabled */
 	s80: {
 		s: 0,
 		v: true,
 	},
+	/** math with buffers */
 	s81: {
 		s: 0,
 		v: 127,
 	},
+	/** navigator.language */
 	s82: {
 		s: 0,
 		v: "en-US",
 	},
+	/** navigator.languages */
 	s83: {
 		s: 0,
 		v: ["en-US", "de-DE"],
 	},
+	/** localStorage and window.openDatabase */
 	s86: {
 		s: -1,
 		v: null,
 	},
+	/** prefers reduced transparency */
 	s91: {
 		s: 0,
 		v: false,
 	},
+	/** webgl information */
 	s74: {
 		s: 0,
 		v: {
@@ -635,6 +718,7 @@ export const body = {
 			shadingLanguageVersion: "WebGL GLSL ES 1.0 (OpenGL ES GLSL ES 1.0 Chromium)",
 		},
 	},
+	/** get hash over WebGL informations */
 	s75: {
 		s: 0,
 		v: {
@@ -652,66 +736,89 @@ export const body = {
 		s: 0,
 		v: "9e4b34771c3006cb419537b406158135",
 	},
+	/** window.permissions */
 	s106: {
 		s: 0,
 		v: false,
 	},
+	/** gets the supported DRM systems */
 	s154: {
-		s: -1,
-		v: null,
+		s: 0,
+		v: {
+			wv: true, // widevine
+			wvp: true,
+			pr: false,
+			ck: false,
+			pt: false,
+			fp: false,
+		},
 	},
+	/** navigator.webdriver */
 	s158: {
 		s: 0,
 		v: false,
 	},
+	/** has Google Voice in speechSynthesis.getVoices() */
 	s160: {
 		s: 0,
 		v: true,
 	},
+	/** navigator.userAgent */
 	s101: {
 		s: 0,
 		v: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
 	},
+	/** navigator.appVersion */
 	s103: {
 		s: 0,
 		v: "5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
 	},
+	/** navigator.connection.rtt */
 	s104: {
 		s: 0,
 		v: 250,
 	},
+	/** navigator.plugins.length */
 	s117: {
 		s: 0,
 		v: 5,
 	},
+	/** Error.stack */
 	s119: {
 		s: 0,
 		v: "TypeError: Cannot read properties of null (reading '0')\n    at bi (https://fingerprint.com/uQ0X/?b=load-vercel&v=3&a=NIrKSr1SW3HEAoyttBe2&l=3.9.2:4311:10)\n    at https://fingerprint.com/uQ0X/?b=load-vercel&v=3&a=NIrKSr1SW3HEAoyttBe2&l=3.9.2:4486:14\n    at G (https://fingerprint.com/uQ0X/?b=load-vercel&v=3&a=NIrKSr1SW3HEAoyttBe2&l=3.9.2:589:13)\n    at https://fingerprint.com/uQ0X/?b=load-vercel&v=3&a=NIrKSr1SW3HEAoyttBe2&l=3.9.2:737:8\n    at new Promise (<anonymous>)\n    at Object.construct (https://fingerprint.com/uQ0X/?b=load-vercel&v=3&a=NIrKSr1SW3HEAoyttBe2&l=3.9.2:116:30)\n    at https://fingerprint.com/uQ0X/?b=load-vercel&v=3&a=NIrKSr1SW3HEAoyttBe2&l=3.9.2:735:15\n    at https://fingerprint.com/uQ0X/?b=load-vercel&v=3&a=NIrKSr1SW3HEAoyttBe2&l=3.9.2:770:8\n    at https://fingerprint.com/uQ0X/?b=load-vercel&v=3&a=NIrKSr1SW3HEAoyttBe2&l=3.9.2:615:21\n    at https://fingerprint.com/uQ0X/?b=load-vercel&v=3&a=NIrKSr1SW3HEAoyttBe2&l=3.9.2:274:15",
 	},
+	/** navigator.productSub */
 	s123: {
 		s: 0,
 		v: "20030107",
 	},
+	/** document.documentElement.getAttributeNames() */
 	s131: {
 		s: 0,
 		v: ["lang", "class"],
 	},
+	/** window.external.toString() */
 	s133: {
 		s: 0,
 		v: "[object External]",
 	},
+	/** navigator.mimeTypes[0] === MimeType.prototype, MimeTypeArray.prototype === navigator.mimeTypes.prototype */
 	s136: {
 		s: 0,
-		v: false,
+		v: true,
 	},
+	/** Function.prototype.bind.toString() */
 	s148: {
 		s: 0,
 		v: "function bind() { [native code] }",
 	},
+	/** window.process */
 	s149: {
 		s: -1,
 		v: null,
 	},
+	/** window.outerWidth, window.outerHeight, window.innerWidth, window.innerHeight */
 	s150: {
 		s: 0,
 		v: {
@@ -721,42 +828,52 @@ export const body = {
 			innerHeight: 1167,
 		},
 	},
+	/** typeof navigator.userAgentData === "object" */
 	s102: {
 		s: 0,
 		v: true,
 	},
+	/** navigator.plugins.prototype === PluginArray.prototype && navigator.plugins[0].protoype === Plugin.prototype */
 	s118: {
 		s: 0,
 		v: false,
 	},
+	/** checks if new Error().toSource() is defined */
 	s120: {
 		s: 0,
 		v: false,
 	},
+	/** [typeof SourceBuffer, typeof SourceBufferList] */
 	s130: {
 		s: 0,
 		v: ["function", "function"],
 	},
+	/** window.close.toString() */
 	s132: {
 		s: 0,
 		v: "function () { [native code] }",
 	},
+	/** navigator.mimeTypes.length */
 	s135: {
 		s: 0,
 		v: 2,
 	},
+	/** supports backdrop-filter blur */
 	s139: {
 		s: 0,
 		v: true,
 	},
+	/** device-pixel-ratio with media query */
 	s142: {
 		s: 0,
 		v: false,
 	},
+	/** supports SharedArrayBuffer */
 	s144: {
 		s: -2,
 		v: null,
 	},
+	/** gets all functions defined on the navigator object */
 	s145: {
 		s: 0,
 		v: [
@@ -787,22 +904,27 @@ export const body = {
 			"unregisterProtocolHandler",
 		],
 	},
+	/** checks if the browser properly throws an error when accessing undefined variables */
 	s146: {
 		s: 0,
 		v: false,
 	},
+	/** checks if the browser has overriden the document.createElement function */
 	s151: {
 		s: -1,
 		v: null,
 	},
+	/** checks if borders are properly rendered */
 	s152: {
 		s: 0,
 		v: 1,
 	},
+	/** navigator.onLine */
 	s153: {
 		s: 0,
 		v: true,
 	},
+	/** checks if some window variables were overridden */
 	s155: {
 		s: 0,
 		v: {},
@@ -832,21 +954,25 @@ export const body = {
 			headless_chrome: false,
 		},
 	},
+	/** checks if globals or navigator.hardwareConcurrency were overridden */
 	s159: {
 		s: -2,
 		v: null,
 	},
+	/** checks that navigator.languages was not tampered with */
 	s162: {
 		s: 0,
-		v: false,
+		v: false, // true if navigator.languages was tampered with
 	},
+	/** checks the integrity of setTimeout and Error object */
 	s163: {
 		s: 0,
 		v: true,
 	},
+	/** create a peer connection and sends the userid to FPJS server */
 	s161: {
-		s: -2,
-		v: null,
+		s: 0,
+		v: "c4d497f0-680e-e2c9-c581-a63667571336",
 	},
 	// saved random id in cookie
 	si: "U73NX6F7ez",
