@@ -1,4 +1,4 @@
-import { load } from "./fingerprint.pro";
+import { load } from "../../assets/fingerprint.pro";
 
 export function getProxy(path, obj = {}) {
 	if (typeof obj !== "object" && typeof obj !== "function") return obj;

@@ -731,6 +731,7 @@ var __fpjs_p_l_b = (function (exports) {
 					})(e, n);
 				}),
 				u = D(o, function (e) {
+					
 					return (function (n, t) {
 						var e = new Promise(function (e) {
 							var r = Date.now();
@@ -3402,8 +3403,9 @@ var __fpjs_p_l_b = (function (exports) {
 								[4, Qe(t)]
 							);
 						case 1:
+							c = l.sent();
+							con.info("send", c);
 							return (
-								(c = l.sent()),
 								(s = I(JSON.stringify(c))),
 								[
 									4,

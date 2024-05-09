@@ -14,8 +14,7 @@
 		"vite": "^5.2.11"
 	},
 	"scripts": {
-		"dev": "vite",
-		"build": "tsc && vite build",
-		"preview": "vite preview"
+		"dev": "vite assets/",
+		"start": "bun src/fingerprint.ts"
 	}
 }
