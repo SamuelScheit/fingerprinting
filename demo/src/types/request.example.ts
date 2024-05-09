@@ -208,10 +208,12 @@ export const body = {
 			system: 146.09375,
 		},
 	},
+	/** Audio Fingerprint */
 	s90: {
 		s: 0,
 		v: 0.00006128742097644135,
 	},
+	/** Audio Fingerprint 2 */
 	s21: {
 		s: 0,
 		v: 124.04344968475198,
