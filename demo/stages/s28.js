@@ -1,5 +1,10 @@
 /**
  * check for global variables that indiciate the browser type
+ * 
+ * s28: {
+		s: 0,
+		v: ["chrome"],
+	},
  */
 
 St = function () {

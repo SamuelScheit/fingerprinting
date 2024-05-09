@@ -1,3 +1,12 @@
+/**
+ * Audio Fingerprint 2
+ * 
+ * s21: {
+		s: 0,
+		v: 124.04344968475198,
+	},
+ */
+
 function xa() {
 	return h(f(500, { s: -3, v: null }), ja);
 }

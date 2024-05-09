@@ -1,5 +1,17 @@
 /**
  * webgl information
+ * 
+ * s74: {
+		s: 0,
+		v: {
+			version: "WebGL 1.0 (OpenGL ES 2.0 Chromium)",
+			vendor: "WebKit",
+			vendorUnmasked: "Google Inc. (Apple)",
+			renderer: "WebKit WebGL",
+			rendererUnmasked: "ANGLE (Apple, ANGLE Metal Renderer: Apple M1 Ultra, Unspecified Version)",
+			shadingLanguageVersion: "WebGL GLSL ES 1.0 (OpenGL ES GLSL ES 1.0 Chromium)",
+		},
+	},
  */
 
 const a = context;

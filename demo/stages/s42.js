@@ -1,4 +1,10 @@
-/** min-monochrome, max-monochrome
+/**
+ * min-monochrome, max-monochrome
+ * 
+ * s42: {
+		s: 0,
+		v: 0,
+	},
  */
 
 Ot = function () {

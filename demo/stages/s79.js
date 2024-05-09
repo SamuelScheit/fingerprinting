@@ -1,4 +1,7 @@
 /**
+ * 
+ *  save data in FileStorage of Browser 
+ * 
  * webkitTapHighlightColor
  *
  * ["v","v","v","default.ini",{"create": true},"URL","URL"]
@@ -8,6 +11,16 @@
  * 'df6af1a6-a4c0-40d3-80bb-8331e3471341' => converted with textencoder to bytes
  *
  * {s: -3,v: [{n: "default.ini",l: 4246720862}]}
+ * 
+ * s79: {
+		s: -3,
+		v: [
+			{
+				n: "default.ini",
+				l: 4246720862,
+			},
+		],
+	},
  *
  */
 

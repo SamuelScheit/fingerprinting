@@ -6,6 +6,11 @@
  * -1: low, less
  * 10: forced
  *
+ * 
+ * s38: {
+		s: 0,
+		v: 0,
+	},
  */
 function Dn(n) {
 	return matchMedia("(prefers-contrast: ".concat(n, ")")).matches;

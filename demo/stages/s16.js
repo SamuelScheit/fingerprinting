@@ -1,5 +1,81 @@
 /**
  * navigator.plugins
+ * 
+ * s16: {
+		s: 0,
+		v: [
+			{
+				name: "PDF Viewer",
+				description: "Portable Document Format",
+				mimeTypes: [
+					{
+						type: "application/pdf",
+						suffixes: "pdf",
+					},
+					{
+						type: "text/pdf",
+						suffixes: "pdf",
+					},
+				],
+			},
+			{
+				name: "Chrome PDF Viewer",
+				description: "Portable Document Format",
+				mimeTypes: [
+					{
+						type: "application/pdf",
+						suffixes: "pdf",
+					},
+					{
+						type: "text/pdf",
+						suffixes: "pdf",
+					},
+				],
+			},
+			{
+				name: "Chromium PDF Viewer",
+				description: "Portable Document Format",
+				mimeTypes: [
+					{
+						type: "application/pdf",
+						suffixes: "pdf",
+					},
+					{
+						type: "text/pdf",
+						suffixes: "pdf",
+					},
+				],
+			},
+			{
+				name: "Microsoft Edge PDF Viewer",
+				description: "Portable Document Format",
+				mimeTypes: [
+					{
+						type: "application/pdf",
+						suffixes: "pdf",
+					},
+					{
+						type: "text/pdf",
+						suffixes: "pdf",
+					},
+				],
+			},
+			{
+				name: "WebKit built-in PDF",
+				description: "Portable Document Format",
+				mimeTypes: [
+					{
+						type: "application/pdf",
+						suffixes: "pdf",
+					},
+					{
+						type: "text/pdf",
+						suffixes: "pdf",
+					},
+				],
+			},
+		],
+	},
  */
 
 yt = function () {

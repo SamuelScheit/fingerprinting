@@ -19,6 +19,11 @@
  *
  * if chrome and at least 2 apis are unavailable => true
  * if firefox and at least 2 apis are unavailable => true
+ * 
+ * s65: {
+		s: 0,
+		v: false, // true if at least two apis are unavailable
+	},
  *
  */
 

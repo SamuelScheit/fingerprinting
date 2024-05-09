@@ -3,6 +3,11 @@
  *
  * https://caniuse.com/mdn-api_htmlanchorelement_attributionsourceid
  * https://github.com/privacycg/private-click-measurement
+ * 
+ * s66: {
+		s: -1,
+		v: null,
+	},
  *
  */
 

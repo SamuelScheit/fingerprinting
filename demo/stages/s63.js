@@ -1,5 +1,10 @@
 /**
- * check if the browser is webkit
+ * check if the browser is safari
+ * 
+ * s63: {
+		s: 0,
+		v: false,
+	},
  */
 
 function hn() {

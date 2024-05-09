@@ -2,6 +2,11 @@
  * matchMedia("(color-gamut: ".concat(e, ")");
  *
  * "rec2020", "p3", "srgb"
+ * 
+ * s37: {
+		s: 0,
+		v: "p3",
+	},
  *
  */
 

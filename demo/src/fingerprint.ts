@@ -44,7 +44,7 @@ function Modulo(n: number, t: number) {
 	return (n - t + 256) % 256;
 }
 
-function unpad(n: Uint8Array, t = [3, 7], e = 7) {
+export function unpad(n: Uint8Array, t = [3, 7], e = 7) {
 	var r = function () {
 			throw new Error("Invalid data");
 		},

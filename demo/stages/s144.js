@@ -1,3 +1,13 @@
+/**
+ * supports SharedArrayBuffer
+ * 
+ * s144: {
+		s: -2,
+		v: null,
+	},
+ *
+ */
+
 function Uu() {
 	if ("function" != typeof window.SharedArrayBuffer) return { s: -2, v: null };
 	var n = new window.SharedArrayBuffer(1);

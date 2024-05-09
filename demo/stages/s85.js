@@ -2,6 +2,11 @@
  * safari and firefoy only
  *
  * window.indexedDB
+ * 
+ * s85: {
+		s: -1,
+		v: null,
+	},
  *
  */
 

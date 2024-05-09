@@ -1,4 +1,11 @@
-/** checks if cookies are allowed */
+/**
+ * checks if cookies are allowed
+ * 
+ * s32: {
+		s: 0,
+		v: true,
+	},
+*/
 
 Rt = function () {
 	var n = document;

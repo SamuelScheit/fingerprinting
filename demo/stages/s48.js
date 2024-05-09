@@ -1,3 +1,12 @@
+/**
+ * math random entropy
+ * 
+ * s48: {
+		s: 0,
+		v: [-73502740, 248815548, -1049183144, -570535580, 790563733, 68073693],
+	},
+*/
+
 var c = [];
 let i = Math.random();
 const MaxSignedInt32 = Math.pow(2, 31);

@@ -1,5 +1,10 @@
 /**
  * checks if new Error().toSource() is defined
+ * 
+ * s120: {
+		s: 0,
+		v: false,
+	},
  */
 function Xu() {
 	try {

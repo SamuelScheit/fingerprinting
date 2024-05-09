@@ -1,5 +1,10 @@
 /**
  * checks if the browser is edge
+ * 
+ * s60: {
+		s: 0,
+		v: false,
+	},
  */
 
 function ln() {

@@ -1,5 +1,14 @@
 /**
  * checks for touch support
+ * 
+ * s19: {
+		s: 0,
+		v: {
+			maxTouchPoints: 0,
+			touchEvent: false,
+			touchStart: false,
+		},
+	},
  */
 
 Et = function () {

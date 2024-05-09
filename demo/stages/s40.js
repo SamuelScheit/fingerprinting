@@ -3,6 +3,11 @@
  *
  * true: high or standard
  * false: no
+ * 
+ * s40: {
+		s: 0,
+		v: false,
+	},
  */
 
 function Bn(n) {

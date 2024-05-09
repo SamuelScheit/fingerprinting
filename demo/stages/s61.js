@@ -1,5 +1,10 @@
 /**
  * check if the browser is chrome
+ * 
+ * s61: {
+		s: 0,
+		v: true,
+	},
  */
 
 function vn() {

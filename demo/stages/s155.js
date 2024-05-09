@@ -1,6 +1,10 @@
 /**
  * checks if some window variables were overridden
  *
+ * s155: {
+		s: 0,
+		v: {},
+	},
  */
 
 ["plugins", "userAgent", "platform", "appName", "languages"];

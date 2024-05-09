@@ -37,6 +37,7 @@ export const body = {
 		sld: "50",
 	},
 	url: "https://fingerprint.com/demo/",
+	cr: "https://fingerprint.com/demo/",
 	/** saved fingerprint id in cookies */
 	s55: {
 		s: 0, // 0 = saved both in cookies and local storage, 1 = saved in cookies, 2 = saved in local storage, -1 = not saved
@@ -362,6 +363,11 @@ export const body = {
 			font: "Times",
 		},
 	},
+	/** TODO */
+	s95: {
+		s: -1,
+		v: null,
+	},
 	/** WebAssembly */
 	s22: {
 		s: 0, // -1 = WebAssembly unsupported and v null, 0 = supported
@@ -422,12 +428,12 @@ export const body = {
 		s: 0,
 		v: true,
 	},
-	/** checks if the browser is safari */
+	/** checks if the browser is mobile safari */
 	s62: {
 		s: 0,
 		v: false,
 	},
-	/** checks if the browser is webkit */
+	/** checks if the browser is safari */
 	s63: {
 		s: 0,
 		v: false,
@@ -753,7 +759,7 @@ export const body = {
 			fp: false,
 		},
 	},
-	/** navigator.webdriver */
+	/** navigator.webdriver - checks if the browser is automated */
 	s158: {
 		s: 0,
 		v: false,

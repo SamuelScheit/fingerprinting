@@ -1,3 +1,16 @@
+/** canvas hashes of geometry, text and winding
+ * 
+ * s17: {
+		s: 0,
+		v: {
+			winding: true,
+			geometry: "1fd188f9714ca90a5a10eb2fc306b5eb",
+			text: "32a115bd05e0f411c5ecd7e285fd36e2",
+		},
+	},
+
+*/
+
 function On(n) {
 	return r(this, void 0, void 0, function () {
 		var t, e, r, o, u, a, c;

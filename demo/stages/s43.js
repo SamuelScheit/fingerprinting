@@ -5,6 +5,12 @@
  *
  * false: no-preference
  * true: reduce
+ * 
+ * s43: {
+		s: 0,
+		v: false,
+	},
+ * 
  */
 
 function Zn(n) {

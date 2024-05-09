@@ -1,5 +1,10 @@
 /**
  * checks if the browser is firefox
+ * 
+ * s64: {
+		s: 0,
+		v: false,
+	},
  */
 function mn() {
 	var n,

@@ -1,3 +1,11 @@
+/** hash of math functions
+ * 
+ * s46: {
+		s: 0,
+		v: "5963cfe25fe61d0bbd7b4920bc602dc8",
+	},
+ */
+
 import { x64hash128 } from "./hash";
 
 function xt() {

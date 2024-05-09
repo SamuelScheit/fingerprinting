@@ -1,6 +1,15 @@
 /**
  * window.screen.width
  * window.screen.height
+ * 
+ * s84: {
+		s: 0,
+		v: {
+			w: 1920,
+			h: 1080,
+		},
+	},
+	
  */
 function ua() {
 	return wn(function (n, t) {

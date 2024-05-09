@@ -1,4 +1,12 @@
-/** performance.now() measure 50000 times to get the smallest accuracy value */
+/**
+ * performance.now() measure 50000 times to get the smallest accuracy value
+ * 
+ * s49: {
+		s: 0,
+		v: [0.09999999403953552, 0.10000002384185791],
+	},
+ * 
+*/
 
 var n = performance;
 // if (!(null == n ? void 0 : n.now)) return { s: -1, v: null };

@@ -1,5 +1,10 @@
 /**
  * notification permissions
+ * 
+ * s106: {
+		s: 0,
+		v: false,
+	},
  */
 
 Si = function () {

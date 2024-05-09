@@ -1,4 +1,14 @@
-/** checks if the browser is internet explorer */
+/**
+ * 
+ * checks if the browser is internet explorer
+ * 
+ * 
+ * s59: {
+		s: 0,
+		v: false,
+	},
+	
+ * */
 
 function fn() {
 	var n = window,

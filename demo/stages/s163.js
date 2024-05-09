@@ -1,5 +1,10 @@
 /**
  * checks the integrity of setTimeout and Error object
+ * 
+ * s163: {
+		s: 0,
+		v: true,
+	},
  */
 
 function ac() {

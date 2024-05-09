@@ -9,6 +9,11 @@
  * aborts if the data does not contains [73, 69, 78, 68] or 49454e44 as hex or "IEND" as string
  *
  * checks if the bytes between IDAT and IEND are summed equal to 1321
+ * 
+ * s33: {
+		s: 0,
+		v: false,
+	},
  *
  */
 

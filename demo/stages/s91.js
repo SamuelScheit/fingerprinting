@@ -3,6 +3,11 @@
  *
  * false: no-preference
  * true: reduce
+ * 
+ * {
+		s: 0,
+		v: false,
+	},
  */
 
 function Hn(n) {

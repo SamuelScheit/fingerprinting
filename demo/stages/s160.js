@@ -1,4 +1,12 @@
-/** has Google Voice in speechSynthesis.getVoices() */
+/**
+ * has Google Voice in speechSynthesis.getVoices()
+ *
+ * 	s160: {
+		s: 0,
+		v: true,
+	},
+ *
+ * */
 
 function lu(n) {
 	var t = n.some(function (n) {

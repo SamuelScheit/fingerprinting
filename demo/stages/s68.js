@@ -6,6 +6,11 @@
  * window.RTCPeerConnection
  * navigator.geolocation
  * window.ServiceWorker
+ * 
+ * s68: {
+		s: 0,
+		v: false, // false = less than 3 are available, true = at least 3 are unavailable
+	},
  *
  */
 

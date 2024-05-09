@@ -1,5 +1,10 @@
 /**
  * checks if the browser is automated
+ * 
+ * s158: {
+		s: 0,
+		v: false,
+	},
  */
 function Va() {
 	return wn(function (n, t) {

@@ -1,3 +1,28 @@
+/**
+ * checks if globals are defined that indicate the use of a headless browser
+ *
+ * 	s157: {
+		s: 0,
+		v: {
+			awesomium: false,
+			cef: false,
+			cefsharp: false,
+			coachjs: false,
+			fminer: false,
+			geb: false,
+			nightmarejs: false,
+			phantomas: false,
+			phantomjs: false,
+			rhino: false,
+			selenium: false,
+			webdriverio: false,
+			webdriver: false,
+			headless_chrome: false,
+		},
+	},
+ * 
+ */
+
 Pi = function () {
 	var n,
 		t,

@@ -1,5 +1,10 @@
 /**
- * checks if the browser is safari
+ * checks if the browser is ios safari
+ * 
+ * s62: {
+		s: 0,
+		v: false,
+	},
  */
 
 function dn() {

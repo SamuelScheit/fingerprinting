@@ -1,5 +1,12 @@
-/** checks if certain globals are in the window object
+/**
+ * checks if certain globals are in the window object
  * set is hashed => needs brute force to find the value
+ * 
+ * s156: {
+		s: 0,
+		v: ["chrome", "WebAssembly"],
+	},
+ * 
  */
 
 function constants() {

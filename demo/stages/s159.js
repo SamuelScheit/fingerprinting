@@ -1,5 +1,10 @@
 /**
  * checks if globals or navigator.hardwareConcurrency were overridden
+ * 
+ * 	s159: {
+		s: -2,
+		v: null,
+	},
  */
 function Ca() {
 	return (function (n, t) {

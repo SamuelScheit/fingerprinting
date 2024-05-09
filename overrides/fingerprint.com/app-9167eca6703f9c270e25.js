@@ -2982,7 +2982,7 @@
 					o = p.Ch,
 					s = p.pi,
 					a = (0, R.kX)(4),
-					c = p.Th ? p.jg + "/uQ0X/?b=load-vercel&v=<version>&a=<apiKey>&l=3.9.2" : p.RC;
+					c = p.Th ? p.jg + "/uQ0X/?b=load-vercel&v=<version>&a=<apiKey>&l=3.9.4" : p.RC;
 				return n
 					? r.createElement(r.Fragment, null, t)
 					: r.createElement(

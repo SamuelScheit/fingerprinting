@@ -1,5 +1,10 @@
 /**
  * check forced color mode
+ * 
+ * s39: {
+		s: 0,
+		v: false,
+	},
  */
 
 function Gn(n) {
