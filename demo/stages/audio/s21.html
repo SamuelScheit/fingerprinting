@@ -1,0 +1,60 @@
+<audio id="audio" controls autoplay />
+
+<script>
+	async function processAudio() {
+		let offlineAudioContext = window.AudioContext || window.OfflineAudioContext || window.webkitOfflineAudioContext;
+
+		let bufferSize = 4500;
+		let sampleRate = 44100;
+		let duration = 5e3;
+
+		// let audioContext = new offlineAudioContext(1, duration, sampleRate);
+		let audioContext = new window.AudioContext({
+			sampleRate: sampleRate,
+			latencyHint: "interactive",
+		});
+		let oscillator = audioContext.createOscillator();
+		oscillator.type = "triangle";
+		oscillator.frequency.value = 10000;
+
+		let dynamicsCompressor = audioContext.createDynamicsCompressor();
+		dynamicsCompressor.threshold.value = -50;
+		dynamicsCompressor.knee.value = 40;
+		dynamicsCompressor.ratio.value = 12;
+		dynamicsCompressor.attack.value = 0;
+		dynamicsCompressor.release.value = 0.25;
+
+		oscillator.connect(dynamicsCompressor);
+		dynamicsCompressor.connect(audioContext.destination);
+		oscillator.start(0);
+
+		let audioBuffer = await renderAudio(audioContext);
+		let audioData = audioBuffer.getChannelData(0).subarray(bufferSize);
+
+		let totalMagnitude = audioData.reduce((total, sample) => total + Math.abs(sample), 0);
+	}
+
+	function renderAudio(audioContext) {
+		return new Promise((resolve, reject) => {
+			let onComplete = () => {
+				resolve(audioBuffer);
+			};
+
+			// let audioBuffer = audioContext.startRendering();
+			// audioBuffer.oncomplete = onComplete;
+			// audioBuffer.onerror = reject;
+
+			const element = document.getElementById("audio");
+			const source = audioContext.createMediaElementSource(element);
+			source.connect(audioContext.destination);
+		});
+	}
+
+	processAudio().then((result) => {
+		if (result.status === 0) {
+			console.log("Audio processing successful:", result.value);
+		} else {
+			console.log("Audio processing failed:", result.status);
+		}
+	});
+</script>

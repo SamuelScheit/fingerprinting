@@ -1,0 +1,143 @@
+<canvas id="canvas" width="300" height="50"></canvas>
+
+<script>
+	// Function to check support and perform canvas operations
+	async function On(n) {
+		let supported = false;
+		let canvasContext;
+		let resultText, resultGeom;
+
+		// Check if canvas and 2D context are supported
+		const [canvas, context] = createCanvasContext();
+		canvasContext = context;
+		supported = checkSupport(canvas, context);
+
+		// Perform operations based on support
+		if (!supported) {
+			resultText = resultGeom = "unsupported";
+		} else {
+			supported = await performCanvasOperations(canvas, context, n);
+			if (supported) {
+				resultText = resultGeom = "skipped";
+			} else {
+				[resultGeom, resultText] = await Tn(canvas, context);
+			}
+		}
+
+		return { winding: supported, geometry: resultGeom, text: resultText };
+	}
+
+	// Create a canvas and 2D context
+	function createCanvasContext() {
+		const c = document.getElementById("canvas");
+		var w = c.width,
+			h = c.height;
+
+		const p = window.devicePixelRatio * 2;
+
+		// scale the canvas by window.devicePixelRatio
+		c.setAttribute("width", w * p);
+		c.setAttribute("height", h * p);
+
+		// use css to bring it back to regular size
+		c.setAttribute("style", "width:" + w + "px; height:" + h + "px;");
+
+		// set the scale of the context
+		c.getContext("2d").scale(p, p);
+		const context = c.getContext("2d");
+		return [c, context];
+	}
+
+	// Check if canvas and context support necessary operations
+	function checkSupport(canvas, context) {
+		return !!(canvas.toDataURL && context);
+	}
+
+	// Perform canvas drawing operations
+	async function performCanvasOperations(canvas, context, shouldSkip) {
+		let winding = false;
+		if (!shouldSkip) {
+			const imageData = await generateImageData(canvas, context);
+			winding = !!imageData;
+		}
+		return winding;
+	}
+
+	// Generate image data on the canvas
+	function generateImageData(canvas, context) {
+		return new Promise((resolve) => {
+			// Canvas drawing operations
+			context.width = 240;
+			context.height = 60;
+			context.textBaseline = "alphabetic";
+			context.fillStyle = "#f60";
+			context.fillRect(100, 1, 62, 20);
+			// Additional drawing operations and text
+			context.fillText("Cwm fjordbank gly 😃", 2, 15);
+			context.fillStyle = "rgba(102, 204, 0, 0.2)";
+			context.font = "18pt Arial";
+			context.fillText("Cwm fjordbank gly 😃", 4, 45);
+			// Resolve with imageData (stub)
+			resolve(context.getImageData(0, 0, canvas.width, canvas.height));
+		});
+	}
+
+	// Function to perform more canvas operations
+	async function Tn(canvas, context) {
+		await F(); // Stub function
+
+		// Perform additional canvas operations
+		const geom1 = An(canvas);
+		const geom2 = An(canvas);
+
+		if (geom1 !== geom2) {
+			return ["unstable", "unstable"];
+		} else {
+			// Perform more canvas drawing operations
+			performMoreOperations(canvas, context);
+			await F(); // Stub function
+			return [An(canvas), geom1];
+		}
+	}
+
+	// Perform additional canvas drawing operations
+	function performMoreOperations(canvas, context) {
+		context.width = 122;
+		context.height = 110;
+		context.globalCompositeOperation = "multiply";
+		// Draw circles
+		const circles = [
+			["#f2f", 40, 40],
+			["#2ff", 80, 40],
+			["#ff2", 60, 80],
+		];
+		circles.forEach(([color, x, y]) => {
+			context.fillStyle = color;
+			context.beginPath();
+			context.arc(x, y, 40, 0, 2 * Math.PI, true);
+			context.closePath();
+			context.fill();
+		});
+		// Fill using even-odd rule
+		context.fillStyle = "#f9c";
+		context.arc(60, 60, 60, 0, 2 * Math.PI, true);
+		context.arc(60, 60, 20, 0, 2 * Math.PI, true);
+		context.fill("evenodd");
+	}
+
+	// Stub function for asynchronous operations
+	function F() {
+		return new Promise((resolve) => {
+			// Simulate asynchronous operation
+			setTimeout(resolve, 100);
+		});
+	}
+
+	// Stub function for canvas analysis
+	function An(canvas) {
+		// Stub function for canvas analysis, returns a mock result
+		return canvas.width * canvas.height;
+	}
+
+	On();
+</script>

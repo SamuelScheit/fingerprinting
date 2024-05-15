@@ -980,18 +980,18 @@ export const body = {
 		s: 0,
 		v: "c4d497f0-680e-e2c9-c581-a63667571336",
 	},
-	// saved random id in cookie
+	/** saved random id in cookie */
 	si: "U73NX6F7ez",
-	// random id per visit
+	/** random id per visit */
 	pi: "Ala3cXLIot",
-	// same random id as si saved in localStorage
+	/** same random id as si saved in localStorage */
 	ai: "U73NX6F7ez",
 	/** keyboard listener with keydown and keyup events with timestamps */
 	b1: {
 		s: 0,
 		v: [],
 	},
-	// previous visits if available
+	/** previous visits if available */
 	lr: [
 		{
 			v: "1",

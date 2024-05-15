@@ -8,13 +8,13 @@
       name: "James Bergfeld",
       organization: [Technical University Munich],
       location: [Munich, Germany],
-      email: "james.bergfeld@tum.de"
+      email: "j.bergfeld@tum.de"
     ),
     (
       name: "Samuel Scheit",
       organization: [Technical University Munich],
       location: [Munich, Germany],
-      email: "samuel.scheit@tum.de"
+      email: "tum@samuelscheit.com"
     ),
   ),
   index-terms: (),

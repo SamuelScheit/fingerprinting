@@ -1,5 +1,10 @@
 /** canvas hashes of geometry, text and winding
  * 
+ * https://github.com/fingerprintjs/fingerprintjs/blob/master/src/sources/canvas.ts
+ * 
+ * winding: Determines if winding rules, which controls if a path can go clockwise or counterclockwise, are supported.
+ * geometry: The hash of the canvas when drawing a simple geometry.
+ * 
  * s17: {
 		s: 0,
 		v: {
@@ -64,7 +69,7 @@ function Tn(n, t) {
 								t.fillRect(100, 1, 62, 20),
 								(t.fillStyle = "#069"),
 								(t.font = '11pt "Times New Roman"');
-							var e = "Cwm fjordbank gly ".concat(String.fromCharCode(55357, 56835));
+							var e = "Cwm fjordbank gly ".concat(String.fromCharCode(55357, 56835)); // '😃'
 							t.fillText(e, 2, 15), (t.fillStyle = "rgba(102, 204, 0, 0.2)"), (t.font = "18pt Arial"), t.fillText(e, 4, 45);
 						})(n, t),
 						[4, F()]

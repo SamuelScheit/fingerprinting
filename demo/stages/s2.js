@@ -26,4 +26,4 @@ ft = function () {
 		i && e.push(i.split(","));
 	}
 	return e;
-},
+};
