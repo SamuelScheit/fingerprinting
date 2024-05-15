@@ -21,9 +21,9 @@
 )
 
 #set text(lang: "en")
-#let Footlink(href, body) = { link(href, text(body)); footnote(href) }
+#let Footlink(href, body) = { link(href, text(body)); footnote(link(href)) }
 
-#set heading(numbering: "I.A.a)")
+#set heading(numbering: "1.1.1)a)")
 #show heading: it => locate(loc => {
       // Find out the final number of the heading counter.
       let levels = counter(heading).at(loc)
@@ -149,7 +149,7 @@ What do we want to focus on:
   it
 }
 
-#outline(depth: 2, indent: auto)
+#outline(depth: 2, indent: auto, title: "Contents")
 
 = Introduction
 
@@ -159,19 +159,46 @@ What do we want to focus on:
 
 // (Browser Fingerprinting) optional taken from proposal
 
-== Browser Fingerprinting
 
-=== General
+== General
 
-=== Advantages
+Websites use browser fingerprinting to create a unique identifier of each website visitor by collecting data about the visitor's device and browser settings and combining them into a unique "fingerprint."
 
-=== Disadvantages
+The aim is for website operators to identify users across multiple website visits without them having to actively accept cookies or log in with their user accounts.
 
-=== Relevance
+== Advantages
 
-== Fingerprinting in practice
+The purpose is to create a detailed profile of each user to display personalized content, serve advertising or analyze user behavior.
+This can be used both to improve the user experience and to detect fraudulent activity.
 
-FingerprintJS (FPJS)
+== Disadvantages
+
+In order to create a unique browser fingerprint, extensive information about a user's devices and browser settings must be collected.
+However, this violates the user's privacy unless they have explicitly agreed.
+Especially since there is no way to opt out of fingerprinting and the data can be used to track users across multiple websites.
+This allows websites to create a comprehensive profile of a person's online activities and draw conclusions about a person's identity and behavior.
+
+== Relevance
+
+Because website operators require unique user profiles, even without users' consent, to provide personalized content and to analyze user behavior, browser fingerprinting has become an important tool.
+This is evidenced by the fact that 30.6% of the top 1k websites in the Alexa ranking use fingerprinting techniques. @fingerprintingML
+
+Since the majority of all browsers deactivate third-party cookies by default in the future #footnote[https://developer.mozilla.org/en-US/blog/goodbye-third-party-cookies/], or need explicit consent to use third-party cookies, browser fingerprinting is a significant alternative to identify users across different websites.
+
+== Application
+
+In order to assign a unique identity or “fingerprint” to each user, various details are collected via the browser.
+For example, a combination of rare fonts, a specific screen resolution, or a specific browser plugin can help generate a unique fingerprint.
+
+JavaScript libraries can be used for this, such as *FingerprintJS* (FPJS), which collects a variety of information about a user's browser environment. In the commercial version, FingerprintJS claims to be able to create a 99.5% unique fingerprint. @fingerprintJS
+
+FingerprintJS is the most popular JavaScript browser fingerprinting library according to npm downloads. #footnote[https://npmtrends.com/@fingerprintjs/fingerprintjs-vs-@rajesh896/broprint.js-vs-@thumbmarkjs/thumbmarkjs-vs-clientjs-vs-imprintjs]
+
+#figure(
+   image("npm.png"),
+   caption: [NPM downloads per day, comparison of different JS fingerprinting libraries (as of 2024)]
+)
+
 
 // (connected to background)
 // usage how to use fingerprinting in a project e.g. with fingerprintjs
@@ -211,26 +238,26 @@ FingerprintJS (FPJS)
 
 
 // navigator.onLine
-- #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/Navigator/onLine")[window.navigator.onLine]
 - #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio")[window.devicePixelRatio]
-- #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/StorageManager/estimate")[navigator.storage.estimate()]
 - #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/Window/screen")[window.screen]
 - #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/Window/indexedDB")[window.indexedDB]
 // semi-auto from here. check links!
 - #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/Window/requestFileSystem")[window.requestFileSystem] // FIXME webkit.requestFileSystem?
+- #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/Screen/colorDepth")[window.screen.colorDepth]
+- #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/Screen/width")[window.screen.width]
+- #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/Screen/height")[window.screen.height]
+- #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage")[window.sessionStorage]
+- #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage")[window.localStorage]
+- #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/Window/indexedDB")[window.indexedDB]
+- #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/Navigator/deviceMemory")[navigator.deviceMemory]
+- #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/Navigator/hardwareConcurrency")[navigator.hardwareConcurrency]
+- #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/StorageManager/estimate")[navigator.storage.estimate()]
 - #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/StorageManager/getDirectory")[navigator.storage.getDirectory()]
 - #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/Navigator/doNotTrack")[navigator.doNotTrack]
 - #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/Navigator/webdriver")[navigator.webdriver]
 - #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/Navigator/oscpu")[navigator.oscpu]
 - #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/Navigator/languages")[navigator.languages]
-- #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/Screen/colorDepth")[window.screen.colorDepth]
-- #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/Navigator/deviceMemory")[navigator.deviceMemory]
-- #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/Screen/width")[window.screen.width]
-- #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/Screen/height")[window.screen.height]
-- #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/Navigator/hardwareConcurrency")[navigator.hardwareConcurrency]
-- #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage")[window.sessionStorage]
-- #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage")[window.localStorage]
-- #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/Window/indexedDB")[window.indexedDB]
+- #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/Navigator/onLine")[navigator.onLine]
 - #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/Navigator/platform")[navigator.platform]
 - #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/Navigator/plugins")[navigator.plugins]
 - #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/Navigator/vendor")[navigator.vendor]
@@ -241,14 +268,7 @@ FingerprintJS (FPJS)
 - #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/Navigator/userAgent")[navigator.userAgent]
 - #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/Navigator/appVersion")[navigator.appVersion]
 - #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/NetworkInformation/rtt")[navigator.connection.rtt]
-- #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/")[]
-- #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/")[]
-- #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/")[]
-- #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/")[]
-- #brwserProp("https://developer.mozilla.org/en-US/docs/Web/API/")[]
-- #brwserProp("")[]
-- #brwserProp("")[]
-- #brwserProp("")[]
+
 /*
 
 localStorage and window.openDatabase
@@ -367,22 +387,42 @@ TLS Fingerprint requested by calling https://fingerprint.com/sdub4ver/?q=NIrKSr1
 
 === Audio
 
-#Footlink("https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API")[Web Audio API] is a browser API that can be used to artificially generate sounds and audio data.
+The #Footlink("https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API")[Web Audio API] is a browser API that can be used to artificially generate sounds and audio data.
 
 However it can also be used create a unique audio profile of the browser by:
 
 + generating a series of tone signals with predefined properties such as frequency, volume and distortion.
-+ This sound is played and recorded at the same time via the Web Audio API.
-+ The recorded audio data is analyzed and encoded as a hash to create a unique audio fingerprint.
++ Playing and recording the sound at the same time via the Web Audio API.
++ Analyzing the recorded audio data and encoding as a hash to create a unique audio fingerprint.
 
-FPJS first creates a tringle oscillator tone signal with a frequency of `10.000` Hz. Then a compressor is created with a `-50` threshold
+FPJS first creates a #Footlink("https://developer.mozilla.org/en-US/docs/Web/API/BaseAudioContext/createOscillator")[tringle oscillator] tone signal with a frequency of `10.000` Hz. Then a #Footlink("https://developer.mozilla.org/en-US/docs/Web/API/BaseAudioContext/createDynamicsCompressor")[compressor] is created with the following #Footlink("https://developer.mozilla.org/en-US/docs/Web/API/DynamicsCompressorNode/")[parameters:]
 
-#image("audio.png")
+#table(
+  columns: (auto, 1fr),
+  inset: 10pt,
+  align: horizon,
+  table.header(
+    [*Value*], [*Description*],
+    [`-50db`], ["value above which the compression will start taking effect"],
+    [`40db`], ["value representing the range above the threshold where the curve smoothly transitions to the compressed portion."],
+    [`12db`], ["amount of change needed in the input for a 1 dB change in the output."],
+    [`0s`], ["the amount of time required to reduce the gain by 10 dB."],
+    [`0.25s`], ["the amount of time required to increase the gain by 10 dB."],
+  ),
+)
+
+The open source FPJS version uses a square oscillator with a base frequency of `1.000` Hz and an additional #Footlink("https://developer.mozilla.org/en-US/docs/Web/API/BiquadFilterNode")[bi-quad filter].
+This can be visualized by the following diagram that compares the audio values of different browser implementations:
+
+#figure(image("audio.png"),
+  caption: [
+    #Footlink("https://fingerprint.com/blog/audio-fingerprinting/")[Audio API browser comparison]
+  ]
+)
 
 Due to subtle differences in audio processing and playback of different browsers and systems, the recorded data will vary slightly from the original.
 
 To prevent fingerprint Firefox has the ability to #Footlink("https://bugzilla.mozilla.org/show_bug.cgi?id=1708593")[disable the audio API].
-
 
 
 === WebRTC
@@ -408,15 +448,13 @@ However, it should be noted local IP addresses are not unique and different LAN 
 Additionally the supported audio and video codecs can further help to fingerprint a device as different Browser and Device configurations support different codecs.
 The `RTCPeerConnection` created in the previous step can be queried via #Footlink("https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/getStats")[`connection.getStats()`] and returns a #Footlink("https://developer.mozilla.org/en-US/docs/Web/API/RTCStatsReport")[`RTCStatsReport`], which contains statistics of used audio and video codecs for the connection.
 For example the VP8 video codec is represented as the following object:
-```js
-{
-    id: "HjD6dszXj",
-    type: "codec",
-    clockRate: 90000,
-    mimeType: "video/VP8",
-    direction: "sendrecv",
-    uri: "urn:ietf:params:rtp-hdrext:toffset",
-}
+```c
+id: "HjD6dszXj",
+type: "codec",
+clockRate: 90000,
+mimeType: "video/VP8",
+direction: "sendrecv",
+uri: "urn:ietf:params:rtp-hdrext:toffset",
 ```
 and contains various information about the supported audio and video codecs e.g. support for #Footlink("https://datatracker.ietf.org/doc/html/draft-ietf-payload-rtp-opus-04#section-6.1")[CPU acceleration, forward error correction, stereo audio, bit-rate, codec version, frame size and other codec specific parameters]. \
 These parameters are partially stable as browser updates might add support for different codecs, but processor specific codec acceleration does not change without a hardware modification.
@@ -428,7 +466,7 @@ WebRTC media devices are audio and video sources of the browser as well as audio
 The #Footlink("https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/enumerateDevices")[`navigator.mediaDevices.enumerateDevices()` API returns a "list of the currently available media input and output devices".]
 Each #Footlink("https://developer.mozilla.org/en-US/docs/Web/API/MediaDeviceInfo")[media device] contains the following properties:
 - `deviceId` (unique and persistent device identifier)
-- `groupId` (optional identifier that groups multiple deviceId's together of the same physical device)
+- `groupId` (optional identifier that groups multiple ids of the same physical device)
 - `kind` (`"videoinput","audioinput","audiooutput"`)
 - `label` (optional human readable name for the device)
 
@@ -441,7 +479,7 @@ FPJS uses this to determine the amount of audio an video devices the user has co
 #let Murmurhash = { [`Murmurhash3_128_x64` ]; cite(<MurmurHash>) }
 #let JSONStringify = { Footlink("https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify")[`JSON.stringify`] }
 
-#Footlink("https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis")[SpeechSynthesis] is part of the #Footlink("https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API")[Web Speech Browser API] that allows websites to convert text to audio data (TTS).
+#Footlink("https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis")[SpeechSynthesis] is part of the #Footlink("https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API")[Web Speech Browser API] that allows websites to convert text to audio data (so-called Text-to-speech or TTS).
 The browser exposes the function #Footlink("https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis/getVoices")[`SpeechSynthesis.getVoices()`] that lists all locally and remotely available voices that can be used for TTS. \
 Each voice contains the following properties:
 - `voiceURI` (unique voice identifier)
@@ -472,15 +510,15 @@ Canvas fingerprinting works by using the Canvas API to draw text, shapes, and im
 
 FPJS uses the canvas API to render the following text, emojis and geometry:
 
-#image("canvas.png")
+#image("canvas1.png")
 
 The pixel data is then retrieved by calling #Footlink("https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL?retiredLocale=de")[`canvas.toDataURL()`] and hashed using #Murmurhash.
-However browsers such as #Footlink("https://github.com/brave/brave-browser/issues/9186")[Brave] or #Footlink("https://support.mozilla.org/en-US/kb/firefox-protection-against-fingerprinting")[Firefox] add noise to the retrieved canvas data. To verify if canvas noise is added FPJS calls `toDataURL()` twice and compares if the resulting buffer is equals. Additionally FPJS uses an embedded image to check if the #Footlink("https://datatracker.ietf.org/doc/html/rfc2083")[PNG] image data returned by `toDataURL()` matches the data of the embedded image. \
+However browsers such as #Footlink("https://github.com/brave/brave-browser/issues/9186")[Brave] or #Footlink("https://support.mozilla.org/en-US/kb/firefox-protection-against-fingerprinting")[Firefox] add noise to the retrieved canvas data. To verify if canvas noise is added FPJS calls `toDataURL()` twice and compares the resulting buffers. Additionally FPJS uses an embedded image to check if the #Footlink("https://datatracker.ietf.org/doc/html/rfc2083")[PNG] image data returned by `toDataURL()` matches the data of the embedded image. \
 If one of the checks fail noise was added to the canvas and the resulting hash is always unique per session and therefore unusable for identification without any further parameters.
 
 === WebGL
 
-#Footlink("https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API")[WebGL (Web Graphics Library)] is an additional API on top of the canvas element that allows websites to render 3D graphics, shaders and can also be used to create a unique identifier of the graphics engine.
+The #Footlink("https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API")[WebGL (Web Graphics Library)] is an additional API on top of the canvas element that allows websites to render 3D graphics, shaders and can also be used to create a unique identifier of the graphics engine.
 
 ==== Rendering
 
@@ -510,7 +548,7 @@ The data is retrieved, hashed and verified in the same way as with the Canvas AP
 
 ==== Extensions
 
-Additionally the GPU capabilities can be queried by calling #Footlink("https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/getSupportedExtensions")[`context.getSupportedExtensions()`], #Footlink("https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/getContextAttributes")[`context.getContextAttributes()`], #Footlink("https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/getParameter")[`context.getParameter()`] and #Footlink("https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/getExtension")[`context.getExtension()`]. \
+Additionally the GPU capabilities can be queried by calling #Footlink("https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/getSupportedExtensions")[`context.getSupportedExtensions()`], #Footlink("https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/getContextAttributes")[`context.getContextAttributes()`], #Footlink("https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/getParameter")[`context.getParameter()`] and #Footlink("https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/getExtension")[`context.getExtension()`] functions of the  #Footlink("https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext")[`WebGLRenderingContext`]-API. \
 The list of all queried WebGL extensions and parameters by FPJS are available as an attachment in @WebglAttributes. \
 FPJS then concatenates the result of the queries and creates a hash over the following categories of WebGL parameters:
 ```c
@@ -553,6 +591,8 @@ shadingLanguageVersion: "WebGL GLSL ES 1.0 (OpenGL ES GLSL ES 1.0 Chromium)",
 = References
 
 #bibliography("refs.bib", full: true, title: none)
+
+#colbreak()
 
 = Attachments
 
