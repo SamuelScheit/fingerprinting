@@ -1,4 +1,4 @@
-import { x64hash128 } from "@/../../fingerprintjs/src/utils/hashing";
+import { x64hash128 } from "fingerprintjs/src/utils/hashing";
 
 export function getWebglGeometry(n: WebGLRenderingContext) {
   n.clearColor(0, 0, 1, 1);
@@ -20,12 +20,12 @@ export function getWebglGeometry(n: WebGLRenderingContext) {
   createShader(
     0,
     "attribute vec2 position;" +
-      "uniform float time;" +
-      "void main() {" +
-      "   float s = sin(time);" +
-      "   float c = cos(time);" +
-      "   gl_Position = vec4(position * mat2(c, s, -s, c), 1, 1);" +
-      "}",
+    "uniform float time;" +
+    "void main() {" +
+    "   float s = sin(time);" +
+    "   float c = cos(time);" +
+    "   gl_Position = vec4(position * mat2(c, s, -s, c), 1, 1);" +
+    "}",
   );
   createShader(
     1,

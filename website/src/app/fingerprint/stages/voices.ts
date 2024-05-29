@@ -1,4 +1,4 @@
-import { x64hash128 } from "@/../../fingerprintjs/src/utils/hashing";
+import { x64hash128 } from "fingerprintjs/src/utils/hashing";
 
 let resolve!: (value?: any) => void;
 let reject!: (reason?: any) => void;
@@ -32,7 +32,7 @@ try {
   if (!speechSynthesis.pending && voices.length > 0) {
     resolve(voices);
   }
-} catch (error) {}
+} catch (error) { }
 
 export function getVoices() {
   return promise;

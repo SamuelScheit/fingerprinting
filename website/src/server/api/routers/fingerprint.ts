@@ -2,7 +2,7 @@ import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
 import { visits } from "@/server/db/schema";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
-import { x64hash128 } from "@/../../fingerprintjs/src/utils/hashing";
+import { x64hash128 } from "fingerprintjs/src/utils/hashing";
 import { count, eq, getTableColumns, getTableName, sql } from "drizzle-orm";
 
 const insertVisits = createInsertSchema(visits, {

@@ -1,6 +1,6 @@
 import getAudioFingerprint, {
   doesBrowserSuspendAudioContext,
-} from "../../../../../fingerprintjs/src/sources/audio";
+} from "../../../../fingerprintjs/src/sources/audio";
 
 export async function getAudioFingerprint1() {
   const result = await getAudioFingerprint();

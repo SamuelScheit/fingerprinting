@@ -4,8 +4,8 @@ import { useRouter } from "next/navigation";
 import { api } from "../../trpc/react";
 import { useLayoutEffect } from "react";
 import { Card, Skeleton, Snippet } from "@nextui-org/react";
-import getApplePayState from "@/../../fingerprintjs/src/sources/apple_pay";
-import getUnstableCanvasFingerprint from "@/../../fingerprintjs/src/sources/canvas";
+import getApplePayState from "fingerprintjs/src/sources/apple_pay";
+import getUnstableCanvasFingerprint from "fingerprintjs/src/sources/canvas";
 import { getNavigatorFunctions, getPlugins, getSafeArea } from "./stages/navigator";
 import {
 	isAndroid,
@@ -20,18 +20,18 @@ import {
 	isWebKit,
 	isWebKit606OrNewer,
 	isWebKit616OrNewer,
-} from "@/../../fingerprintjs/src/utils/browser";
-import getMathFingerprint from "@/../../fingerprintjs/src/sources/math";
-import { getWebGLContext, getWebGlBasics } from "@/../../fingerprintjs/src/sources/webgl";
-import getFonts from "@/../../fingerprintjs/src/sources/fonts";
-import getVendorFlavors from "@/../../fingerprintjs/src/sources/vendor_flavors";
-import getDomBlockers from "@/../../fingerprintjs/src/sources/dom_blockers";
-import getTouchSupport from "@/../../fingerprintjs/src/sources/touch_support";
+} from "fingerprintjs/src/utils/browser";
+import getMathFingerprint from "fingerprintjs/src/sources/math";
+import { getWebGLContext, getWebGlBasics } from "fingerprintjs/src/sources/webgl";
+import getFonts from "fingerprintjs/src/sources/fonts";
+import getVendorFlavors from "fingerprintjs/src/sources/vendor_flavors";
+import getDomBlockers from "fingerprintjs/src/sources/dom_blockers";
+import getTouchSupport from "fingerprintjs/src/sources/touch_support";
 import { getTimezoneOffset } from "./stages/time";
-import getSessionStorage from "@/../../fingerprintjs/src/sources/session_storage";
-import isTransparencyReduced from "@/../../fingerprintjs/src/sources/reduced_transparency";
-import isMotionReduce from "@/../../fingerprintjs/src/sources/reduced_motion";
-import getContrastPreference from "@/../../fingerprintjs/src/sources/contrast";
+import getSessionStorage from "fingerprintjs/src/sources/session_storage";
+import isTransparencyReduced from "fingerprintjs/src/sources/reduced_transparency";
+import isMotionReduce from "fingerprintjs/src/sources/reduced_motion";
+import getContrastPreference from "fingerprintjs/src/sources/contrast";
 import {
 	getMaxMonochrome,
 	isDarkMode,
@@ -59,7 +59,7 @@ import { detectSupportedDRMs } from "./stages/drm";
 import { measureFontWidths } from "./stages/font_width";
 import { renderEmojis } from "./stages/font_emoji";
 import { renderMathFormulas } from "./stages/font_math";
-import { x64hash128 } from "../../../../fingerprintjs/src/utils/hashing";
+import { x64hash128 } from "../../../fingerprintjs/src/utils/hashing";
 
 declare global {
 	interface Navigator {

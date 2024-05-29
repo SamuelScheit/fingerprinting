@@ -1,4 +1,4 @@
-import { toFloat } from "@/../../fingerprintjs/src/utils/data";
+import { toFloat } from "fingerprintjs/src/utils/data";
 
 export function getTimezoneOffset(): number {
   const currentYear = new Date().getFullYear();

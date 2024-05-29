@@ -1,9 +1,9 @@
-import { x64hash128 } from "@/../../fingerprintjs/src/utils/hashing";
+import { x64hash128 } from "fingerprintjs/src/utils/hashing";
 import {
   isChromium,
   isGecko,
   isWebKit,
-} from "../../../../../fingerprintjs/src/utils/browser";
+} from "../../../../fingerprintjs/src/utils/browser";
 
 const infos = {
   contextAttributes: [
@@ -545,7 +545,7 @@ export function getWebglExtensions(ctx?: WebGLRenderingContext) {
     shaderPrecisions: x64hash128(n.shaderPrecisions.join("&")),
     extensions: x64hash128(
       (null === (t = n.extensions) || void 0 === t ? void 0 : t.join(",")) ||
-        "",
+      "",
     ),
     extensionParameters: x64hash128(i.join(",")),
     extensionParameters2: x64hash128(n.extensionParameters.join("&")),
