@@ -140,7 +140,7 @@ export const visits = createTable(
     browser_safari_webkit: boolean("browser_safari_webkit"),
     browser_webkit_desktop: boolean("browser_webkit_desktop"),
     browser_edgeHTML: boolean("browser_edgeHTML"),
-    element_attributionSourceId: varchar("a_attributionSourceId"),
+    element_attributionSourceId: real("a_attributionSourceId"),
     element_attributeNames: jsonb("a_attributeNames"),
     eval_toString: varchar("eval_toString"),
     drm: jsonb("drm"),
