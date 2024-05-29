@@ -5,7 +5,7 @@ export default async function Home() {
     <div className="min-h-[100vh] bg-gradient-to-b from-[#120b1c] to-[#15162c]">
       <main className="flex min-h-screen flex-col items-center justify-center text-white">
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-          <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
+          <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem] text-center">
             <span>Browser </span>
             <span className="bg-gradient-to-br from-purple-500 to-purple-700 bg-clip-text text-transparent">
               Fingerprint
