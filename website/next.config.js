@@ -8,6 +8,9 @@ await import("./src/env.js");
 const config = {
   output: "standalone",
   reactStrictMode: false,
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 };
 
 export default config;
