@@ -11,7 +11,7 @@ services:
       - "57389:3000"
     image: fingerprint
     environment:
-      - DATABASE_URL=${DATABASE_URL}
+      - DATABASE_URL="postgresql://postgres:P4XDN4kAeEr98gdqtW5K@db:5432/fingerprint"
     env_file:
       - .env
     depends_on:
