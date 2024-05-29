@@ -11,7 +11,8 @@
     "db:studio": "drizzle-kit studio",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@nextui-org/react": "^2.4.0",
@@ -25,6 +26,7 @@
     "drizzle-zod": "^0.5.1",
     "geist": "^1.3.0",
     "next": "^14.2.1",
+    "patch-package": "^8.0.0",
     "postgres": "^3.4.4",
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
