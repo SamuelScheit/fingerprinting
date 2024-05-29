@@ -87,7 +87,7 @@ This can be used both to improve the user experience and to detect fraudulent ac
 In order to create a unique browser fingerprint, extensive information about a user's devices and browser settings must be collected.
 However, this violates the user's privacy unless they have explicitly agreed.
 Especially since there is no way to opt out of fingerprinting and the data can be used to track users across multiple websites.
-This allows a comprehensive profile of a person's online activities to be created and conclusions to be drawn about a person's identity and behavior.
+This allows  comprehensive profile of a person's online activities to be created and conclusions to be drawn about a person's identity and behavior.
 
 == Relevance
 
@@ -128,7 +128,7 @@ The library referenced for practical implementation is FingerprintJS. We analyze
 
 We also examine how robust these techniques are to changes in the browser environment, e.g. software updates and configuration changes.
 
-Additionally, we provide an assessment of the privacy and security risks associated with browser fingerprinting. This includes the ability to identify users across different websites, potential attack scenarios, and the effectiveness of privacy protections against fingerprinting techniques.
+Additionally, we provide an assessment of the privacy and security risks associated with browser fingerprinting. This includes the ability to identify users across different websites and the effectiveness of privacy protections against fingerprinting techniques.
 
 The results will be documented in the form of a paper that explains how browser fingerprinting techniques work, shows their advantages and disadvantages, and offers recommendations on possible countermeasures. // FIXME a few of these points are repeated from earlier paragraphs?
 
@@ -138,21 +138,75 @@ The technical implementation of fingerprinting technology based on FingerprintJS
 Our analysis helps us to understand how fingerprinting is implemented, outlines possible countermeasures and their respective effectiveness.
 On the one hand, this allows browser manufacturers and browser extension developers to limit or customize possible interfaces to make browser fingerprinting more difficult. On the other hand, library developers can use the identified techniques to improve and make their own fingerprinting libraries more effective.
 
+#colbreak()
+
 == Research questions
 
-+ What specific techniques and methods are used by the FingerprintJS library for browser fingerprinting?
++ How does the FingerprintJS library generate unique browser fingerprints?
++ Which browser properties are examined by the FingerprintJS library?
++ How can parts of the library be replicated to build a browser fingerprinting library?
 + How can these techniques be used or adapted to by other actors such as browser manufacturers, extension developers and library developers?
 + What impact do the identified techniques have on user privacy and security?
 + How reliable are the fingerprinting mechanisms and can FingerprintJS keep up with their promise of 99.5% unique device identification and high temporal fingerprint stability? // they promise: "[...] our visitor identifier that is stable for months not days." (https://fingerprint.com/resources/comparisons/compare-fingerprint-vs-shield/)
 
-// #colbreak()
 
 == Methodology
 
+/*
 - *Analysis of FingerprintJS library:*
    Examination of the documentation, source code, and how fingerprinting techniques are implemented in FingerprintJS.
    
 - *Experiments and tests:* Conducting tests to evaluate the effectiveness of the fingerprinting techniques under different browser configurations and identifying possible countermeasures.
    
 - *Literature review:* Analysis of existing research and studies on browser fingerprinting techniques.
+*/
+
+//// intro to methodology
+A technical analysis of a [state of the art] fingerprinting suite provides insight into modern browser fingerprinting technology.
+
+//// FPJS
+FingerprintJS is currently the most widely used browser fingerprinting library @topFingerprintingWebsites. As such it's an [excellent] subject to investigate the implementation of browser fingerprinting in practice.
+
+//// FPJS offers two versions
+FPJS offers two fingerprinting solutions: FingerprintJS, an open source library with moderate coverage [of different browser types and configurations] and FPJS Pro, a subscription-based closed source library that uses a greater set of parameters and promises a 99.5% rate of (re-)identification.
+
+//// we need to reverse-engineer it
+Since the source code of the latter isn't accessible, it's necessary to reverse-engineer/*#footnote("what is reverse-engineering")*/ FPJS Pro in order to draw conclusions about the techniques used to generate fingerprints.
+
+//// we need to reverse-engineer it (alt)
+/*
+FPJS offers a demonstration of [their Pro version / FPJS Pro] on their website. The JavaScript#footnote("what is JS?") code used to collect fingerprint data is obfuscated, [which] necessitates reverse-engineering#footnote("what is reverse-engineering") the library.
+*/
+
+//// deploy locally
+In order to create a stable [testing / reverse-engineering] environment, the JavaScript code is extracted from the demo website and deployed locally/*#footnote("describe setup used for debugging!")*/.
+
+//// list of funccalls
+Using a JavaScript Proxy object #footnote(link("https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy")) a list of API- and function calls can be captured which [grants] and overview of the general behavior of the library.
+This aids in identifying entry points for later reverse-engineering.
+
+//// FPJS client <-> server
+Analysis of the network calls made when running FPJS reveals that fingerprints are generated by collecting data about the browser setup using client-side JavaScript and sending it to a remote server. The server parses the data and computes a fingerprint. // FIXME: should this be explained elsewhere, e.g. earlier?
+
+//// obfuscated payload
+The client payload is serialized before being sent and can't be read in plaintext. Therefore the request needs to be traced back to the caller function that generates the payload to decipher its contents.
+The browser's internal JavaScript debugger can be used to inspect the payload in plaintext format before it has been serialized.
+
+//// parameter functions
+The plaintext payload can be used to identify the functions for each parameter. These functions are then analyzed in detail, especially with regard to the browser APIs used and their processing.
+
+//// fingerprint generation
+The actual fingerprints are generated with API calls to a closed source server. This hinders attempts to reverse-engineer the actual generation process.
+
+//// guessing weights
+Systematically testing different parameters from a collection of various payloads while comparing the uniqueness of the resulting fingerprints.
+This hints at the Relevance of each parameter to the final fingerprint.
+
+//// custom library
+The algorithm used to generate a fingerprint from the parameters sent by the client must be carefully designed to accept small changes that a user agent naturally undergoes during use, all the while clearly differentiating between separate clients.
+
+To gather statistical data about the prevalence of each parameter, a custom fingerprinting library based on findings from the previous steps can be implemented. /*Using the custom library, browser fingerprints from volunteers can be collected.
+The data */ Conclusions can then be drawn from the data about the unique identifiably of each parameter.
+
+// → draw conclusions about unique identifiability of each parameter
 

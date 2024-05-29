@@ -2,17 +2,13 @@
 
 <script>
 	async function processAudio() {
-		let offlineAudioContext = window.AudioContext || window.OfflineAudioContext || window.webkitOfflineAudioContext;
+		let offlineAudioContext = window.OfflineAudioContext || window.webkitOfflineAudioContext;
 
 		let bufferSize = 4500;
 		let sampleRate = 44100;
 		let duration = 5e3;
 
-		// let audioContext = new offlineAudioContext(1, duration, sampleRate);
-		let audioContext = new window.AudioContext({
-			sampleRate: sampleRate,
-			latencyHint: "interactive",
-		});
+		let audioContext = new offlineAudioContext(1, duration, sampleRate);
 		let oscillator = audioContext.createOscillator();
 		oscillator.type = "triangle";
 		oscillator.frequency.value = 10000;
@@ -40,13 +36,9 @@
 				resolve(audioBuffer);
 			};
 
-			// let audioBuffer = audioContext.startRendering();
-			// audioBuffer.oncomplete = onComplete;
-			// audioBuffer.onerror = reject;
-
-			const element = document.getElementById("audio");
-			const source = audioContext.createMediaElementSource(element);
-			source.connect(audioContext.destination);
+			let audioBuffer = audioContext.startRendering();
+			audioBuffer.oncomplete = onComplete;
+			audioBuffer.onerror = reject;
 		});
 	}
 

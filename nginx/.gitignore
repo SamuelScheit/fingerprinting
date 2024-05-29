@@ -1,0 +1,7 @@
+*.tar.gz
+*.sha256
+*.asc
+*.crt
+*.key
+*.pem
+nginx_utils/logs

@@ -657,7 +657,7 @@ export const body = {
 		s: 0,
 		v: false,
 	},
-	/** min-monochrome, max-monochrome */
+	/** max-monochrome */
 	s42: {
 		s: 0,
 		v: 0,

@@ -2,6 +2,22 @@ import { Vr } from "./util";
 import crypto from "crypto";
 
 console.log(Yt());
+// peer = new RTCPeerConnection()
+// peer.createDataChannel(Math.random().toString())
+// l = peer.createOffer()
+// peer.setLocalDescription(l)
+
+/**
+{
+    "iceServers": [
+        {
+            "credential": "admin",
+            "urls": "turn:use1-turn.fpjs.io?transport=tcp",
+            "username": "b8ba5b31-59f9-744f-5dca-7518ec23f2b8"
+        }
+    ]
+}
+ */
 
 /**
  * 
@@ -435,14 +451,14 @@ function ic(n, t, e, o, u) {
 								}
 							};
 						})),
-						(R = O.vQPRt(Yo, E)),
-						O.nEXBq(R, 0) ? [2, R] : [4, O.vQPRt(zo, E)]
+						(R = O.vQPRt(Yo, E)), // createDataChannel
+						O.nEXBq(R, 0) ? [2, R] : [4, O.vQPRt(zo, E)] // createOffer
 					);
 				case 2:
 					return (
-						(L = i.sent()),
-						(I = O.dVOqx(Ar, L, 453955339)),
-						(P = O.snGwz(Ar, L, 1801730948)),
+						(L = i.sent()), // offer
+						(I = O.dVOqx(Ar, L, 453955339)), // s
+						(P = O.snGwz(Ar, L, 1801730948)), // v
 						O.cfILk(I, 0) ? [2, I] : [4, O.snGwz(Ar, E, 76151562)(P)]
 					);
 				case 3:
