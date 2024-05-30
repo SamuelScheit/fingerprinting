@@ -50,18 +50,18 @@ export const fingerprintRouter = createTRPCRouter({
 			const uniqueness = await query.execute();
 			console.log(uniqueness);
 
-			// await ctx.db.execute(
-			// 	sql`INSERT INTO ${sql.raw(getTableName(visits))} VALUES (${sql.raw(columns.map((x) => {
-			// 		// @ts-ignore
-			// 		const value = input[x.name];
-			// 		if (x.dataType === "boolean") return value ? "true" : "false";
-			// 		if (x.dataType === "number") return value || 0;
-			// 		if (x.dataType === "json") return `'${JSON.stringify(value || null)}'::jsonb`;
-			// 		if (x.dataType === "date") return value ? `'${value}'::date` : "now()";
-			// 		console.log(x.dataType, x.name, value);
-			// 		return `'${value || ""}'`;
-			// 	}).join(", "))})`,
-			// );
+			await ctx.db.execute(
+				sql`INSERT INTO ${sql.raw(getTableName(visits))} VALUES (${sql.raw(columns.map((x) => {
+					// @ts-ignore
+					const value = input[x.name];
+					if (x.dataType === "boolean") return value ? "true" : "false";
+					if (x.dataType === "number") return value || 0;
+					if (x.dataType === "json") return `'${JSON.stringify(value || null)}'::jsonb`;
+					if (x.dataType === "date") return value ? `'${value}'::date` : "now()";
+					console.log(x.dataType, x.name, value);
+					return `'${value || ""}'`;
+				}).join(", "))})`,
+			);
 
 			return {
 				fingerprint, // "654c8418b95d5236828891b2fabfaebba56ae880"
