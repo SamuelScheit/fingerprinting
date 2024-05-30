@@ -60,6 +60,7 @@ import { measureFontWidths } from "./stages/font_width";
 import { renderEmojis } from "./stages/font_emoji";
 import { renderMathFormulas } from "./stages/font_math";
 import { x64hash128 } from "../../../fingerprintjs/src/utils/hashing";
+import { getTLS } from "./stages/tls";
 
 declare global {
 	interface Navigator {
@@ -108,9 +109,10 @@ export function Fingerprint() {
 
 			initWebRTC().catch(console.error);
 
-			const hash = (input: string) => input ? x64hash128(input) : undefined;
+			const hash = (input: string) => (input ? x64hash128(input) : undefined);
 
 			const sources = {
+				tls_ja4: getTLS,
 				font_list: getFonts,
 				font_widths: measureFontWidths,
 				font_emoji: renderEmojis,
@@ -220,16 +222,7 @@ export function Fingerprint() {
 				eval_toString: () => eval.toString(),
 				external_toString: window.external?.toString,
 				function_bind_toString: () => Function.prototype.bind?.toString(),
-				performance_memory: () => {
-					const m = performance.memory;
-					return m
-						? {
-								usedJSHeapSize: m.usedJSHeapSize,
-								totalJSHeapSize: m.totalJSHeapSize,
-								jsHeapSizeLimit: m.jsHeapSizeLimit,
-							}
-						: null;
-				},
+				performance_memory: performance?.memory?.jsHeapSizeLimit,
 				performance_now: performanceNowAccuracy,
 				navigator_pdfViewerEnabled: navigator.pdfViewerEnabled,
 				navigator_productSub: navigator.productSub,

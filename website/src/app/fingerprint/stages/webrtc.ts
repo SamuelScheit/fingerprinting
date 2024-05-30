@@ -1,5 +1,5 @@
-let resolve = () => {};
-let reject = (x?: any) => {};
+let resolve = () => { };
+let reject = (x?: any) => { };
 let promise = new Promise<void>((res, rej) => {
   resolve = res;
   reject = rej;
@@ -21,12 +21,9 @@ export async function getWebRTCStats() {
 export async function initWebRTC() {
   peer = new RTCPeerConnection({
     iceServers: [
-      {
-        urls: "stun:stun.l.google.com:19302",
-      },
-      // {
-      //   urls: "stun:stun.fpapi.io:3478",
-      // },
+      { urls: "stun:stunserver.stunprotocol.org" },
+      { urls: "stun:stun.l.google.com:19302", },
+      // { urls: "stun:stun.fpapi.io:3478", },
       // {
       //   credential: "admin",
       //   urls: "turn:use1-turn.fpjs.io?transport=tcp",
@@ -36,7 +33,7 @@ export async function initWebRTC() {
   });
 
   peer.onicecandidate = (event) => {
-    // console.log("onicecandidate", event);
+    console.log("onicecandidate", event.candidate);
     if (event.candidate) {
       candidates.push(event.candidate);
     } else {
@@ -48,6 +45,7 @@ export async function initWebRTC() {
     reject(ev.errorText);
   };
   peer.onicegatheringstatechange = (ev) => {
+    console.log("onicegatheringstatechange", peer.iceGatheringState);
     if (peer.iceGatheringState === "complete") {
       resolve();
     } else if (peer.iceGatheringState === "gathering") {
@@ -56,6 +54,10 @@ export async function initWebRTC() {
       reject(peer.iceGatheringState);
     }
   };
+
+  setTimeout(() => {
+    resolve()
+  }, 900)
 
   peer.createDataChannel("data");
 

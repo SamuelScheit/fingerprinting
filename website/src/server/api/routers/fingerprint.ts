@@ -26,18 +26,15 @@ export const fingerprintRouter = createTRPCRouter({
 							// @ts-ignore
 							const value = input[x.name];
 
-							if (value == null) {
-								// acc[x.name] = sql`(SELECT COUNT(*) FROM ${visits} WHERE "${sql.raw(x.name)}" IS NULL)`;
-							} else if (typeof value === "object") {
-								console.log(x.name, value);
-								if (Array.isArray(value)) {
-									acc[x.name] =
-										sql`(SELECT COUNT(*) FROM ${visits} WHERE "${sql.raw(x.name)}" = '${sql.raw(JSON.stringify(value))}'::jsonb )`;
-								} else {
-								}
+							if (value === undefined) {
+							} else if (value == null) {
+								acc[x.name] = sql`(SELECT COUNT(*) FROM ${visits} WHERE "${sql.raw(x.name)}" IS NULL)`;
+							} else if (x.dataType === "json") {
+								acc[x.name] =
+									sql`(SELECT COUNT(*) FROM ${visits} WHERE "${sql.raw(x.name)}" = '${sql.raw(JSON.stringify(value))}'::jsonb )`;
 							} else {
-								// acc[x.name] =
-								// 	sql`(SELECT COUNT(*) FROM ${visits} WHERE "${sql.raw(x.name)}" = ${value})`;
+								acc[x.name] =
+									sql`(SELECT COUNT(*) FROM ${visits} WHERE "${sql.raw(x.name)}" = ${value})`;
 							}
 
 							return acc;
@@ -50,17 +47,21 @@ export const fingerprintRouter = createTRPCRouter({
 			const uniqueness = await query.execute();
 			console.log(uniqueness);
 
+			const cols = [] as string[];
+
+			const values = columns.filter(x => x.name !== "id").map((x) => {
+				cols.push(`"${x.name}"`)
+				// @ts-ignore
+				const value = input[x.name];
+				if (x.dataType === "boolean") return value ? "true" : "false";
+				if (x.dataType === "number") return value || 0;
+				if (x.dataType === "json") return `'${JSON.stringify(value || null)}'::jsonb`;
+				if (x.dataType === "date") return value ? `'${value}'::date` : "now()";
+				return `'${value || ""}'`;
+			}).join(", ")
+
 			await ctx.db.execute(
-				sql`INSERT INTO ${sql.raw(getTableName(visits))} VALUES (${sql.raw(columns.map((x) => {
-					// @ts-ignore
-					const value = input[x.name];
-					if (x.dataType === "boolean") return value ? "true" : "false";
-					if (x.dataType === "number") return value || 0;
-					if (x.dataType === "json") return `'${JSON.stringify(value || null)}'::jsonb`;
-					if (x.dataType === "date") return value ? `'${value}'::date` : "now()";
-					console.log(x.dataType, x.name, value);
-					return `'${value || ""}'`;
-				}).join(", "))})`,
+				sql`INSERT INTO ${sql.raw(getTableName(visits))} (${sql.raw(cols.join(", "))}) VALUES (${sql.raw(values)})`,
 			);
 
 			return {

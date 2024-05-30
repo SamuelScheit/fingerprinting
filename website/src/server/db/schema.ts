@@ -127,7 +127,7 @@ export const visits = createTable(
     media_backdrop_blur: boolean("media_backdrop_blur"),
     time_zone_offset: integer("time_zone_offset"),
     performance_now: jsonb("performance_now"),
-    performance_memory: jsonb("performance_memory"),
+    performance_memory: real("performance_memory"),
     browser_chromium: boolean("browser_chromium"),
     browser_chromium86OrNewer: boolean("browser_chromium86OrNewer"),
     browser_trident: boolean("browser_trident"),
