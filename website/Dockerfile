@@ -22,7 +22,7 @@ RUN SKIP_ENV_VALIDATION=1 bun next build
 EXPOSE 3000
 ENV PORT 3000
 
-CMD . ~/.nvm/nvm.sh && bun node_modules/.bin/drizzle-kit migrate && node next start
+CMD . ~/.nvm/nvm.sh && bun node_modules/.bin/drizzle-kit migrate && bun run next start
 
 # node .next/standalone/server.js
 
