@@ -1,0 +1,1 @@
+ALTER TABLE "fingerprint_visit" ALTER COLUMN "navigator_doNotTrack" SET DATA TYPE varchar;

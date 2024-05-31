@@ -8,6 +8,13 @@
       "when": 1717117655763,
       "tag": "0000_breezy_tomorrow_man",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1717168571725,
+      "tag": "0001_white_karnak",
+      "breakpoints": true
     }
   ]
 }
