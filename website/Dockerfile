@@ -39,4 +39,5 @@ COPY --from=builder /app/.next/static ./.next/static
 EXPOSE 3000
 ENV PORT 3000
 
-CMD ["server.js"]
+CMD node node_modules/.bin/drizzle-kit migrate && node server.js
+
