@@ -303,7 +303,7 @@ export function Fingerprint() {
 							className="mt-2 max-w-[-webkit-fill-available] rounded-2xl"
 							isLoaded={insertFingerprint.isSuccess}
 						>
-							<h2 className="z-10 w-full break-words bg-gradient-to-br from-purple-500 to-purple-700 bg-clip-text font-mono text-[2rem] font-semibold text-transparent sm:text-[3rem]">
+							<h2 className="z-10 w-full break-words bg-gradient-to-br from-fuchsia-500 to-blue-700 bg-clip-text font-mono text-[2rem] font-semibold text-transparent sm:text-[3rem]">
 								{insertFingerprint.data?.fingerprint || `0c7d1984f9d0b5040ff64321bf5b24ef`}
 							</h2>
 						</Skeleton>
@@ -313,7 +313,7 @@ export function Fingerprint() {
 						>
 							<span className="justify-self-end">You are </span>
 							<Skeleton className="rounded-2xl" isLoaded={insertFingerprint.isSuccess}>
-								<span className="bg-gradient-to-br from-purple-500 to-purple-700 bg-clip-text text-transparent sm:text-[4.5rem]">
+								<span className="bg-gradient-to-br from-fuchsia-500 to-blue-700 bg-clip-text text-transparent sm:text-[4.5rem]">
 									{insertFingerprint.data?.percentage ?? 100}%
 								</span>
 							</Skeleton>
