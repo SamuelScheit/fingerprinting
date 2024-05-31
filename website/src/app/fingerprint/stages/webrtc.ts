@@ -4,7 +4,7 @@ let promise = new Promise<void>((res, rej) => {
   resolve = res;
   reject = rej;
 });
-let candidates = [] as RTCIceCandidate[];
+let candidates = [] as any[];
 let peer: RTCPeerConnection;
 
 export async function getWebRTCCandidates() {
@@ -35,7 +35,19 @@ export async function initWebRTC() {
   peer.onicecandidate = (event) => {
     console.log("onicecandidate", event.candidate);
     if (event.candidate) {
-      candidates.push(event.candidate);
+      const x = event.candidate
+      candidates.push({
+        ...x.toJSON(),
+        address: x.address,
+        port: x.port,
+        tcpType: x.tcpType,
+        type: x.type,
+        protocol: x.protocol, // @ts-ignore
+        url: x.url,
+        usernameFragment: x.usernameFragment,
+        relatedAddress: x.relatedAddress,
+        relatedPort: x.relatedPort,
+      });
     } else {
       resolve();
     }

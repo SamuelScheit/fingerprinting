@@ -17,6 +17,10 @@ export const fingerprintRouter = createTRPCRouter({
 
 			const fingerprint = x64hash128(JSON.stringify(input));
 			const columns = Object.values(getTableColumns(visits));
+			const candidates = Array.isArray(input.webrtc_candidates) ? input.webrtc_candidates : [];
+
+			console.log(candidates.map((x: any) => `'${x.address?.replace(/[^\d.\]\[:\w]+/g, "")}'`).join(", "))
+			console.log(candidates)
 
 			const query = ctx.db
 				.select({
@@ -41,6 +45,10 @@ export const fingerprintRouter = createTRPCRouter({
 						},
 						{} as Record<string, any>,
 					),
+					webrtc_candidates: sql`(
+						WITH stmt AS (SELECT JSONB_ARRAY_ELEMENTS("webrtc_candidates"::jsonb) AS candidate FROM fingerprint_visit)
+						SELECT COUNT(*) FROM stmt WHERE candidate ->> 'address' IN (${sql.raw(candidates.map((x: any) => `'${x.address?.replace(/[^\d.\]\[:\w]+/g, "")}'`).join(", "))})
+					)`,
 				})
 				.from(visits);
 
@@ -67,6 +75,7 @@ export const fingerprintRouter = createTRPCRouter({
 			return {
 				fingerprint, // "654c8418b95d5236828891b2fabfaebba56ae880"
 				percentage: 100,
+				...uniqueness[0]
 			};
 		} catch (error) {
 			console.error(error);
