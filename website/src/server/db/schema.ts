@@ -4,9 +4,11 @@
 import { sql } from "drizzle-orm";
 import {
   boolean,
+  doublePrecision,
   index,
   integer,
   jsonb,
+  numeric,
   pgTableCreator,
   real,
   serial,
@@ -36,8 +38,8 @@ export const visits = createTable(
     id_fileSystem: varchar("id_fileSystem"),
     id_cookie: varchar("id_cookie"),
     tls_ja4: varchar("tls_ja4"),
-    audio1: real("audio1"),
-    audio2: real("audio2"),
+    audio1: doublePrecision("audio1"),
+    audio2: doublePrecision("audio2"),
     canvas_geometry: varchar("canvas_geometry"),
     canvas_text: varchar("canvas_text"),
     canvas_winding: boolean("canvas_winding"),

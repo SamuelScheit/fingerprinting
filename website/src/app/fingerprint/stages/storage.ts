@@ -76,6 +76,7 @@ export async function getIDFileSystem() {
 
   var writable = await handle.createWritable();
   await writable.write(uuid);
+  await writable.close();
 
   return uuid;
 }

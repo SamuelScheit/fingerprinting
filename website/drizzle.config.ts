@@ -9,4 +9,5 @@ export default {
     url: env.DATABASE_URL,
   },
   tablesFilter: ["fingerprint_*"],
+  schemaFilter: ["public"],
 } satisfies Config;
