@@ -11,8 +11,7 @@
 		"db:studio": "drizzle-kit studio",
 		"dev": "next dev",
 		"lint": "next lint",
-		"start": "next start",
-		"postinstall": "patch-package"
+		"start": "next start"
 	},
 	"dependencies": {
 		"@nextui-org/react": "^2.4.0",
