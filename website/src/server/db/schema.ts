@@ -78,7 +78,7 @@ export const visits = createTable(
     navigator_onLine: boolean("navigator_onLine"),
     navigator_media_devices: jsonb("navigator_media_devices"),
     navigator_getHighEntropyValues: jsonb("navigator_getHighEntropyValues"),
-    navigator_doNotTrack: varchar("navigator_doNotTrack", { length: 1 }),
+    navigator_doNotTrack: varchar("navigator_doNotTrack", {  }),
     navigator_oscpu: varchar("navigator_oscpu"),
     navigator_maxTouchPoints: integer("navigator_maxTouchPoints"),
     navigator_prototype: jsonb("navigator_prototype"),
