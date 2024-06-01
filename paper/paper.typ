@@ -232,7 +232,7 @@ FingerprintJS is the most popular JavaScript browser fingerprinting library acco
 
 // the following parameters are read by fingerprintjs from the browser and are sent directly to the FPJS server
 // detect browser type based on availability of property
-// some browsers return inaccurate values to prevent fingerprinting
+// some browsers return common values to prevent fingerprinting
 
 #let brwserProp(href, body) = { link(href, text(body));/* footnote(href) */ }
 
@@ -323,7 +323,7 @@ WebAssembly
 checks preferred dark or white mode via matchMedia("(prefers-color-scheme: dark)"))
 calculates the timezone offset
 math random entropy
-performance.now() accuracy
+performance.now() unique
 performance.memory()
 
 window referer
@@ -506,7 +506,7 @@ Canvas fingerprinting works by using the Canvas API to draw text, shapes, and im
 
 1. *Text Rendering:* By rendering specific text onto a hidden canvas element, the browser's font rendering and antialiasing techniques contribute to the uniqueness of the fingerprint.
 2. *Shape Drawing:* Drawing shapes and applying transformations (scaling, rotation, etc.) can reveal details about the graphics rendering engine and hardware acceleration capabilities.
-3. *Image Manipulation:* Using images and manipulating them at a pixel-level level can reveal information about image processing algorithms and rendering accuracy.
+3. *Image Manipulation:* Using images and manipulating them at a pixel-level level can reveal information about image processing algorithms and rendering unique.
 
 FPJS uses the canvas API to render the following text, emojis and geometry:
 
@@ -579,6 +579,91 @@ shadingLanguageVersion: "WebGL GLSL ES 1.0 (OpenGL ES GLSL ES 1.0 Chromium)",
 // does not weight parameters
 // every parameter is weighted equally
 // a single parameter change results in a different fingerprint
+
+== Parameter weights
+
+== stable
+
+The stable of each parameter is calculated by $ product_(forall "user session") frac("Amount of equal for each user session", "Amount of all parameters of the same user") $
+
+== unique
+
+The unique of each parameter is calculated by $ frac{1}{|"parameter"_"type"|} $
+
+dividing the total count of parameters with the same value by the total count of unique values.
+
+/*
+
+unstable   = parameter changes for the same user
+stable     = parameter stays always the same for the same user
+
+common     = low entropy parameter that shares the same value with other users
+unique     = high entropy parameter that is unique for each user
+
+unequal    = parameter is different as in previous sessions
+equal      = parameter is the same as in previous sessions
+
+neutral    = no influence on the probability of matching fingerprints
+decrease   = decrease the probability of matching fingerprints with the same parameter value
+increase   = increase the probability of matching fingerprints with the same parameter value
+
+
+Cases:
+
+unstable:
+-  unequal: neutral
+-  equal: increase
+
+stable:
+-  unequal: decrease
+-  equal: increase
+
+unique:
+-  unequal: neutral
+-  equal: increase
+
+common:
+-  unequal: neutral
+-  equal: increase
+
+
+Mixed Cases:
+
+1. unstable | common
+-  unequal  : neutral
+-  equal    : increase
+-  example  : window width
+
+2. stable   | common
+-  unequal  : decrease (always results in a new fingerprint)
+-  equal    : increase
+-  example  : browser type
+
+3. unstable | unique
+-  unequal  : neutral
+-  equal    : increase (always results in the same fingerprint)
+-  example  : cookie
+
+4. stable   | unique
+-  unequal  : always results in a new fingerprint
+-  equal    : always results in the same fingerprint
+-  example  : (not possible)
+
+
+For each row:
+p = probability of row matching
+
+stability = 1 / (unique parameter values per user)
+uniqueness = (unique parameter values per user) / (all unique parameter values)
+
+for each parameter
+stable = probability between 1 if the parameter is stable and 0 if the parameter is unstable
+unique = probability between 1 if the parameter is unique for each user and 0 if the parameter is common
+equal = 1 if the parameter of the row is the same as the compare value, 0 otherwise
+
+
+
+*/
 
 = Discussion
 

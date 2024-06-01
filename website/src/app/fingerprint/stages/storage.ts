@@ -1,10 +1,17 @@
-function getUUID() {
+import { x64hash128 } from "../../../../fingerprintjs/src/utils/hashing";
+
+function UUID() {
   if (typeof crypto?.randomUUID === "function") return crypto.randomUUID();
 
   const random = () => (Math.random() * 16) | 0;
   return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, (c: any) =>
     (c ^ (random() % 16 >> (c / 4))).toString(16),
   );
+}
+
+function getUUID() {
+  const uuid = UUID();
+  return x64hash128(uuid);
 }
 
 export function getIDLocalStorage() {

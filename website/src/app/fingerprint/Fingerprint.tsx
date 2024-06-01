@@ -282,16 +282,18 @@ export function Fingerprint() {
 		})();
 	}, []);
 
+	if (insertFingerprint.data) console.log(insertFingerprint.data);
+
 	return (
 		<div className="min-h-[100vh] bg-gradient-to-b from-[#120b1c] to-[#15162c]">
 			<main className="flex min-h-screen flex-col items-center justify-center px-5 text-center text-white">
-				<h1 className="break-all text-[3rem] font-extrabold leading-[1] tracking-tight sm:text-[5rem]">
+				<h1 className="break-words text-[3rem] font-extrabold leading-[1] tracking-tight md:text-[5rem]">
 					<span className="">
-						<span className="text-[2rem] sm:text-[3rem]">Your</span> Browser
+						<span className="text-[2rem] md:text-[3rem]">Your</span> Browser
 					</span>
-					<span className="whitespace-nowrap">
+					<span className="">
 						{" "}
-						Fingerprint <span className="text-[2rem] sm:text-[3rem]">is</span>
+						Fingerprint <span className="text-[2rem] md:text-[3rem]">is</span>
 					</span>
 				</h1>
 				{insertFingerprint.isError ? (
@@ -303,23 +305,23 @@ export function Fingerprint() {
 							className="mt-2 max-w-[-webkit-fill-available] rounded-2xl"
 							isLoaded={insertFingerprint.isSuccess}
 						>
-							<h2 className="z-10 w-full break-words bg-gradient-to-br from-fuchsia-500 to-blue-700 bg-clip-text font-mono text-[2rem] font-semibold text-transparent sm:text-[3rem]">
+							<h2 className="z-10 w-full break-words bg-gradient-to-br from-fuchsia-500 to-blue-700 bg-clip-text font-mono text-[2rem] font-semibold text-transparent md:text-[3rem]">
 								{insertFingerprint.data?.fingerprint || `0c7d1984f9d0b5040ff64321bf5b24ef`}
 							</h2>
 						</Skeleton>
 						<h1
-							className="mt-10 grid place-items-center gap-2 text-3xl font-semibold leading-[1] sm:gap-5 sm:text-[3rem]"
+							className="mt-10 grid place-items-center gap-2 text-3xl font-semibold leading-[1] md:gap-5 md:text-[3rem]"
 							style={{ gridTemplateColumns: "1fr auto 1fr" }}
 						>
 							<span className="justify-self-end">You are </span>
 							<Skeleton className="rounded-2xl" isLoaded={insertFingerprint.isSuccess}>
-								<span className="bg-gradient-to-br from-fuchsia-500 to-blue-700 bg-clip-text text-transparent sm:text-[4.5rem]">
+								<span className="bg-gradient-to-br from-fuchsia-500 to-blue-700 bg-clip-text text-transparent md:text-[4.5rem]">
 									{insertFingerprint.data?.percentage ?? 100}%
 								</span>
 							</Skeleton>
 							<span className=""> identifiable</span>
 						</h1>
-						<div className="text-md  text-gray-400">
+						<div className="text-lg  text-gray-400">
 							The higher the percentage, the more likely you can be tracked.
 						</div>
 					</>
