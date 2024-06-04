@@ -1,19 +1,12 @@
 {
-  "version": "6",
+  "version": "7",
   "dialect": "postgresql",
   "entries": [
     {
       "idx": 0,
-      "version": "6",
-      "when": 1717117655763,
-      "tag": "0000_breezy_tomorrow_man",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "6",
-      "when": 1717168571725,
-      "tag": "0001_white_karnak",
+      "version": "7",
+      "when": 1717467738007,
+      "tag": "0000_curvy_aqueduct",
       "breakpoints": true
     }
   ]

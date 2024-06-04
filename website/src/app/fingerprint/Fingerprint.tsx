@@ -137,7 +137,6 @@ export function Fingerprint() {
 				webgl_parameters1: webglHash?.parameters,
 				webgl_parameters2: webglHash?.parameters2,
 				webgl_shader_precisions: webglHash?.shaderPrecisions,
-
 				webgl_geometry: () => {
 					if (!context) return null;
 					return getWebglGeometry(context);
@@ -287,28 +286,33 @@ export function Fingerprint() {
 	return (
 		<div className="min-h-[100vh] bg-gradient-to-b from-[#120b1c] to-[#15162c]">
 			<main className="flex min-h-screen flex-col items-center justify-center px-5 text-center text-white">
-				<h1 className="break-words text-[3rem] font-extrabold leading-[1] tracking-tight md:text-[5rem]">
-					<span className="">
-						<span className="text-[2rem] md:text-[3rem]">Your</span> Browser
-					</span>
-					<span className="">
-						{" "}
-						Fingerprint <span className="text-[2rem] md:text-[3rem]">is</span>
-					</span>
-				</h1>
+				<div>
+					<h1 className="break-words text-[3rem] font-extrabold leading-[1] tracking-tight md:text-[5rem]">
+						<span className="">
+							<span className="text-[2rem] md:text-[3rem]">Your</span> Browser
+						</span>
+						<span className="">
+							{" "}
+							Fingerprint <span className="text-[2rem] md:text-[3rem]">is</span>
+						</span>
+					</h1>
+					<Skeleton
+						className="mt-2 max-w-[-webkit-fill-available] rounded-2xl"
+						isLoaded={insertFingerprint.isSuccess}
+						style={{ containerType: "inline-size", width: "100%" }}
+					>
+						<h2
+							className="z-10 w-full break-words bg-gradient-to-br from-fuchsia-500 to-blue-700 bg-clip-text font-mono font-semibold text-transparent"
+							style={{ fontSize: "5cqw" }}
+						>
+							{insertFingerprint.data?.fingerprint || `0c7d1984f9d0b5040ff64321bf5b24ef`}
+						</h2>
+					</Skeleton>
+				</div>
 				{insertFingerprint.isError ? (
-					<h2 className="text-[5rem] font-semibold text-red-500">Error: {insertFingerprint.error.message}</h2>
+					<h2 className="text-[4rem] font-semibold text-red-500">Error: {insertFingerprint.error.message}</h2>
 				) : (
 					<>
-						{" "}
-						<Skeleton
-							className="mt-2 max-w-[-webkit-fill-available] rounded-2xl"
-							isLoaded={insertFingerprint.isSuccess}
-						>
-							<h2 className="z-10 w-full break-words bg-gradient-to-br from-fuchsia-500 to-blue-700 bg-clip-text font-mono text-[2rem] font-semibold text-transparent md:text-[3rem]">
-								{insertFingerprint.data?.fingerprint || `0c7d1984f9d0b5040ff64321bf5b24ef`}
-							</h2>
-						</Skeleton>
 						<h1
 							className="mt-10 grid place-items-center gap-2 text-3xl font-semibold leading-[1] md:gap-5 md:text-[3rem]"
 							style={{ gridTemplateColumns: "1fr auto 1fr" }}
@@ -321,7 +325,7 @@ export function Fingerprint() {
 							</Skeleton>
 							<span className=""> identifiable</span>
 						</h1>
-						<div className="text-lg  text-gray-400">
+						<div className="text-md md:text-lg text-gray-400">
 							The higher the percentage, the more likely you can be tracked.
 						</div>
 					</>

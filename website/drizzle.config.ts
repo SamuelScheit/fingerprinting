@@ -10,4 +10,5 @@ export default {
   },
   tablesFilter: ["fingerprint_*"],
   schemaFilter: ["public"],
+  out: "./drizzle/"
 } satisfies Config;

@@ -1,4 +1,6 @@
 #import "@preview/charged-ieee:0.1.0": ieee
+#import "@preview/cetz:0.2.2"
+// #import "@preview/plotst:0.2.0": *
 
 #show: ieee.with(
   title: [Technical analysis of browser fingerprinting techniques based on FingerprintJS],
@@ -21,7 +23,8 @@
 )
 
 #set text(lang: "en")
-#let Footlink(href, body) = { link(href, text(body)); footnote(link(href)) }
+// #let Footlink(href, body) = { link(href, text(body)); footnote(link(href)) }
+#let Footlink(href, body) = { link(href, text(body)) }
 
 #set heading(numbering: "1.1.1)a)")
 #show heading: it => locate(loc => {
@@ -48,7 +51,7 @@
           numbering("1.", deepest)
           h(7pt, weak: true)
         }
-        #it.body
+        *#it.body*
         #v(13.75pt, weak: true)
       ] else if it.level == 2 [
         // Second-level headings are run-ins.
@@ -84,9 +87,11 @@
 /*
 
 QUESTIONS TO OUR INSTRUCTOR:
-- (how) can we add attachments, e.g. a list of fonts that fingerprintjs checks for?
+- (how) can / should we add attachments, e.g. a list of fonts that fingerprintjs checks for?
+- (how) do we include code used to test our hypothesis?
 - which of the following topics can / should we investigate?
 - is this typst template acceptable?
+- do we need more literature?
 
 Current status:
 
@@ -119,7 +124,7 @@ What do we want to focus on:
 - literature vs fingerprintjs
   - (=> how is data, e.g. the canvas fingerprint, generated?)
 - fingerprintjs vs other implementations (open-source version, stytch, etc)
-- educated guess abt possible weights for fingerprintjs
+- educated guess abt possible weights for fingerprintjs => custom library!
 
 */
 
@@ -190,9 +195,9 @@ Since the majority of all browsers deactivate third-party cookies by default in 
 In order to assign a unique identity or “fingerprint” to each user, various details are collected via the browser.
 For example, a combination of rare fonts, a specific screen resolution, or a specific browser plugin can help generate a unique fingerprint.
 
-JavaScript libraries can be used for this, such as *FingerprintJS* (FPJS), which collects a variety of information about a user's browser environment. In the commercial version, FingerprintJS claims to be able to create a 99.5% unique fingerprint. @fingerprintJS
+JavaScript libraries can be used for this, such as _FingerprintJS_ (FPJS), which collects a variety of information about a user's browser environment. In the commercial version, FPJS claims to be able to create a 99.5% unique fingerprint. @fingerprintJS
 
-FingerprintJS is the most popular JavaScript browser fingerprinting library according to npm downloads. #footnote[https://npmtrends.com/@fingerprintjs/fingerprintjs-vs-@rajesh896/broprint.js-vs-@thumbmarkjs/thumbmarkjs-vs-clientjs-vs-imprintjs]
+FPJS is the most popular JavaScript browser fingerprinting library according to npm downloads. #footnote[https://npmtrends.com/@fingerprintjs/fingerprintjs-vs-@rajesh896/broprint.js-vs-@thumbmarkjs/thumbmarkjs-vs-clientjs-vs-imprintjs]
 
 #figure(
    image("npm.png"),
@@ -232,7 +237,7 @@ FingerprintJS is the most popular JavaScript browser fingerprinting library acco
 
 // the following parameters are read by fingerprintjs from the browser and are sent directly to the FPJS server
 // detect browser type based on availability of property
-// some browsers return common values to prevent fingerprinting
+// some browsers return inaccurate values to prevent fingerprinting
 
 #let brwserProp(href, body) = { link(href, text(body));/* footnote(href) */ }
 
@@ -323,7 +328,7 @@ WebAssembly
 checks preferred dark or white mode via matchMedia("(prefers-color-scheme: dark)"))
 calculates the timezone offset
 math random entropy
-performance.now() unique
+performance.now() accuracy
 performance.memory()
 
 window referer
@@ -395,7 +400,7 @@ However it can also be used create a unique audio profile of the browser by:
 + Playing and recording the sound at the same time via the Web Audio API.
 + Analyzing the recorded audio data and encoding as a hash to create a unique audio fingerprint.
 
-FPJS first creates a #Footlink("https://developer.mozilla.org/en-US/docs/Web/API/BaseAudioContext/createOscillator")[tringle oscillator] tone signal with a frequency of `10.000` Hz. Then a #Footlink("https://developer.mozilla.org/en-US/docs/Web/API/BaseAudioContext/createDynamicsCompressor")[compressor] is created with the following #Footlink("https://developer.mozilla.org/en-US/docs/Web/API/DynamicsCompressorNode/")[parameters:]
+FPJS first creates a #Footlink("https://developer.mozilla.org/en-US/docs/Web/API/BaseAudioContext/createOscillator")[triangle oscillator] tone signal with a frequency of `10.000` Hz. Then a #Footlink("https://developer.mozilla.org/en-US/docs/Web/API/BaseAudioContext/createDynamicsCompressor")[compressor] is created with the following #Footlink("https://developer.mozilla.org/en-US/docs/Web/API/DynamicsCompressorNode/")[parameters:]
 
 #table(
   columns: (auto, 1fr),
@@ -439,10 +444,11 @@ This information can be retrieved by creating a #Footlink("https://developer.moz
 By adding an #Footlink("https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/icecandidate_event")[`icecandidate`] event listener, the ICE candidates can be retrieved. The following string is an example candidate: \
 `candidate:2079771436 1 udp 2122260223 123.234.1.250 50012 typ host generation 0 ufrag qRGm network-id 3` \
 The candidate includes the IP address, port, network transport protocol, a unique identifier and other key value parameters.
+// chrome flags #enable-webrtc-hide-local-ips-with-mdns allows to hide local ip, if video devices were never requested
 Specifically the local IP address can be used to recognize a device even if the public IP address changes e.g. when using a Virtual Private Network (VPN).
 For this reason the #Footlink("https://bugzilla.mozilla.org/show_bug.cgi?id=1432983")[TOR Browser has disabled the WebRTC protocol] and the #Footlink("https://support.brave.com/hc/en-us/articles/360017989132-How-do-I-change-my-Privacy-Settings#webrtc")[Brave Browser has the ability to disable the usage of LAN IP addresses for WebRTC].
 However, it should be noted local IP addresses are not unique and different LAN subnets have a limited address room. Specifically, #Footlink("https://datatracker.ietf.org/doc/html/rfc1918#section-3")[17.891.328 IP addresses are reserved for LAN networks] and similar subnets and IP addresses are reused on many different networks and therefore can only be used for fingerprinting in conjunction with other parameters.
- 
+
 ==== Codecs
 
 Additionally the supported audio and video codecs can further help to fingerprint a device as different Browser and Device configurations support different codecs.
@@ -506,7 +512,7 @@ Canvas fingerprinting works by using the Canvas API to draw text, shapes, and im
 
 1. *Text Rendering:* By rendering specific text onto a hidden canvas element, the browser's font rendering and antialiasing techniques contribute to the uniqueness of the fingerprint.
 2. *Shape Drawing:* Drawing shapes and applying transformations (scaling, rotation, etc.) can reveal details about the graphics rendering engine and hardware acceleration capabilities.
-3. *Image Manipulation:* Using images and manipulating them at a pixel-level level can reveal information about image processing algorithms and rendering unique.
+3. *Image Manipulation:* Using images and manipulating them at a pixel-level level can reveal information about image processing algorithms and rendering accuracy.
 
 FPJS uses the canvas API to render the following text, emojis and geometry:
 
@@ -580,51 +586,160 @@ shadingLanguageVersion: "WebGL GLSL ES 1.0 (OpenGL ES GLSL ES 1.0 Chromium)",
 // every parameter is weighted equally
 // a single parameter change results in a different fingerprint
 
+
+#set math.equation(numbering: none)
+
+#show math.equation.where(block: true): e => [
+    #box(width: 100%, inset: 0em, [
+        #set align(left)
+        #e
+    ])
+]
+
+
+#colbreak()
+#colbreak()
+
+
 == Parameter weights
 
-== stable
 
-The stable of each parameter is calculated by $ product_(forall "user session") frac("Amount of equal for each user session", "Amount of all parameters of the same user") $
+Type definitions:
 
-== unique
+- Parameter weights: ${ ("name", "stability", "uniqueness") }$
+  $"stability", "uniqueness" in [0, 1]$
+- Fingerprint: ${ ("name", "value") }$
+- $"overlap" in [0, 1]$\
+  score for each db entry that describes how accurately said entry matches a fingerprint
 
-The unique of each parameter is calculated by $ frac{1}{|"parameter"_"type"|} $
+Given:
+- Database of weights for parameters $P$
+- Fingerprint $f$
+- Collection of existing fingerprints $C$
 
-dividing the total count of parameters with the same value by the total count of unique values.
+- $c_p = ⟨ c in C | c."name" = p ⟩ $ // tuple
+- $c_"p+v" = ⟨ c in C | "c.name = p" and "c.value = v" ⟩ $
+- $C_p = { c in c_p }$
+- $C_"p+v" = { c in c_"p+v" }$
+
+- $ forall p in "P" |
+  p_"stability"
+  &= EE[C_p] \
+  &= sum_("v "in C_p) v dot Pr[C_p "= v"] \
+  &= sum_("v "in C_p) (frac(abs(C_"p+v"),|C_"p"|))^2 $
+- $ forall p in "P" |
+  p_"uniqueness" 
+  &= EE[I_(C_"p")] \
+  &= - sum_("v "in C_p) Pr[C_p "= v"] log_(|C_"p+v"|)(Pr[C_p "= v"])\
+  &= - sum_("v "in C_p) frac(|c_"p+v"|,|C_p|) log_(|C_"p+v"|)(frac(|c_"p+v"|,|C_p|))\
+   $
+ 
+We generate a fingerprint:
+
+// (helper) match func
+define match function $m(a, b):= cases(0 "if a" != "b", 1 "otherwise")$
+\ \
+// parameter match set
+for each $c in C$ we calculate the parameter match set:
+$ M_(f,c) = { (f_n, m(f_v, c_v)) | (f_n, f_v) in f, (c_n, c_v) in c, f_n = c_n} $
+\ \ 
+// overlap
+
+
+and use it to calculate the overlap
+$ "overlap" (M_(f, c)) = frac( product_(p in M_(f, c)) "algo"(p) , 2) $
+// product vs sum:
+// using a sum may make calculation more intuitive, but non-matching values can't stop a fingerprint from generating a high overlap value if all others match
+// our algorithm must return very large values (close to 1) when using a product to combine the results in order to ensure a match even when properties with little relevance (e.g. window geometry) don't match.
+
+// window geometry => unstable + common
+// 
+
+$ "stability(s, x)" = (1 - s) dot (x + 1) + 2 dot s dot x $
+$ "uniqueness(u, x)" = (1 - x) + (1 + u) dot x  $
+// algo (stability, uniqueness, match)  = 
+$ "algo"(s,         u,          x    ) = "stability(s, x)" dot "uniqueness(u, x)" $
+
+#colbreak()
+
+
+#let stability(s, x) = (1 - s) * (x + 1) + 2 * s * x
+#let uniqueness(u, x) = (1 - x) + (1 + u) * x
+#let algo(s, u, x) = stability(s, x) * uniqueness(u, x)
+
+#table(
+  columns: (1fr, 1fr),
+  align: (center),
+  stroke: none,
+  [*Stability (unequal)*], [*Stability (equal)*],
+  cetz.canvas({
+    import cetz: *
+  
+    plot.plot(
+      size: (3, 3),
+      axis-style: "left",
+      y-tick-step: 0.25,
+      x-tick-step: 0.25, {
+      plot.add(domain: (0, 1), s => stability(s, 0))
+    })
+  }),
+  cetz.canvas({
+    import cetz: *
+  
+    plot.plot(
+      size: (3, 3),
+      axis-style: "left",
+      y-tick-step: 0.5,
+      x-tick-step: 0.25, {
+      plot.add(domain: (0, 1), s => stability(s, 1))
+    })
+  }),
+  [*Uniqueness (unequal)*], [*Uniqueness (equal)*], 
+  cetz.canvas({
+    import cetz: *
+  
+    plot.plot(
+      size: (3, 3),
+      axis-style: "left",
+      y-tick-step: 0.5,
+      x-tick-step: 0.25, {
+      plot.add(domain: (0, 1), u => uniqueness(u, 0))
+    })
+  }),
+  cetz.canvas({
+    import cetz: *
+  
+    plot.plot(
+      size: (3, 3),
+      axis-style: "left",
+      y-tick-step: 0.25,
+      x-tick-step: 0.25, {
+      plot.add(domain: (0, 1), u => uniqueness(u, 1))
+    })
+  }),
+)
+
+
 
 /*
-
-unstable   = parameter changes for the same user
-stable     = parameter stays always the same for the same user
-
-common     = low entropy parameter that shares the same value with other users
-unique     = high entropy parameter that is unique for each user
-
-unequal    = parameter is different as in previous sessions
-equal      = parameter is the same as in previous sessions
-
-neutral    = no influence on the probability of matching fingerprints
-decrease   = decrease the probability of matching fingerprints with the same parameter value
-increase   = increase the probability of matching fingerprints with the same parameter value
-
 
 Cases:
 
 unstable:
--  unequal: neutral
--  equal: increase
+-  unequal: neutral (1)
+-  equal: increase (2) (depending on uniqueness)
 
 stable:
--  unequal: decrease
--  equal: increase
+-  unequal: decrease (0)
+-  equal: increase (2) (depending on uniqueness)
 
 unique:
--  unequal: neutral
--  equal: increase
+-  unequal: neutral (1)
+-  equal: increase (u = 1) (1 + 1) (2)
 
 common:
--  unequal: neutral
--  equal: increase
+-  unequal: neutral (1)
+-  equal: increase (u + 1)
 
 
 Mixed Cases:
@@ -650,20 +765,64 @@ Mixed Cases:
 -  example  : (not possible)
 
 
+unstable   = parameter changes for the same user
+stable     = parameter stays always the same for the same user
+
+common     = low entropy parameter that shares the same value with other users
+unique     = high entropy parameter that is unique for each user
+
+unequal    = parameter is different as in previous sessions
+equal      = parameter is the same as in previous sessions
+
+neutral    = no influence on the probability of matching fingerprints
+decrease   = decrease the probability of matching fingerprints with the same parameter value
+increase   = increase the probability of matching fingerprints with the same parameter value
+
+
+
 For each row:
 p = probability of row matching
 
-stability = 1 / (unique parameter values per user)
+stability = avg_user (1 / (unique parameter values per user))
+stability_median = median_user (1 / (unique parameter values per user))
+
 uniqueness = (unique parameter values per user) / (all unique parameter values)
 
 for each parameter
 stable = probability between 1 if the parameter is stable and 0 if the parameter is unstable
-unique = probability between 1 if the parameter is unique for each user and 0 if the parameter is common
+unique = probability between 1 if the parameter is unique for each user and 0 if the parameter is the same for each user
 equal = 1 if the parameter of the row is the same as the compare value, 0 otherwise
 
+stable -> 1
+eq: -
+neq: no match
+
+m(1, u, 1) := 1
+m(1, u, 0) := 0
+
+stable -> 0
+eq: -
+neq: -
+(depends on uniqueness)
+
+m(0, u, 1) := y
+m(0, u, 0) := y
+
+uniqueness -> 1
+eq: 1
+neq: - (when unstable) 0 (when stable)
+
+m(s, 1, 1) := 1
+m(s, 1, 0) := 
+
+uniqueness -> 0
+
+overlap = abhängig von stability uniqueness und übereinstimmung
 
 
 */
+#colbreak()
+
 
 = Discussion
 
@@ -674,6 +833,7 @@ equal = 1 if the parameter of the row is the same as the compare value, 0 otherw
 //  Wrap up your paper, mention key results, possible limitations, future work
 
 = References
+
 
 #bibliography("refs.bib", full: true, title: none)
 

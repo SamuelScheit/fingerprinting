@@ -1,7 +1,7 @@
 {
-  "id": "f4d161b0-379c-4874-8131-f7caec56d7e3",
+  "id": "283d7b00-1bd6-4d19-b75e-188a888289fe",
   "prevId": "00000000-0000-0000-0000-000000000000",
-  "version": "6",
+  "version": "7",
   "dialect": "postgresql",
   "tables": {
     "public.fingerprint_visit": {
@@ -305,7 +305,7 @@
         },
         "navigator_doNotTrack": {
           "name": "navigator_doNotTrack",
-          "type": "varchar(1)",
+          "type": "varchar",
           "primaryKey": false,
           "notNull": false
         },
@@ -713,7 +713,7 @@
         },
         "error_stack": {
           "name": "error_stack",
-          "type": "jsonb",
+          "type": "varchar",
           "primaryKey": false,
           "notNull": false
         },
@@ -752,863 +752,1847 @@
         "id_idx": {
           "name": "id_idx",
           "columns": [
-            "id"
+            {
+              "expression": "\"id\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "ip_idx": {
           "name": "ip_idx",
           "columns": [
-            "ip"
+            {
+              "expression": "\"ip\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "createdAt_idx": {
           "name": "createdAt_idx",
           "columns": [
-            "created_at"
+            {
+              "expression": "\"created_at\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "id_localStorage_idx": {
           "name": "id_localStorage_idx",
           "columns": [
-            "id_localStorage"
+            {
+              "expression": "\"id_localStorage\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "id_sessionStorage_idx": {
           "name": "id_sessionStorage_idx",
           "columns": [
-            "id_sessionStorage"
+            {
+              "expression": "\"id_sessionStorage\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "id_indexedDB_idx": {
           "name": "id_indexedDB_idx",
           "columns": [
-            "id_indexedDB"
+            {
+              "expression": "\"id_indexedDB\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "id_fileSystem_idx": {
           "name": "id_fileSystem_idx",
           "columns": [
-            "id_fileSystem"
+            {
+              "expression": "\"id_fileSystem\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "id_cookie_idx": {
           "name": "id_cookie_idx",
           "columns": [
-            "id_cookie"
+            {
+              "expression": "\"id_cookie\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "tls_ja4_idx": {
           "name": "tls_ja4_idx",
           "columns": [
-            "tls_ja4"
+            {
+              "expression": "\"tls_ja4\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "audio1_idx": {
           "name": "audio1_idx",
           "columns": [
-            "audio1"
+            {
+              "expression": "\"audio1\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "audio2_idx": {
           "name": "audio2_idx",
           "columns": [
-            "audio2"
+            {
+              "expression": "\"audio2\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "canvas_geometry_idx": {
           "name": "canvas_geometry_idx",
           "columns": [
-            "canvas_geometry"
+            {
+              "expression": "\"canvas_geometry\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "canvas_text_idx": {
           "name": "canvas_text_idx",
           "columns": [
-            "canvas_text"
+            {
+              "expression": "\"canvas_text\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "canvas_winding_idx": {
           "name": "canvas_winding_idx",
           "columns": [
-            "canvas_winding"
+            {
+              "expression": "\"canvas_winding\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "webgl_geometry_idx": {
           "name": "webgl_geometry_idx",
           "columns": [
-            "webgl_geometry"
+            {
+              "expression": "\"webgl_geometry\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "webgl_version_idx": {
           "name": "webgl_version_idx",
           "columns": [
-            "webgl_version"
+            {
+              "expression": "\"webgl_version\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "webgl_vendor_idx": {
           "name": "webgl_vendor_idx",
           "columns": [
-            "webgl_vendor"
+            {
+              "expression": "\"webgl_vendor\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "webgl_shading_language_version_idx": {
           "name": "webgl_shading_language_version_idx",
           "columns": [
-            "webgl_shading_language_version"
+            {
+              "expression": "\"webgl_shading_language_version\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "webgl_vendor_unmasked_idx": {
           "name": "webgl_vendor_unmasked_idx",
           "columns": [
-            "webgl_vendor_unmasked"
+            {
+              "expression": "\"webgl_vendor_unmasked\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "webgl_renderer_idx": {
           "name": "webgl_renderer_idx",
           "columns": [
-            "webgl_renderer"
+            {
+              "expression": "\"webgl_renderer\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "webgl_renderer_unmasked_idx": {
           "name": "webgl_renderer_unmasked_idx",
           "columns": [
-            "webgl_renderer_unmasked"
+            {
+              "expression": "\"webgl_renderer_unmasked\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "webgl_context_attributes_idx": {
           "name": "webgl_context_attributes_idx",
           "columns": [
-            "webgl_context_attributes"
+            {
+              "expression": "\"webgl_context_attributes\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "webgl_shader_precisions_idx": {
           "name": "webgl_shader_precisions_idx",
           "columns": [
-            "webgl_shader_precisions"
+            {
+              "expression": "\"webgl_shader_precisions\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "webgl_extensions_idx": {
           "name": "webgl_extensions_idx",
           "columns": [
-            "webgl_extensions"
+            {
+              "expression": "\"webgl_extensions\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "webgl_parameters1_idx": {
           "name": "webgl_parameters1_idx",
           "columns": [
-            "webgl_parameters1"
+            {
+              "expression": "\"webgl_parameters1\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "webgl_parameters2_idx": {
           "name": "webgl_parameters2_idx",
           "columns": [
-            "webgl_parameters2"
+            {
+              "expression": "\"webgl_parameters2\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "webgl_extensions_parameters1_idx": {
           "name": "webgl_extensions_parameters1_idx",
           "columns": [
-            "webgl_extensions_parameters1"
+            {
+              "expression": "\"webgl_extensions_parameters1\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "webgl_extensions_parameters2_idx": {
           "name": "webgl_extensions_parameters2_idx",
           "columns": [
-            "webgl_extensions_parameters2"
+            {
+              "expression": "\"webgl_extensions_parameters2\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "http_headers_idx": {
           "name": "http_headers_idx",
           "columns": [
-            "http_headers"
+            {
+              "expression": "\"http_headers\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "user_agent_idx": {
           "name": "user_agent_idx",
           "columns": [
-            "user_agent"
+            {
+              "expression": "\"user_agent\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "math_idx": {
           "name": "math_idx",
           "columns": [
-            "math"
+            {
+              "expression": "\"math\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "gin",
+          "with": {}
         },
         "buffer_idx": {
           "name": "buffer_idx",
           "columns": [
-            "buffer"
+            {
+              "expression": "\"buffer\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "navigator_pdfViewerEnabled_idx": {
           "name": "navigator_pdfViewerEnabled_idx",
           "columns": [
-            "navigator_pdfViewerEnabled"
+            {
+              "expression": "\"navigator_pdfViewerEnabled\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "navigator_language_idx": {
           "name": "navigator_language_idx",
           "columns": [
-            "navigator_language"
+            {
+              "expression": "\"navigator_language\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "navigator_languages_idx": {
           "name": "navigator_languages_idx",
           "columns": [
-            "navigator_languages"
+            {
+              "expression": "\"navigator_languages\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "gin",
+          "with": {}
         },
         "navigator_webdriver_idx": {
           "name": "navigator_webdriver_idx",
           "columns": [
-            "navigator_webdriver"
+            {
+              "expression": "\"navigator_webdriver\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "navigator_userAgentData_idx": {
           "name": "navigator_userAgentData_idx",
           "columns": [
-            "navigator_userAgentData"
+            {
+              "expression": "\"navigator_userAgentData\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "gin",
+          "with": {}
         },
         "navigator_appVersion_idx": {
           "name": "navigator_appVersion_idx",
           "columns": [
-            "navigator_appVersion"
+            {
+              "expression": "\"navigator_appVersion\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "navigator_connection_rtt_idx": {
           "name": "navigator_connection_rtt_idx",
           "columns": [
-            "navigator_connection_rtt"
+            {
+              "expression": "\"navigator_connection_rtt\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "navigator_plugins_idx": {
           "name": "navigator_plugins_idx",
           "columns": [
-            "navigator_plugins"
+            {
+              "expression": "\"navigator_plugins\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "gin",
+          "with": {}
         },
         "navigator_hardwareConcurrency_idx": {
           "name": "navigator_hardwareConcurrency_idx",
           "columns": [
-            "navigator_hardwareConcurrency"
+            {
+              "expression": "\"navigator_hardwareConcurrency\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "navigator_deviceMemory_idx": {
           "name": "navigator_deviceMemory_idx",
           "columns": [
-            "navigator_deviceMemory"
+            {
+              "expression": "\"navigator_deviceMemory\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "navigator_platform_idx": {
           "name": "navigator_platform_idx",
           "columns": [
-            "navigator_platform"
+            {
+              "expression": "\"navigator_platform\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "navigator_vendor_idx": {
           "name": "navigator_vendor_idx",
           "columns": [
-            "navigator_vendor"
+            {
+              "expression": "\"navigator_vendor\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "navigator_productSub_idx": {
           "name": "navigator_productSub_idx",
           "columns": [
-            "navigator_productSub"
+            {
+              "expression": "\"navigator_productSub\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "navigator_vendorSub_idx": {
           "name": "navigator_vendorSub_idx",
           "columns": [
-            "navigator_vendorSub"
+            {
+              "expression": "\"navigator_vendorSub\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "navigator_onLine_idx": {
           "name": "navigator_onLine_idx",
           "columns": [
-            "navigator_onLine"
+            {
+              "expression": "\"navigator_onLine\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "navigator_media_devices_idx": {
           "name": "navigator_media_devices_idx",
           "columns": [
-            "navigator_media_devices"
+            {
+              "expression": "\"navigator_media_devices\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "gin",
+          "with": {}
         },
         "navigator_getHighEntropyValues_idx": {
           "name": "navigator_getHighEntropyValues_idx",
           "columns": [
-            "navigator_getHighEntropyValues"
+            {
+              "expression": "\"navigator_getHighEntropyValues\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "gin",
+          "with": {}
         },
         "navigator_doNotTrack_idx": {
           "name": "navigator_doNotTrack_idx",
           "columns": [
-            "navigator_doNotTrack"
+            {
+              "expression": "\"navigator_doNotTrack\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "navigator_oscpu_idx": {
           "name": "navigator_oscpu_idx",
           "columns": [
-            "navigator_oscpu"
+            {
+              "expression": "\"navigator_oscpu\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "navigator_maxTouchPoints_idx": {
           "name": "navigator_maxTouchPoints_idx",
           "columns": [
-            "navigator_maxTouchPoints"
+            {
+              "expression": "\"navigator_maxTouchPoints\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "navigator_prototype_idx": {
           "name": "navigator_prototype_idx",
           "columns": [
-            "navigator_prototype"
+            {
+              "expression": "\"navigator_prototype\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "gin",
+          "with": {}
         },
         "window_TouchEvent_idx": {
           "name": "window_TouchEvent_idx",
           "columns": [
-            "window_TouchEvent"
+            {
+              "expression": "\"window_TouchEvent\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "window_ontouchstart_idx": {
           "name": "window_ontouchstart_idx",
           "columns": [
-            "window_ontouchstart"
+            {
+              "expression": "\"window_ontouchstart\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "storage_estimate_idx": {
           "name": "storage_estimate_idx",
           "columns": [
-            "storage_estimate"
+            {
+              "expression": "\"storage_estimate\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "gin",
+          "with": {}
         },
         "storage_getDirectory_idx": {
           "name": "storage_getDirectory_idx",
           "columns": [
-            "storage_getDirectory"
+            {
+              "expression": "\"storage_getDirectory\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "speechSynthesis_voices_idx": {
           "name": "speechSynthesis_voices_idx",
           "columns": [
-            "speechSynthesis_voices"
+            {
+              "expression": "\"speechSynthesis_voices\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "webrtc_candidates_idx": {
           "name": "webrtc_candidates_idx",
           "columns": [
-            "webrtc_candidates"
+            {
+              "expression": "\"webrtc_candidates\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "gin",
+          "with": {}
         },
         "webrtc_stats_idx": {
           "name": "webrtc_stats_idx",
           "columns": [
-            "webrtc_stats"
+            {
+              "expression": "\"webrtc_stats\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "gin",
+          "with": {}
         },
         "apple_pay_idx": {
           "name": "apple_pay_idx",
           "columns": [
-            "apple_pay"
+            {
+              "expression": "\"apple_pay\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "screen_safeArea_idx": {
           "name": "screen_safeArea_idx",
           "columns": [
-            "screen_safeArea"
+            {
+              "expression": "\"screen_safeArea\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "gin",
+          "with": {}
         },
         "screen_width_idx": {
           "name": "screen_width_idx",
           "columns": [
-            "screen_width"
+            {
+              "expression": "\"screen_width\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "screen_height_idx": {
           "name": "screen_height_idx",
           "columns": [
-            "screen_height"
+            {
+              "expression": "\"screen_height\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "screen_colorDepth_idx": {
           "name": "screen_colorDepth_idx",
           "columns": [
-            "screen_colorDepth"
+            {
+              "expression": "\"screen_colorDepth\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "screen_outerWidth_idx": {
           "name": "screen_outerWidth_idx",
           "columns": [
-            "screen_outerWidth"
+            {
+              "expression": "\"screen_outerWidth\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "screen_outerHeight_idx": {
           "name": "screen_outerHeight_idx",
           "columns": [
-            "screen_outerHeight"
+            {
+              "expression": "\"screen_outerHeight\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "screen_innerWidth_idx": {
           "name": "screen_innerWidth_idx",
           "columns": [
-            "screen_innerWidth"
+            {
+              "expression": "\"screen_innerWidth\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "screen_innerHeight_idx": {
           "name": "screen_innerHeight_idx",
           "columns": [
-            "screen_innerHeight"
+            {
+              "expression": "\"screen_innerHeight\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "screen_highRes_idx": {
           "name": "screen_highRes_idx",
           "columns": [
-            "screen_highRes"
+            {
+              "expression": "\"screen_highRes\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "window_devicePixelRatio_idx": {
           "name": "window_devicePixelRatio_idx",
           "columns": [
-            "window_devicePixelRatio"
+            {
+              "expression": "\"window_devicePixelRatio\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "dom_blocker_idx": {
           "name": "dom_blocker_idx",
           "columns": [
-            "dom_blocker"
+            {
+              "expression": "\"dom_blocker\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "gin",
+          "with": {}
         },
         "font_list_idx": {
           "name": "font_list_idx",
           "columns": [
-            "font_list"
+            {
+              "expression": "\"font_list\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "gin",
+          "with": {}
         },
         "font_widths_idx": {
           "name": "font_widths_idx",
           "columns": [
-            "font_widths"
+            {
+              "expression": "\"font_widths\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "gin",
+          "with": {}
         },
         "font_emoji_idx": {
           "name": "font_emoji_idx",
           "columns": [
-            "font_emoji"
+            {
+              "expression": "\"font_emoji\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "gin",
+          "with": {}
         },
         "font_math_idx": {
           "name": "font_math_idx",
           "columns": [
-            "font_math"
+            {
+              "expression": "\"font_math\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "gin",
+          "with": {}
         },
         "location_href_idx": {
           "name": "location_href_idx",
           "columns": [
-            "location_href"
+            {
+              "expression": "\"location_href\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "document_referrer_idx": {
           "name": "document_referrer_idx",
           "columns": [
-            "document_referrer"
+            {
+              "expression": "\"document_referrer\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "window_webkitRequestFileSystem_idx": {
           "name": "window_webkitRequestFileSystem_idx",
           "columns": [
-            "window_webkitRequestFileSystem"
+            {
+              "expression": "\"window_webkitRequestFileSystem\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "window_openDatabase_idx": {
           "name": "window_openDatabase_idx",
           "columns": [
-            "window_openDatabase"
+            {
+              "expression": "\"window_openDatabase\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "window_sessionStorage_idx": {
           "name": "window_sessionStorage_idx",
           "columns": [
-            "window_sessionStorage"
+            {
+              "expression": "\"window_sessionStorage\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "window_localStorage_idx": {
           "name": "window_localStorage_idx",
           "columns": [
-            "window_localStorage"
+            {
+              "expression": "\"window_localStorage\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "window_indexedDB_idx": {
           "name": "window_indexedDB_idx",
           "columns": [
-            "window_indexedDB"
+            {
+              "expression": "\"window_indexedDB\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "window_permissions_idx": {
           "name": "window_permissions_idx",
           "columns": [
-            "window_permissions"
+            {
+              "expression": "\"window_permissions\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "window_process_idx": {
           "name": "window_process_idx",
           "columns": [
-            "window_process"
+            {
+              "expression": "\"window_process\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "window_globals_idx": {
           "name": "window_globals_idx",
           "columns": [
-            "window_globals"
+            {
+              "expression": "\"window_globals\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "gin",
+          "with": {}
         },
         "document_cookie_idx": {
           "name": "document_cookie_idx",
           "columns": [
-            "document_cookie"
+            {
+              "expression": "\"document_cookie\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "cookies_enabled_idx": {
           "name": "cookies_enabled_idx",
           "columns": [
-            "cookies_enabled"
+            {
+              "expression": "\"cookies_enabled\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "webassembly_validate_idx": {
           "name": "webassembly_validate_idx",
           "columns": [
-            "webassembly_validate"
+            {
+              "expression": "\"webassembly_validate\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "media_dark_mode_idx": {
           "name": "media_dark_mode_idx",
           "columns": [
-            "media_dark_mode"
+            {
+              "expression": "\"media_dark_mode\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "media_inverted_colors_idx": {
           "name": "media_inverted_colors_idx",
           "columns": [
-            "media_inverted_colors"
+            {
+              "expression": "\"media_inverted_colors\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "media_forced_colors_idx": {
           "name": "media_forced_colors_idx",
           "columns": [
-            "media_forced_colors"
+            {
+              "expression": "\"media_forced_colors\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "media_max_monochrome_idx": {
           "name": "media_max_monochrome_idx",
           "columns": [
-            "media_max_monochrome"
+            {
+              "expression": "\"media_max_monochrome\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "media_contrast_idx": {
           "name": "media_contrast_idx",
           "columns": [
-            "media_contrast"
+            {
+              "expression": "\"media_contrast\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "media_reduced_motion_idx": {
           "name": "media_reduced_motion_idx",
           "columns": [
-            "media_reduced_motion"
+            {
+              "expression": "\"media_reduced_motion\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "media_dynamic_range_idx": {
           "name": "media_dynamic_range_idx",
           "columns": [
-            "media_dynamic_range"
+            {
+              "expression": "\"media_dynamic_range\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "media_transparency_idx": {
           "name": "media_transparency_idx",
           "columns": [
-            "media_transparency"
+            {
+              "expression": "\"media_transparency\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "media_backdrop_blur_idx": {
           "name": "media_backdrop_blur_idx",
           "columns": [
-            "media_backdrop_blur"
+            {
+              "expression": "\"media_backdrop_blur\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "time_zone_offset_idx": {
           "name": "time_zone_offset_idx",
           "columns": [
-            "time_zone_offset"
+            {
+              "expression": "\"time_zone_offset\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "performance_now_idx": {
           "name": "performance_now_idx",
           "columns": [
-            "performance_now"
+            {
+              "expression": "\"performance_now\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "gin",
+          "with": {}
         },
         "performance_memory_idx": {
           "name": "performance_memory_idx",
           "columns": [
-            "performance_memory"
+            {
+              "expression": "\"performance_memory\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "browser_chromium_idx": {
           "name": "browser_chromium_idx",
           "columns": [
-            "browser_chromium"
+            {
+              "expression": "\"browser_chromium\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "browser_chromium86OrNewer_idx": {
           "name": "browser_chromium86OrNewer_idx",
           "columns": [
-            "browser_chromium86OrNewer"
+            {
+              "expression": "\"browser_chromium86OrNewer\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "browser_trident_idx": {
           "name": "browser_trident_idx",
           "columns": [
-            "browser_trident"
+            {
+              "expression": "\"browser_trident\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "browser_gecko_idx": {
           "name": "browser_gecko_idx",
           "columns": [
-            "browser_gecko"
+            {
+              "expression": "\"browser_gecko\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "browser_webkit_idx": {
           "name": "browser_webkit_idx",
           "columns": [
-            "browser_webkit"
+            {
+              "expression": "\"browser_webkit\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "browser_ipad_idx": {
           "name": "browser_ipad_idx",
           "columns": [
-            "browser_ipad"
+            {
+              "expression": "\"browser_ipad\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "browser_android_idx": {
           "name": "browser_android_idx",
           "columns": [
-            "browser_android"
+            {
+              "expression": "\"browser_android\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "browser_webkit606OrNewer_idx": {
           "name": "browser_webkit606OrNewer_idx",
           "columns": [
-            "browser_webkit606OrNewer"
+            {
+              "expression": "\"browser_webkit606OrNewer\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "browser_webkit616OrNewer_idx": {
           "name": "browser_webkit616OrNewer_idx",
           "columns": [
-            "browser_webkit616OrNewer"
+            {
+              "expression": "\"browser_webkit616OrNewer\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "browser_safari_webkit_idx": {
           "name": "browser_safari_webkit_idx",
           "columns": [
-            "browser_safari_webkit"
+            {
+              "expression": "\"browser_safari_webkit\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "browser_webkit_desktop_idx": {
           "name": "browser_webkit_desktop_idx",
           "columns": [
-            "browser_webkit_desktop"
+            {
+              "expression": "\"browser_webkit_desktop\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "browser_edgeHTML_idx": {
           "name": "browser_edgeHTML_idx",
           "columns": [
-            "browser_edgeHTML"
+            {
+              "expression": "\"browser_edgeHTML\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "element_attributionSourceId_idx": {
           "name": "element_attributionSourceId_idx",
           "columns": [
-            "a_attributionSourceId"
+            {
+              "expression": "\"a_attributionSourceId\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "element_attributeNames_idx": {
           "name": "element_attributeNames_idx",
           "columns": [
-            "a_attributeNames"
+            {
+              "expression": "\"a_attributeNames\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "gin",
+          "with": {}
         },
         "eval_toString_idx": {
           "name": "eval_toString_idx",
           "columns": [
-            "eval_toString"
+            {
+              "expression": "\"eval_toString\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "drm_idx": {
           "name": "drm_idx",
           "columns": [
-            "drm"
+            {
+              "expression": "\"drm\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "gin",
+          "with": {}
         },
         "error_stack_idx": {
           "name": "error_stack_idx",
           "columns": [
-            "error_stack"
+            {
+              "expression": "\"error_stack\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "error_toSource_idx": {
           "name": "error_toSource_idx",
           "columns": [
-            "error_toSource"
+            {
+              "expression": "\"error_toSource\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "error_undefined_idx": {
           "name": "error_undefined_idx",
           "columns": [
-            "error_undefined"
+            {
+              "expression": "\"error_undefined\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "external_toString_idx": {
           "name": "external_toString_idx",
           "columns": [
-            "external_toString"
+            {
+              "expression": "\"external_toString\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "window_close_toString_idx": {
           "name": "window_close_toString_idx",
           "columns": [
-            "window_close_toString"
+            {
+              "expression": "\"window_close_toString\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         },
         "function_bind_toString_idx": {
           "name": "function_bind_toString_idx",
           "columns": [
-            "function_bind_toString"
+            {
+              "expression": "\"function_bind_toString\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
           ],
-          "isUnique": false
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         }
       },
       "foreignKeys": {},

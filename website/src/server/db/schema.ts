@@ -78,7 +78,7 @@ export const visits = createTable(
     navigator_onLine: boolean("navigator_onLine"),
     navigator_media_devices: jsonb("navigator_media_devices"),
     navigator_getHighEntropyValues: jsonb("navigator_getHighEntropyValues"),
-    navigator_doNotTrack: varchar("navigator_doNotTrack", {  }),
+    navigator_doNotTrack: varchar("navigator_doNotTrack", {}),
     navigator_oscpu: varchar("navigator_oscpu"),
     navigator_maxTouchPoints: integer("navigator_maxTouchPoints"),
     navigator_prototype: jsonb("navigator_prototype"),
@@ -146,7 +146,7 @@ export const visits = createTable(
     element_attributeNames: jsonb("a_attributeNames"),
     eval_toString: varchar("eval_toString"),
     drm: jsonb("drm"),
-    error_stack: jsonb("error_stack"),
+    error_stack: varchar("error_stack"),
     error_toSource: boolean("error_toSource"),
     error_undefined: boolean("error_undefined"), // s146
     external_toString: varchar("external_toString"),
@@ -155,11 +155,17 @@ export const visits = createTable(
     // keyboard b1
   },
   (example) => {
-    const obj = {};
+    const obj: any = {};
 
     Object.keys(example).forEach((key) => {
       // @ts-ignore
-      obj[key] = index(`${key}_idx`).on(example[key]);
+      const column = example[key];
+
+      if (column.dataType === "json") {
+        obj[key] = index(`${key}_idx`).using("gin", sql.raw(`"${column.name}"`))
+      } else {
+        obj[key] = index(`${key}_idx`).using("btree", sql.raw(`"${column.name}"`))
+      }
     });
 
     return obj;
