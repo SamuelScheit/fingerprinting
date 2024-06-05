@@ -87,7 +87,15 @@ export const fingerprintRouter = createTRPCRouter({
 					).filter(x => x),
 					sql`(
 						WITH stmt AS (
-							SELECT JSONB_ARRAY_ELEMENTS("webrtc_candidates"::jsonb) AS candidate FROM other_sessions)
+							SELECT
+							JSONB_ARRAY_ELEMENTS(CASE
+													WHEN jsonb_typeof(webrtc_candidates::jsonb) = 'array'
+													THEN webrtc_candidates::jsonb
+													ELSE '[]'::jsonb
+													END) AS candidate
+							FROM
+							other_sessions
+						)
 							SELECT COUNT(*) FROM stmt WHERE candidate ->> 'address' IN (${sql.raw(candidates.map((x: any) => `'${x.address?.replace(/[^\d.\]\[:\w]+/g, "")}'`).join(", "))})
 						) as webrtc_candidates `,
 				], sql.raw(", ")),
