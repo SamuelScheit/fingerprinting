@@ -82,6 +82,7 @@ export const visits = createTable(
     navigator_oscpu: varchar("navigator_oscpu"),
     navigator_maxTouchPoints: integer("navigator_maxTouchPoints"),
     navigator_prototype: jsonb("navigator_prototype"),
+    keyboard_layout: varchar("keyboard_layout"),
     window_TouchEvent: boolean("window_TouchEvent"),
     window_ontouchstart: boolean("window_ontouchstart"),
     storage_estimate: jsonb("storage_estimate"),

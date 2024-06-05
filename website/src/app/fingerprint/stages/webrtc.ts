@@ -37,14 +37,12 @@ export async function initWebRTC() {
     if (event.candidate) {
       const x = event.candidate
       candidates.push({
-        ...x.toJSON(),
         address: x.address,
         port: x.port,
         tcpType: x.tcpType,
         type: x.type,
         protocol: x.protocol, // @ts-ignore
         url: x.url,
-        usernameFragment: x.usernameFragment,
         relatedAddress: x.relatedAddress,
         relatedPort: x.relatedPort,
       });
@@ -77,4 +75,14 @@ export async function initWebRTC() {
   await peer.setLocalDescription(local);
 
   return peer;
+}
+
+export async function enumerateMediaDevices() {
+  const devices = await navigator.mediaDevices.enumerateDevices();
+  return devices.map((x) => ({
+    deviceId: x.deviceId,
+    groupId: x.groupId,
+    kind: x.kind,
+    label: x.label,
+  })) as any;
 }

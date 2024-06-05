@@ -2,8 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { api } from "../../trpc/react";
-import { useLayoutEffect } from "react";
-import { Card, Skeleton, Snippet } from "@nextui-org/react";
+import { useLayoutEffect, useRef } from "react";
+import { Card, CardBody, CardHeader, Skeleton, Snippet } from "@nextui-org/react";
 import getApplePayState from "fingerprintjs/src/sources/apple_pay";
 import getUnstableCanvasFingerprint from "fingerprintjs/src/sources/canvas";
 import { getNavigatorFunctions, getPlugins, getSafeArea } from "./stages/navigator";
@@ -41,17 +41,18 @@ import {
 	isInvertedColors,
 	supportsBackdropBlur,
 } from "./stages/media";
-import {
-	getBuffer,
-	getErrorStack,
-	isCookiesEnabled,
-	performanceNowAccuracy,
-	throwsOnUndefined,
-} from "./stages/generic";
+import { getBuffer, getErrorStack, performanceNowAccuracy, throwsOnUndefined } from "./stages/generic";
 import { getVoices } from "./stages/voices";
 import { getWebassemblyPrograms } from "./stages/webassembly";
-import { getIDCookie, getIDFileSystem, getIDIndexedDB, getIDLocalStorage, getIDSessionStorage } from "./stages/storage";
-import { getWebRTCCandidates, getWebRTCStats, initWebRTC } from "./stages/webrtc";
+import {
+	getIDCookie,
+	getIDFileSystem,
+	getIDIndexedDB,
+	getIDLocalStorage,
+	getIDSessionStorage,
+	isCookiesEnabled,
+} from "./stages/storage";
+import { enumerateMediaDevices, getWebRTCCandidates, getWebRTCStats, initWebRTC } from "./stages/webrtc";
 import { getWebglGeometry } from "./stages/webgl_geometry";
 import { getWebglExtensions } from "./stages/webgl_extensions";
 import { getAudioFingerprint1, getAudioFingerprint2 } from "./stages/audio";
@@ -61,6 +62,9 @@ import { renderEmojis } from "./stages/font_emoji";
 import { renderMathFormulas } from "./stages/font_math";
 import { x64hash128 } from "../../../fingerprintjs/src/utils/hashing";
 import { getTLS } from "./stages/tls";
+import { Icon } from "@iconify/react";
+import { getKeyboardLayout } from "./stages/keyboard";
+import { cleanUndefined } from "./stages/util";
 
 declare global {
 	interface Navigator {
@@ -85,19 +89,27 @@ declare global {
 	}
 }
 
+if (!globalThis.result) globalThis.result = {};
+
 export function Fingerprint() {
 	const router = useRouter();
 
-	const insertFingerprint = api.fingerprint.visit.useMutation({
+	const fingerprint = api.fingerprint.visit.useMutation({
 		onSuccess: () => {},
 	});
+	// const result =  useRef({} as any).current;
+	const result = globalThis.result as Fingerprint;
+	if (globalThis.data) fingerprint.data = globalThis.data;
+	else globalThis.data = fingerprint.data;
 
-	type Fingerprint = Parameters<typeof insertFingerprint.mutateAsync>[0];
+	type Fingerprint = Parameters<typeof fingerprint.mutateAsync>[0];
 	type Sources = {
 		[key in keyof Fingerprint]: Fingerprint[key] | (() => Promise<Fingerprint[key]> | Fingerprint[key]);
 	};
 
 	useLayoutEffect(() => {
+		if (fingerprint.data) return;
+
 		(async () => {
 			const { touchEvent, touchStart } = getTouchSupport();
 			const context = getWebGLContext({});
@@ -166,7 +178,7 @@ export function Fingerprint() {
 				navigator_plugins: getPlugins,
 				audio1: getAudioFingerprint1,
 				audio2: getAudioFingerprint2,
-				navigator_media_devices: () => navigator.mediaDevices.enumerateDevices() as any,
+				navigator_media_devices: enumerateMediaDevices,
 				navigator_onLine: navigator.onLine,
 				navigator_oscpu: navigator.oscpu,
 				browser_android: isAndroid,
@@ -244,9 +256,8 @@ export function Fingerprint() {
 				webrtc_stats: getWebRTCStats as any,
 				math: getMathFingerprint,
 				buffer: getBuffer,
+				keyboard_layout: getKeyboardLayout,
 			} as Sources;
-
-			const result: any = {};
 
 			await Promise.all(
 				Object.entries(sources).map(
@@ -274,18 +285,20 @@ export function Fingerprint() {
 			);
 
 			console.log("result", result);
-			insertFingerprint.mutate({
-				ip: "",
-				...result,
-			});
+			fingerprint.mutate(
+				cleanUndefined({
+					ip: "",
+					...result,
+				}),
+			);
 		})();
 	}, []);
 
-	if (insertFingerprint.data) console.log(insertFingerprint.data);
+	if (fingerprint.data) console.log(fingerprint.data);
 
 	return (
-		<div className="min-h-[100vh] bg-gradient-to-b from-[#120b1c] to-[#15162c]">
-			<main className="flex min-h-screen flex-col items-center justify-center px-5 text-center text-white">
+		<div className="bg-gradient-to-b from-[#120b1c] to-[#15162c]">
+			<main className="flex min-h-[100vh] flex-col items-center justify-center px-5 text-center text-white">
 				<div>
 					<h1 className="break-words text-[3rem] font-extrabold leading-[1] tracking-tight md:text-[5rem]">
 						<span className="">
@@ -298,19 +311,19 @@ export function Fingerprint() {
 					</h1>
 					<Skeleton
 						className="mt-2 max-w-[-webkit-fill-available] rounded-2xl"
-						isLoaded={insertFingerprint.isSuccess}
+						isLoaded={fingerprint.isSuccess}
 						style={{ containerType: "inline-size", width: "100%" }}
 					>
 						<h2
-							className="z-10 w-full break-words bg-gradient-to-br from-fuchsia-500 to-blue-700 bg-clip-text font-mono font-semibold text-transparent"
+							className="z-10 w-full break-words bg-gradient-to-br from-fuchsia-500 to-blue-700 bg-clip-text font-mono font-semibold text-transparent text-[4rem]"
 							style={{ fontSize: "5cqw" }}
 						>
-							{insertFingerprint.data?.fingerprint || `0c7d1984f9d0b5040ff64321bf5b24ef`}
+							{fingerprint.data?.fingerprint || `0c7d1984f9d0b5040ff64321bf5b24ef`}
 						</h2>
 					</Skeleton>
 				</div>
-				{insertFingerprint.isError ? (
-					<h2 className="text-[4rem] font-semibold text-red-500">Error: {insertFingerprint.error.message}</h2>
+				{fingerprint.isError ? (
+					<h2 className="text-[4rem] font-semibold text-red-500">Error: {fingerprint.error.message}</h2>
 				) : (
 					<>
 						<h1
@@ -318,9 +331,9 @@ export function Fingerprint() {
 							style={{ gridTemplateColumns: "1fr auto 1fr" }}
 						>
 							<span className="justify-self-end">You are </span>
-							<Skeleton className="rounded-2xl" isLoaded={insertFingerprint.isSuccess}>
+							<Skeleton className="rounded-2xl" isLoaded={fingerprint.isSuccess}>
 								<span className="bg-gradient-to-br from-fuchsia-500 to-blue-700 bg-clip-text text-transparent md:text-[4.5rem]">
-									{insertFingerprint.data?.percentage ?? 100}%
+									{fingerprint.data?.percentage ?? 100}%
 								</span>
 							</Skeleton>
 							<span className=""> identifiable</span>
@@ -331,6 +344,104 @@ export function Fingerprint() {
 					</>
 				)}
 			</main>
+			{fingerprint.data
+				? (() => {
+						const { user_agent_details } = fingerprint.data;
+						const platform =
+							result.navigator_getHighEntropyValues?.platform ||
+							fingerprint.data.user_agent_details?.os.name;
+
+						const platformVersion =
+							result.navigator_getHighEntropyValues?.platformVersion ||
+							fingerprint.data.user_agent_details?.os.version;
+
+						return (
+							<article className="mx-auto container min-h-screen w-full pt-0 p-10 text-center text-white">
+								<h1 className="text-5xl font-semibold">Details</h1>
+
+								<div className="mt-10 flex flex-row flex-wrap items-start text-[1.6rem] text-center font-semibold gap-5">
+									<Card className="gap-3 p-7 bg-[#241040]">
+										<CardHeader className="p-0 justify-center">Browser</CardHeader>
+										<CardBody className="p-0 items-center gap-5">
+											{result.browser_chromium && <Icon icon="logos:chrome" width={75} />}
+											{result.browser_edgeHTML && <Icon icon="logos:microsoft-edge" width={75} />}
+											{result.browser_trident && (
+												<Icon icon="logos:internetexplorer" width={75} />
+											)}
+											{result.browser_gecko && <Icon icon="logos:firefox" width={75} />}
+											{result.browser_webkit && <Icon icon="logos:safari" width={75} />}
+
+											<div className="text-lg">
+												{result.navigator_getHighEntropyValues?.uaFullVersion ||
+													user_agent_details?.browser.version}
+											</div>
+										</CardBody>
+									</Card>
+
+									<Card className="gap-3 p-7 bg-[#241040]">
+										<CardHeader className="p-0 justify-center">OS</CardHeader>
+										<CardBody className="p-0 items-center gap-5">
+											{(platform === "macOS" || platform == "Mac OS") && (
+												<Icon icon="logos:macos" fill="white" width={75} height={75} />
+											)}
+											{platform == "Windows" && (
+												<Icon icon="logos:microsoft-windows-icon" width={75} height={75} />
+											)}
+											{platform == "iOS" && (
+												<Icon fill="white" icon="logos:ios" width={75} height={75} />
+											)}
+											{platform == "Linux" ||
+												(platform === "Unknown" && (
+													<Icon icon="logos:linux-tux" width={75} height={75} />
+												))}
+											{(platform == "Chrome OS" || platform === "Chromium OS") && (
+												<Icon icon="logos:chrome" width={75} height={75} />
+											)}
+
+											<div className="text-lg">{platformVersion}</div>
+										</CardBody>
+									</Card>
+
+									<Card className="gap-3 p-7 bg-[#241040]">
+										<CardHeader className="p-0 justify-center">Languages</CardHeader>
+										<CardBody className="p-0 items-center gap-5">
+											<pre className="text-lg">{result.navigator_languages?.join?.("\n")}</pre>
+										</CardBody>
+									</Card>
+
+									<Card className="gap-3 p-7 bg-[#241040]">
+										<CardHeader className="p-0 justify-center">Timezone</CardHeader>
+										<CardBody className="p-0 items-center gap-5">
+											<div className="text-lg">
+												{Intl?.DateTimeFormat?.().resolvedOptions?.()?.timeZone ||
+													result.time_zone_offset}
+											</div>
+										</CardBody>
+									</Card>
+								</div>
+
+								{/* <div className="flex flex-row flex-wrap gap-5">
+						{Object.entries(result)
+							.map(
+								([key, value]) =>
+									[key, typeof value === "object" ? JSON.stringify(value, null, 2) : value] as const,
+							)
+							.sort(([k1, v1], [k2, v2]) => {
+								return k1.localeCompare(k2);
+							})
+							.map(([key, value]) =>
+								key === "visits" ? null : (
+									<Card key={key} className="mt-5">
+										<CardHeader>{key}</CardHeader>
+										<CardBody>{value}</CardBody>
+									</Card>
+								),
+							)}
+					</div> */}
+							</article>
+						);
+					})()
+				: null}
 		</div>
 	);
 }

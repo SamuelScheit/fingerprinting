@@ -15,21 +15,6 @@ export function throwsOnUndefined() {
   }
 }
 
-export function isCookiesEnabled() {
-  var n = document;
-  try {
-    n.cookie = "cookietest=1; SameSite=Strict;";
-    var t = -1 !== n.cookie.indexOf("cookietest=");
-    return (
-      (n.cookie =
-        "cookietest=1; SameSite=Strict; expires=Thu, 01-Jan-1970 00:00:01 GMT"),
-      t
-    );
-  } catch (e) {
-    return false;
-  }
-}
-
 export function performanceNowAccuracy() {
   var n = performance;
   // if (!(null == n ? void 0 : n.now)) return { s: -1, v: null };

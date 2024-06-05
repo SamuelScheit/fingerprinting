@@ -4,6 +4,8 @@ import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 import { x64hash128 } from "fingerprintjs/src/utils/hashing";
 import { count, eq, getTableColumns, getTableName, sql } from "drizzle-orm";
+import { UAParser } from "ua-parser-js"
+
 
 const insertVisits = createInsertSchema(visits, {
 	ip: z.string().optional(),
@@ -55,15 +57,24 @@ export const fingerprintRouter = createTRPCRouter({
 
 							// @ts-ignore
 							const value = input[x.name];
+							if (value === undefined) return
 
-							if (value === undefined) {
-							} else if (value == null) {
-								return sql`(SELECT COUNT(*) FROM other_sessions WHERE "${sql.raw(x.name)}" IS NULL ) as ${sql.raw(x.name)}`;
+							const select = [
+								sql`(SELECT COUNT(*) FROM other_sessions WHERE "${sql.raw(x.name)}" `,
+							]
+
+							if (value == null) {
+								select.push(sql` IS NULL `)
 							} else if (x.dataType === "json") {
-								return sql`(SELECT COUNT(*) FROM other_sessions WHERE "${sql.raw(x.name)}" = '${sql.raw(JSON.stringify(value))}'::jsonb ) as ${sql.raw(x.name)}`;
+								select.push(sql` = '${sql.raw(JSON.stringify(value))}'::jsonb `)
 							} else {
-								return sql`(SELECT COUNT(*) FROM other_sessions WHERE "${sql.raw(x.name)}" = ${value}) as ${sql.raw(x.name)}`;
+								select.push(sql` = ${value}`)
 							}
+
+							// @ts-ignore
+							select.push(sql(`) as ${sql.raw(x.name)}`))
+
+							return sql.join(select, sql.raw(" "))
 						}
 					).filter(x => x),
 					sql`(
@@ -88,7 +99,6 @@ export const fingerprintRouter = createTRPCRouter({
 				const value = input[x.name] || null
 
 				cols.push(`"${x.name}"`)
-				console.log(i, x.name, value);
 				// if (x.dataType === "boolean") return value ? "true" : "false";
 				// if (x.dataType === "number" && typeof value === "number") return value;
 				if (x.dataType === "json") return sql.raw(`'${JSON.stringify(value || null)}'::jsonb`);
@@ -105,10 +115,18 @@ export const fingerprintRouter = createTRPCRouter({
 				], sql.raw(" "))
 			);
 
+			var user_agent_details = undefined
+
+			if (input.user_agent) {
+				user_agent_details = new UAParser(input.user_agent).getResult();
+			}
+
 			return {
 				fingerprint, // "654c8418b95d5236828891b2fabfaebba56ae880"
 				percentage: 100,
-				...uniqueness[0],
+				user_agent_details,
+				headers: ctx.headers,
+				parameters: uniqueness[0],
 				visits: await my_sessions,
 			};
 		} catch (error) {

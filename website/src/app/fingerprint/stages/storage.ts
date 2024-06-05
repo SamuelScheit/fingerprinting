@@ -45,7 +45,8 @@ export function getIDSessionStorage() {
 }
 
 function setCookie(name: string, value: string) {
-  document.cookie = `${name}=${value}; SameSite=Lax; Secure;`;
+  document.cookie = `${name}=${value}; SameSite=Lax; Max-Age=315360000`;
+  console.log("set cookie", name, value, document.cookie);
 }
 
 function getCookie(name: string) {
@@ -125,3 +126,19 @@ export async function getIDIndexedDB() {
     });
   });
 }
+
+
+export function isCookiesEnabled() {
+  try {
+    document.cookie = "cookietest=1; SameSite=Strict;";
+    var t = -1 !== document.cookie.indexOf("cookietest=");
+    return (
+      (document.cookie =
+        "cookietest=1; SameSite=Strict; expires=Thu, 01-Jan-1970 00:00:01 GMT"),
+      t
+    );
+  } catch (e) {
+    return false;
+  }
+}
+
