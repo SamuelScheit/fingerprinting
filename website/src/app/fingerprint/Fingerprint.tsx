@@ -65,6 +65,7 @@ import { getTLS } from "./stages/tls";
 import { Icon } from "@iconify/react";
 import { getKeyboardLayout } from "./stages/keyboard";
 import { cleanUndefined } from "./stages/util";
+import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell } from "@nextui-org/react";
 
 declare global {
 	interface Navigator {
@@ -419,6 +420,31 @@ export function Fingerprint() {
 										</CardBody>
 									</Card>
 								</div>
+
+								<Table>
+									<TableHeader
+										columns={
+											[
+												{ key: "name", label: "Name" },
+												{ key: "value", label: "Value" },
+												{ key: "count", label: "Count" },
+											] as const
+										}
+									>
+										{(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
+									</TableHeader>
+									<TableBody items={Object.entries(result)}>
+										{([key, value]) => (
+											<TableRow key={key}>
+												<TableCell>{key}</TableCell>
+												<TableCell>
+													{typeof value === "object" ? JSON.stringify(value) : value}
+												</TableCell>
+												<TableCell>{fingerprint.data.parameters[key]}</TableCell>
+											</TableRow>
+										)}
+									</TableBody>
+								</Table>
 
 								{/* <div className="flex flex-row flex-wrap gap-5">
 						{Object.entries(result)
