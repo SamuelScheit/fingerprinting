@@ -444,7 +444,9 @@ export function Fingerprint() {
 									>
 										{([key, value]) => (
 											<TableRow key={key}>
-												<TableCell>{key}</TableCell>
+												<TableCell style={{ textAlign: "left" }} align="left">
+													{key}
+												</TableCell>
 												<TableCell
 													align="left"
 													style={{
