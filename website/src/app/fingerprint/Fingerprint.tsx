@@ -421,7 +421,7 @@ export function Fingerprint() {
 									</Card>
 								</div>
 
-								<Table>
+								<Table className="mt-10">
 									<TableHeader
 										columns={
 											[
@@ -431,16 +431,41 @@ export function Fingerprint() {
 											] as const
 										}
 									>
-										{(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
+										{(column) => (
+											<TableColumn align="start" key={column.key}>
+												{column.label}
+											</TableColumn>
+										)}
 									</TableHeader>
-									<TableBody items={Object.entries(result)}>
+									<TableBody
+										items={Object.entries(result).sort(([key1, value1], [key2, value2]) => {
+											return key1.localeCompare(key2);
+										})}
+									>
 										{([key, value]) => (
 											<TableRow key={key}>
 												<TableCell>{key}</TableCell>
-												<TableCell>
-													{typeof value === "object" ? JSON.stringify(value) : value}
+												<TableCell
+													align="left"
+													style={{
+														textAlign: "left",
+														overflow: "hidden",
+														textOverflow: "ellipsis",
+														whiteSpace: "nowrap",
+														maxWidth: "200px",
+													}}
+												>
+													{typeof value === "object"
+														? JSON.stringify(value)
+														: value === true
+															? "true"
+															: value === false
+																? "false"
+																: value}
 												</TableCell>
-												<TableCell>{fingerprint.data.parameters[key]}</TableCell>
+												<TableCell align="left" style={{ textAlign: "left" }}>
+													{fingerprint.data.parameters[key.toLowerCase()] || 0}
+												</TableCell>
 											</TableRow>
 										)}
 									</TableBody>

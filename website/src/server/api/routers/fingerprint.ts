@@ -59,6 +59,14 @@ export const fingerprintRouter = createTRPCRouter({
 							const value = input[x.name];
 							if (value === undefined) return
 
+							if (value == null) {
+								return sql`(SELECT COUNT(*) FROM other_sessions WHERE "${sql.raw(x.name)}" IS NULL ) as ${sql.raw(x.name)}`;
+							} else if (x.dataType === "json") {
+								return sql`(SELECT COUNT(*) FROM other_sessions WHERE "${sql.raw(x.name)}" = '${sql.raw(JSON.stringify(value))}'::jsonb ) as ${sql.raw(x.name)}`;
+							} else {
+								return sql`(SELECT COUNT(*) FROM other_sessions WHERE "${sql.raw(x.name)}" = ${value}) as ${sql.raw(x.name)}`;
+							}
+
 							const select = [
 								sql`(SELECT COUNT(*) FROM other_sessions WHERE "${sql.raw(x.name)}" `,
 							]
