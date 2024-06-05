@@ -12,7 +12,7 @@ export default async function Home() {
 						</span>
 					</h1>
 					<div className="text-center text-xl leading-relaxed text-gray-300">
-						Fingerprint is a unique identifier based on your browser and device configuration.
+						A Fingerprint is a unique identifier based on your browser and device configuration.
 						<br />
 						This identifier can be used to track you across different websites and build a profile of your
 						online activity.
