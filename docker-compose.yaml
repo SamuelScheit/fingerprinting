@@ -12,23 +12,19 @@ services:
         image: fingerprint
         environment:
             - DATABASE_URL=postgresql://postgres:P4XDN4kAeEr98gdqtW5K@db:5432/fingerprint
-        env_file:
-            - ./.env
         depends_on:
             - db
 
     db:
         image: postgres:13
         environment:
-            POSTGRES_USER: ${POSTGRES_USER}
-            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-            POSTGRES_DB: ${POSTGRES_DB}
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: P4XDN4kAeEr98gdqtW5K
+            POSTGRES_DB: fingerprint
         ports:
             - "5432:5432"
         volumes:
             - db-data:/var/lib/postgresql/data
-        env_file:
-            - ./website/.env
 
 volumes:
     db-data:
