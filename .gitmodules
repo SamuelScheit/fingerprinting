@@ -1,0 +1,3 @@
+[submodule "website/fingerprintjs"]
+	path = website/fingerprintjs
+	url = https://github.com/fingerprintjs/fingerprintjs
