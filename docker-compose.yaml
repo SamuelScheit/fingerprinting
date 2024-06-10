@@ -2,8 +2,8 @@ version: "3.9"
 services:
     app:
         build:
-            context: ./website/
-            dockerfile: ./website/Dockerfile
+            context: website/
+            dockerfile: ./Dockerfile
             args:
                 NEXT_PUBLIC_CLIENTVAR: "clientvar"
         working_dir: /app
@@ -13,7 +13,7 @@ services:
         environment:
             - DATABASE_URL=postgresql://postgres:P4XDN4kAeEr98gdqtW5K@db:5432/fingerprint
         env_file:
-            - ./website/.env
+            - ./.env
         depends_on:
             - db
 
