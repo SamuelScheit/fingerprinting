@@ -108,8 +108,8 @@ export function Fingerprint() {
 		[key in keyof Fingerprint]: Fingerprint[key] | (() => Promise<Fingerprint[key]> | Fingerprint[key]);
 	};
 
-	const percentage = localStorage?.getItem?.("percentage") || Math.floor(Math.random() * 20 + 70);
-	localStorage?.setItem?.("percentage", "" + percentage);
+	const percentage = globalThis?.localStorage?.getItem?.("percentage") || Math.floor(Math.random() * 20 + 70);
+	globalThis?.localStorage?.setItem?.("percentage", "" + percentage);
 
 	useLayoutEffect(() => {
 		if (fingerprint.data) return;
