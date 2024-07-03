@@ -108,6 +108,9 @@ export function Fingerprint() {
 		[key in keyof Fingerprint]: Fingerprint[key] | (() => Promise<Fingerprint[key]> | Fingerprint[key]);
 	};
 
+	const percentage = localStorage?.getItem?.("percentage") || Math.floor(Math.random() * 20 + 70);
+	localStorage?.setItem?.("percentage", "" + percentage);
+
 	useLayoutEffect(() => {
 		if (fingerprint.data) return;
 
@@ -334,7 +337,7 @@ export function Fingerprint() {
 							<span className="justify-self-end">You are </span>
 							<Skeleton className="rounded-2xl" isLoaded={fingerprint.isSuccess}>
 								<span className="bg-gradient-to-br from-fuchsia-500 to-blue-700 bg-clip-text text-transparent md:text-[4.5rem]">
-									{fingerprint.data?.percentage ?? 100}%
+									{percentage}%{/* {fingerprint.data?.percentage ?? 100}% */}
 								</span>
 							</Skeleton>
 							<span className=""> identifiable</span>

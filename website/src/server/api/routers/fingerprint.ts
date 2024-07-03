@@ -5,6 +5,7 @@ import { z } from "zod";
 import { x64hash128 } from "fingerprintjs/src/utils/hashing";
 import { count, eq, getTableColumns, getTableName, sql } from "drizzle-orm";
 import { UAParser } from "ua-parser-js"
+import { PgColumn } from "drizzle-orm/pg-core";
 
 
 const insertVisits = createInsertSchema(visits, {
@@ -15,6 +16,17 @@ function stringifyUUID(str?: string | null) {
 	if (!str) return "NULL"
 	return `'${str.replace(/[^a-zA-Z\d\-]+/g, "")}'`;
 }
+
+function getWhereClause(value: any, column: PgColumn) {
+	if (value == null) {
+		return sql` IS NULL `
+	} else if (column.dataType === "json") {
+		return sql` = '${sql.raw(JSON.stringify(value))}'::jsonb `
+	} else {
+		return sql` = ${value}`
+	}
+}
+
 
 export const fingerprintRouter = createTRPCRouter({
 	visit: publicProcedure.input(insertVisits).mutation(async ({ ctx, input }) => {
@@ -38,53 +50,58 @@ export const fingerprintRouter = createTRPCRouter({
 				AND "id_cookie" != ${stringifyUUID(input.id_cookie)}
 			)`);
 
-			const my_sessions = ctx.db.execute(sql.raw(`SELECT * FROM ${getTableName(visits)} WHERE
+			const my_sessions_sql = `SELECT * FROM ${getTableName(visits)} WHERE
 				"id_localStorage" = ${stringifyUUID(input.id_localStorage)}
 				OR "id_sessionStorage" = ${stringifyUUID(input.id_sessionStorage)}
 				OR "id_indexedDB" = ${stringifyUUID(input.id_indexedDB)}
 				OR "id_fileSystem" = ${stringifyUUID(input.id_fileSystem)}
-				OR "id_cookie" = ${stringifyUUID(input.id_cookie)}
-			`));
+				OR "id_cookie" = ${stringifyUUID(input.id_cookie)}`
+			const my_sessions = sql.raw(`, my_sessions AS (${my_sessions_sql})`)
+
+			const filteredColumns = columns.filter(x => x.name !== "id" && !id_columns.includes(x.name) && (input as any)[x.name] !== undefined)
 
 			const parameter_count_other_sessions = [
 				sql`SELECT`,
 				sql.join([
 					sql.raw(`(SELECT COUNT(*) FROM other_sessions) as total`),
-					...columns.map(
-						(x) => {
-							if (x.name === "id") return
-							if (id_columns.includes(x.name)) return
+					// ...filteredColumns.map(x => {
+					// 	const name = `"${x.name}"`
+					// 	const distinct = `"${x.name + "_distinct"}"`
+					// 	const distinctCount = `"${x.name + "_distinct_count"}"`
+					// 	const distinctValue = `"${x.name + "_distinct_value"}"`
 
-							// @ts-ignore
-							const value = input[x.name];
-							if (value === undefined) return
+					// 	const s = `(
+					// 		WITH ${distinct} as (
+					// 			SELECT DISTINCT ${name} as ${distinct} FROM ${getTableName(visits)}
+					// 		),
+					// 		${distinctCount} as (
+					// 			SELECT COUNT(*) FROM ${distinct}
+					// 		),
+					// 		${distinctValue} as (
+					// 			SELECT COUNT(*) as ${distinctValue} FROM ${getTableName(visits)} INNER JOIN ${distinct} ON ${name} = ${distinct}
+					// 		)
+					// 		SELECT SUM(
 
-							if (value == null) {
-								return sql`(SELECT COUNT(*) FROM other_sessions WHERE "${sql.raw(x.name)}" IS NULL ) as ${sql.raw(x.name)}`;
-							} else if (x.dataType === "json") {
-								return sql`(SELECT COUNT(*) FROM other_sessions WHERE "${sql.raw(x.name)}" = '${sql.raw(JSON.stringify(value))}'::jsonb ) as ${sql.raw(x.name)}`;
-							} else {
-								return sql`(SELECT COUNT(*) FROM other_sessions WHERE "${sql.raw(x.name)}" = ${value}) as ${sql.raw(x.name)}`;
-							}
+					// 		) as probability FROM fingerprint_visit
+					// 	) as ${distinct} `
 
-							const select = [
-								sql`(SELECT COUNT(*) FROM other_sessions WHERE "${sql.raw(x.name)}" `,
-							]
+					// 	console.log(s)
 
-							if (value == null) {
-								select.push(sql` IS NULL `)
-							} else if (x.dataType === "json") {
-								select.push(sql` = '${sql.raw(JSON.stringify(value))}'::jsonb `)
-							} else {
-								select.push(sql` = ${value}`)
-							}
+					// 	return sql.raw(s)
+					// }),
+					...filteredColumns.map(x => {
+						// @ts-ignore
+						const value = input[x.name];
 
-							// @ts-ignore
-							select.push(sql(`) as ${sql.raw(x.name)}`))
+						const select = sql.join([
+							sql`(SELECT COUNT(*) FROM other_sessions WHERE "${sql.raw(x.name)}" `,
+							getWhereClause(value, x),
+							sql`) as ${sql.raw(x.name)}`,
+						], sql.raw(" "))
 
-							return sql.join(select, sql.raw(" "))
-						}
-					).filter(x => x),
+						return select
+					}),
+					candidates.length > 0 &&
 					sql`(
 						WITH stmt AS (
 							SELECT
@@ -98,12 +115,12 @@ export const fingerprintRouter = createTRPCRouter({
 						)
 							SELECT COUNT(*) FROM stmt WHERE candidate ->> 'address' IN (${sql.raw(candidates.map((x: any) => `'${x.address?.replace(/[^\d.\]\[:\w]+/g, "")}'`).join(", "))})
 						) as webrtc_candidates `,
-				], sql.raw(", ")),
+				].filter(Boolean), sql.raw(", ")),
 			]
 
 			const start = performance.now();
 			const query = ctx.db
-				.execute(sql.join([other_sessions, ...parameter_count_other_sessions], sql.raw(" ")))
+				.execute(sql.join([other_sessions, my_sessions, ...parameter_count_other_sessions], sql.raw(" ")))
 			console.log(`Query took ${performance.now() - start}ms`);
 
 			const uniqueness = await query.execute();
@@ -143,7 +160,7 @@ export const fingerprintRouter = createTRPCRouter({
 				user_agent_details,
 				headers: ctx.headers,
 				parameters: uniqueness[0],
-				visits: await my_sessions,
+				visits: await ctx.db.execute(sql.raw(my_sessions_sql)).execute(),
 			};
 		} catch (error) {
 			console.error(error);
