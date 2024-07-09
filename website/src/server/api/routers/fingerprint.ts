@@ -221,7 +221,7 @@ export const fingerprintRouter = createTRPCRouter({
 				user_agent_details,
 				headers: ctx.headers,
 				parameters: occurance[0],
-				matches,
+				// matches,
 				visits: visitsResult
 			};
 		} catch (error) {
