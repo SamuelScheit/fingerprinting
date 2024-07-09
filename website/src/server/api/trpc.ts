@@ -12,8 +12,8 @@ import { ZodError } from "zod";
 
 import { db } from "@/server/db";
 import type {
-  CreateNextContextOptions,
-  NextApiRequest,
+	CreateNextContextOptions,
+	NextApiRequest,
 } from "@trpc/server/adapters/next";
 import { NextRequest } from "next/server";
 
@@ -30,12 +30,12 @@ import { NextRequest } from "next/server";
  * @see https://trpc.io/docs/server/context
  */
 export const createTRPCContext = async (opts: { req: NextRequest }) => {
-  return {
-    db,
-    ip: opts.req.ip || opts.req.headers.get("x-real-ip") || "127.0.0.1",
-    headers: Object.fromEntries(opts.req.headers.entries()),
-    ...opts,
-  };
+	return {
+		db,
+		ip: opts.req.headers.get("x-real-ip") || opts.req.ip || "127.0.0.1",
+		headers: Object.fromEntries(opts.req.headers.entries()),
+		...opts,
+	};
 };
 
 /**
@@ -46,17 +46,17 @@ export const createTRPCContext = async (opts: { req: NextRequest }) => {
  * errors on the backend.
  */
 const t = initTRPC.context<typeof createTRPCContext>().create({
-  transformer: superjson,
-  errorFormatter({ shape, error }) {
-    return {
-      ...shape,
-      data: {
-        ...shape.data,
-        zodError:
-          error.cause instanceof ZodError ? error.cause.flatten() : null,
-      },
-    };
-  },
+	transformer: superjson,
+	errorFormatter({ shape, error }) {
+		return {
+			...shape,
+			data: {
+				...shape.data,
+				zodError:
+					error.cause instanceof ZodError ? error.cause.flatten() : null,
+			},
+		};
+	},
 });
 
 /**
