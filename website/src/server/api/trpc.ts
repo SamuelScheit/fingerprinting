@@ -30,10 +30,13 @@ import { NextRequest } from "next/server";
  * @see https://trpc.io/docs/server/context
  */
 export const createTRPCContext = async (opts: { req: NextRequest }) => {
+	const ip = opts.req.headers.get("x-real-ip") || opts.req.headers.get("CF-Connecting-IP") || opts.req.ip || "127.0.0.1"
+	const headers = Object.fromEntries(opts.req.headers.entries())
+	console.log("request", ip, headers)
 	return {
 		db,
-		ip: opts.req.headers.get("x-real-ip") || opts.req.ip || "127.0.0.1",
-		headers: Object.fromEntries(opts.req.headers.entries()),
+		ip,
+		headers,
 		...opts,
 	};
 };
