@@ -21,7 +21,6 @@ export function cleanUndefined(obj: any, visited = new Set<any>()): any {
 				console.error(error, obj, key);
 			}
 		}
-		console.log(newObj)
 		return newObj
 	}
 	return obj;

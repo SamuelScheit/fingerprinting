@@ -51,6 +51,7 @@ import {
 	getIDLocalStorage,
 	getIDSessionStorage,
 	isCookiesEnabled,
+	setAllID,
 } from "./stages/storage";
 import { enumerateMediaDevices, getWebRTCCandidates, getWebRTCStats, initWebRTC } from "./stages/webrtc";
 import { getWebglGeometry } from "./stages/webgl_geometry";
@@ -107,9 +108,6 @@ export function Fingerprint() {
 	type Sources = {
 		[key in keyof Fingerprint]: Fingerprint[key] | (() => Promise<Fingerprint[key]> | Fingerprint[key]);
 	};
-
-	const percentage = globalThis?.localStorage?.getItem?.("percentage") || Math.floor(Math.random() * 20 + 70);
-	globalThis?.localStorage?.setItem?.("percentage", "" + percentage);
 
 	useLayoutEffect(() => {
 		if (fingerprint.data) return;
@@ -298,7 +296,10 @@ export function Fingerprint() {
 		})();
 	}, []);
 
-	if (fingerprint.data) console.log(fingerprint.data);
+	if (fingerprint.data) {
+		setAllID(fingerprint.data.fingerprint);
+		console.log(fingerprint.data);
+	}
 
 	return (
 		<div className="bg-gradient-to-b from-[#120b1c] to-[#15162c]">
@@ -337,7 +338,7 @@ export function Fingerprint() {
 							<span className="justify-self-end">You are </span>
 							<Skeleton className="rounded-2xl" isLoaded={fingerprint.isSuccess}>
 								<span className="bg-gradient-to-br from-fuchsia-500 to-blue-700 bg-clip-text text-transparent md:text-[4.5rem]">
-									{percentage}%{/* {fingerprint.data?.percentage ?? 100}% */}
+									{fingerprint.data?.percentage ?? 100}%
 								</span>
 							</Skeleton>
 							<span className=""> identifiable</span>
@@ -423,58 +424,60 @@ export function Fingerprint() {
 										</CardBody>
 									</Card>
 								</div>
-
-								<Table className="mt-10">
-									<TableHeader
-										columns={
-											[
-												{ key: "name", label: "Name" },
-												{ key: "value", label: "Value" },
-												{ key: "count", label: "Count" },
-											] as const
-										}
-									>
-										{(column) => (
-											<TableColumn align="start" key={column.key}>
-												{column.label}
-											</TableColumn>
-										)}
-									</TableHeader>
-									<TableBody
-										items={Object.entries(result).sort(([key1, value1], [key2, value2]) => {
-											return key1.localeCompare(key2);
-										})}
-									>
-										{([key, value]) => (
-											<TableRow key={key}>
-												<TableCell style={{ textAlign: "left" }} align="left">
-													{key}
-												</TableCell>
-												<TableCell
-													align="left"
-													style={{
-														textAlign: "left",
-														overflow: "hidden",
-														textOverflow: "ellipsis",
-														whiteSpace: "nowrap",
-														maxWidth: "200px",
-													}}
-												>
-													{typeof value === "object"
-														? JSON.stringify(value)
-														: value === true
-															? "true"
-															: value === false
-																? "false"
-																: value}
-												</TableCell>
-												<TableCell align="left" style={{ textAlign: "left" }}>
-													{fingerprint.data.parameters[key.toLowerCase()] || 0}
-												</TableCell>
-											</TableRow>
-										)}
-									</TableBody>
-								</Table>
+								<details>
+									<summary style={{ fontWeight: "600", fontSize: 20 }}>Show all parameters </summary>
+									<Table className="mt-10">
+										<TableHeader
+											columns={
+												[
+													{ key: "name", label: "Name" },
+													{ key: "value", label: "Value" },
+													{ key: "count", label: "Count" },
+												] as const
+											}
+										>
+											{(column) => (
+												<TableColumn align="start" key={column.key}>
+													{column.label}
+												</TableColumn>
+											)}
+										</TableHeader>
+										<TableBody
+											items={Object.entries(result).sort(([key1, value1], [key2, value2]) => {
+												return key1.localeCompare(key2);
+											})}
+										>
+											{([key, value]) => (
+												<TableRow key={key}>
+													<TableCell style={{ textAlign: "left" }} align="left">
+														{key}
+													</TableCell>
+													<TableCell
+														align="left"
+														style={{
+															textAlign: "left",
+															overflow: "hidden",
+															textOverflow: "ellipsis",
+															whiteSpace: "nowrap",
+															maxWidth: "200px",
+														}}
+													>
+														{typeof value === "object"
+															? JSON.stringify(value)
+															: value === true
+																? "true"
+																: value === false
+																	? "false"
+																	: value}
+													</TableCell>
+													<TableCell align="left" style={{ textAlign: "left" }}>
+														{fingerprint.data.parameters[key.toLowerCase()] || 0}
+													</TableCell>
+												</TableRow>
+											)}
+										</TableBody>
+									</Table>
+								</details>
 
 								{/* <div className="flex flex-row flex-wrap gap-5">
 						{Object.entries(result)
