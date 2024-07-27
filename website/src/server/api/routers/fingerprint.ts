@@ -93,6 +93,52 @@ export const fingerprintRouter = createTRPCRouter({
 
 			const occurance = await query.execute();
 
+			const matches2: any[] = await ctx.db.execute(
+				(() => {
+					const tableName = getTableName(visits)
+
+					return sql.join([
+						sql.raw(`WITH `),
+						sql.join(filteredColumns.map(x => {
+							const name = `"${x.name}"`
+							const distinct = `"${x.name + "_distinct"}"`
+							const uniqueness = `"${x.name + "_uniqueness"}"`
+							const totalCount = `"${x.name + "_total"}"`
+							const distinctValue = `"${x.name + "_distinct_value"}"`
+
+							return sql.raw(`${distinct} as (
+								SELECT DISTINCT ${name} as ${distinct} FROM ${tableName}
+							),
+							${totalCount} as (
+								SELECT COUNT(${name})::float as ${totalCount} FROM ${tableName}
+							),
+							${distinctValue} as (
+								SELECT COUNT(${distinct})::float as ${distinctValue}
+								FROM ${tableName}
+								INNER JOIN ${distinct} ON ${name} = ${distinct}
+								GROUP BY ${distinct}
+							),
+							${uniqueness} as (
+								SELECT abs(coalesce((
+									SELECT SUM(
+									CASE
+										WHEN ${totalCount} <= 1 THEN 0
+										ELSE
+											(${distinctValue} / ${totalCount})
+											* log(
+												${totalCount}::numeric,
+												(${distinctValue} / ${totalCount})::numeric
+											)
+									END
+									) FROM ${distinctValue}, ${totalCount}
+								) * -1, 0)) as ${uniqueness}
+							)`)
+						}), sql.raw(", ")),
+						sql.raw(" SELECT " + filteredColumns.map(x => `"${x.name}_uniqueness"`).join(", ")),
+						sql.raw(` FROM ${tableName}, ${filteredColumns.map(x => `"${x.name}_uniqueness"`).join(", ")}`),
+					], sql.raw(" "))
+				})())
+
 			const matches: any[] = await ctx.db.execute(
 				(() => {
 					const tableName = getTableName(visits)
@@ -221,7 +267,7 @@ export const fingerprintRouter = createTRPCRouter({
 				user_agent_details,
 				headers: ctx.headers,
 				parameters: occurance[0],
-				// matches,
+				matches: matches2,
 				visits: visitsResult
 			};
 		} catch (error) {
