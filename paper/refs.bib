@@ -5,23 +5,95 @@ Extension Fingerprinting Through Ephemeral Modifications},
   url="https://www.cs.uic.edu/~polakis/papers/solomos-ccs22.pdf",
 }
 
-@online{fingerprintingML,
-  title="Fingerprinting the Fingerprinters: Learning to Detect Browser Fingerprinting Behaviors",
-  author={Umar Iqbal, Steven Englehardt, Zubair Shafiq},
-  url="https://arxiv.org/pdf/2008.04480",
-}
-
-@inline{topFingerprintingWebsites,
+@online{topFingerprintingWebsites,
   title="Automatic Discovery of Emerging Browser Fingerprinting
 Techniques",
   author={Junhua Su, Alexandros Kapravelos},
   url="https://www.kapravelos.com/publications/fptechniques-www23.pdf"
 }
 
-@inline{fingerprintJS,
+@online{fingerprintJS,
   url="https://fingerprint.com"
 }
 
-@inline{fingerprintJSOpenSource,
+@online{fingerprintJSOpenSource,
   url="https://github.com/fingerprintjs/fingerprintjs"
 }
+
+@online{MurmurHash,
+  url="https://github.com/aappleby/smhasher"
+}
+
+@InProceedings{howUnique,
+author="Eckersley, Peter",
+editor="Atallah, Mikhail J.
+and Hopper, Nicholas J.",
+title="How Unique Is Your Web Browser?",
+booktitle="Privacy Enhancing Technologies",
+year="2010",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="1--18",
+abstract="We investigate the degree to which modern web browsers are subject to ``device fingerprinting'' via the version and configuration information that they will transmit to websites upon request. We implemented one possible fingerprinting algorithm, and collected these fingerprints from a large sample of browsers that visited our test side, panopticlick.eff.org. We observe that the distribution of our fingerprint contains at least 18.1 bits of entropy, meaning that if we pick a browser at random, at best we expect that only one in 286,777 other browsers will share its fingerprint. Among browsers that support Flash or Java, the situation is worse, with the average browser carrying at least 18.8 bits of identifying information. 94.2{\%} of browsers with Flash or Java were unique in our sample.",
+isbn="978-3-642-14527-8"
+}
+
+@INPROCEEDINGS{DetectFingerprinting,
+  author={Iqbal, Umar and Englehardt, Steven and Shafiq, Zubair},
+  booktitle={2021 IEEE Symposium on Security and Privacy (SP)}, 
+  title={Fingerprinting the Fingerprinters: Learning to Detect Browser Fingerprinting Behaviors}, 
+  year={2021},
+  volume={},
+  number={},
+  pages={1143-1161},
+  keywords={Privacy;Virtual assistants;Standards organizations;Computer bugs;Prototypes;Machine learning;Fingerprint recognition;fingerprinting;tracking;machine-learning},
+  doi={10.1109/SP40001.2021.00017}
+}
+
+@article{longtermFP,
+author = {Pugliese, Gaston and Riess, Christian and Gassmann, Freya and Benenson, Zinaida},
+year = {2020},
+month = {05},
+pages = {558-577},
+title = {Long-Term Observation on Browser Fingerprinting: Users' Trackability and Perspective},
+volume = {2020},
+journal = {Proceedings on Privacy Enhancing Technologies},
+doi = {10.2478/popets-2020-0041}
+}
+
+
+@online{npmTrends,
+  url="https://npmtrends.com/@fingerprintjs/fingerprintjs-vs-@rajesh896/broprint.js-vs-@thumbmarkjs/thumbmarkjs-vs-clientjs-vs-imprintjs",
+  title={@fingerprintjs/fingerprintjs vs @rajesh896/broprint.js vs @thumbmarkjs/thumbmarkjs vs clientjs vs imprintjs | npm trends},
+  urldate={2024-05-02}
+}
+
+@online{mdnWindow,
+  month = {07},
+  title = {Window - Web APIs | MDN},
+  url = {https://developer.mozilla.org/en-US/docs/Web/API/Window},
+  urldate = {2024-07-27},
+  year = {2024},
+  organization = {developer.mozilla.org}
+}
+
+@InProceedings{batteryFP,
+author="Olejnik, {\L}ukasz
+and Acar, Gunes
+and Castelluccia, Claude
+and Diaz, Claudia",
+editor="Garcia-Alfaro, Joaquin
+and Navarro-Arribas, Guillermo
+and Aldini, Alessandro
+and Martinelli, Fabio
+and Suri, Neeraj",
+title="The Leaking Battery",
+booktitle="Data Privacy Management, and Security Assurance",
+year="2016",
+publisher="Springer International Publishing",
+address="Cham",
+pages="254--263",
+abstract="We highlight privacy risks associated with the HTML5 Battery Status API. We put special focus on its implementation in the Firefox browser. Our study shows that websites can discover the capacity of users' batteries by exploiting the high precision readouts provided by Firefox on Linux. The capacity of the battery, as well as its level, expose a fingerprintable surface that can be used to track web users in short time intervals.",
+isbn="978-3-319-29883-2"
+}
+

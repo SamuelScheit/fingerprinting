@@ -1,21 +1,21 @@
+# Fingerprinting
+
+[**Paper**](./paper/paper.pdf)
+
+## Abstract
+
+This work provides a comprehensive technical analysis of browser fingerprinting techniques, in particular using FingerprintJS. Browser fingerprinting allows individual users to be identified based on specific characteristics of their web browser without the need for cookies or other traditional tracking methods. This study examines the various components and mechanisms of FingerprintJS in detail, including their ability to create unique fingerprints and evaluate their accuracy and reliability. In addition, the effectiveness of these fingerprinting techniques in various application scenarios is analyzed and evaluated.
+
+A central part of this research is the development of a custom fingerprinting library and the collection of our own dataset to validate and evaluate the methods. By analyzing this dataset, additional insights into the practical challenges and performance of the fingerprinting methods could be gained. The goal is to highlight the strengths and weaknesses of the current methods and to identify possible improvements for future implementations.
+
 ## General
 
--   [demo/](./demo) Enthält ein POC mit der fingerprint.pro.js library, die man local ausführen kann.
+-   [demo/](./demo) Contains a POC with the fingerprint.pro.js library that can be run locally.
 
--   [notes/](./notes) Enthält Notizen und Assets für die Dokumentation.
+-   [notes/](./notes) Contains notes and assets for documentation.
 
--   [paper/](./paper) Enthält das Paper in Typst mit allen Bildern.
+-   [paper/](./paper) Contains the paper in typst with all assets.
 
--   [overrides](./overrides) Enthält die Browser overrides (JS Source Dateien), um die offizielle Demo https://fingerprint.com/demo/ zu debuggen.
+-   [overrides](./overrides) Contains the browser overrides (JS source files) to debug the official demo https://fingerprint.com/demo/.
 
-## Overrides
-
-app-...js lädt die browser library nach einem dynamischen pfad, der wie folgt aufgebaut ist `?b=load-vercel&v=<version>&a=<apiKey>&l=<apiVersion>`
-
-In dem Fall wurde der pfad hardcoded zu `/uQ0X/?b=load-vercel&v=<version>&a=<apiKey>&l=3.9.2`
-
-Die Main Datei der fingerprint.js logik ist in [`overrides/fingerprint.com/uQ0X/?b=load-vercel&v=3&a=NIrKSr1SW3HEAoyttBe2&l=3.9.2`](./overrides/fingerprint.com/uQ0X/%3Fb%3Dload-vercel%26v%3D3%26a%3DNIrKSr1SW3HEAoyttBe2%26l%3D3.9.2)
-
-Diese wurde so angepasst, dass der gesamte ursprüngliche Code in einem [`with`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/with) statement wrapped wurde, um die globalen variablen zu überschreiben.
-
-Dabei werden mit einem [`JS Proxy`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) alle Propertyzugriffe und Funktionsaufrufe abgefangen und protokolliert.
+-   [website](./website) Contains the website with the custom fingerprinting library.

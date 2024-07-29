@@ -58,6 +58,15 @@ for (const param of parameters) {
 const stability = {}
 const sessions = Object.values(groupBy(data, "ip")) as any
 
+const l = sessions.sort((a, b) => a.length - b.length)
+
+// console.log(data.length)
+// console.log(sessions.length)
+// console.log(l)
+// console.log(l[Math.floor(l.length / 2)])
+// console.log(l.reduce((a, b) => a + b, 0) / l.length)
+console.log(l[l.length - 1].map(x => x.user_agent))
+
 for (const param of parameters) {
 	let average = 0
 
