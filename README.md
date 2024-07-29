@@ -1,4 +1,4 @@
-# Fingerprinting
+# Technical analysis of browser fingerprinting techniques based on FingerprintJS
 
 ## [Paper](./paper/paper.pdf)
 
