@@ -1,6 +1,10 @@
 # Fingerprinting
 
-[**Paper**](./paper/paper.pdf)
+## [Paper](./paper/paper.pdf)
+
+Authors:
+[Samuel Scheit](https://samuelscheit.com/),
+[James Bergfeld](mailto:j.bergfeld@tum.de)
 
 ## Abstract
 
@@ -16,6 +20,6 @@ A central part of this research is the development of a custom fingerprinting li
 
 -   [paper/](./paper) Contains the paper in typst with all assets.
 
--   [overrides](./overrides) Contains the browser overrides (JS source files) to debug the official demo https://fingerprint.com/demo/.
+-   [overrides](./overrides) Contains the browser overrides (JS source files) to debug the [FingerprintJS demo](https://fingerprint.com/demo/).
 
--   [website](./website) Contains the website with the custom fingerprinting library.
+-   [website](./website) Contains the [website](https://fingerprint.samuelscheit.com/) with the custom fingerprinting library.
